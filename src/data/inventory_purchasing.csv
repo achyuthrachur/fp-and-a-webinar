@@ -1,5 +1,0 @@
-sku,vendor_cost,inventory_turns,valuation_method
-MRO-100,42.5,9.2,weighted_avg
-SAF-220,18.1,11.4,fifo
-FAS-310,7.4,8.1,weighted_avg
-PKG-404,4.8,12.6,fifo

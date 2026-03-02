@@ -1,0 +1,64 @@
+{
+  "companyName": "NorthRiver Distribution Group (NRDG)",
+  "periods": [
+    { "period": "2025-01", "revenueActual": 48.9, "revenueForecast": 49.4, "cogsActual": 36.6, "closeCycleDays": 8.3, "onTimeTaskPct": 84.1, "lateJournalPct": 11.2, "dso": 47.8, "controlExceptionAgingDays": 14.2, "forecastBiasPct": 3.4, "inventoryShrinkPct": 0.93, "pipelineGapPct": 7.9, "netCash": 26.1 },
+    { "period": "2025-02", "revenueActual": 49.3, "revenueForecast": 49.9, "cogsActual": 36.8, "closeCycleDays": 8.5, "onTimeTaskPct": 83.6, "lateJournalPct": 11.6, "dso": 48.1, "controlExceptionAgingDays": 14.8, "forecastBiasPct": 3.7, "inventoryShrinkPct": 0.96, "pipelineGapPct": 8.0, "netCash": 25.8 },
+    { "period": "2025-03", "revenueActual": 50.7, "revenueForecast": 50.1, "cogsActual": 37.6, "closeCycleDays": 8.7, "onTimeTaskPct": 82.9, "lateJournalPct": 12.2, "dso": 48.6, "controlExceptionAgingDays": 15.4, "forecastBiasPct": 4.1, "inventoryShrinkPct": 1.01, "pipelineGapPct": 8.3, "netCash": 25.3 },
+    { "period": "2025-04", "revenueActual": 50.4, "revenueForecast": 50.9, "cogsActual": 37.8, "closeCycleDays": 8.6, "onTimeTaskPct": 83.8, "lateJournalPct": 11.9, "dso": 49.0, "controlExceptionAgingDays": 15.0, "forecastBiasPct": 3.9, "inventoryShrinkPct": 1.04, "pipelineGapPct": 8.4, "netCash": 24.7 },
+    { "period": "2025-05", "revenueActual": 51.2, "revenueForecast": 51.6, "cogsActual": 38.0, "closeCycleDays": 8.9, "onTimeTaskPct": 82.2, "lateJournalPct": 12.3, "dso": 49.3, "controlExceptionAgingDays": 15.9, "forecastBiasPct": 4.2, "inventoryShrinkPct": 1.07, "pipelineGapPct": 8.6, "netCash": 24.2 },
+    { "period": "2025-06", "revenueActual": 51.7, "revenueForecast": 52.2, "cogsActual": 38.2, "closeCycleDays": 9.1, "onTimeTaskPct": 81.7, "lateJournalPct": 12.8, "dso": 49.8, "controlExceptionAgingDays": 16.3, "forecastBiasPct": 4.6, "inventoryShrinkPct": 1.09, "pipelineGapPct": 8.9, "netCash": 23.6 },
+    { "period": "2025-07", "revenueActual": 52.4, "revenueForecast": 52.8, "cogsActual": 38.7, "closeCycleDays": 9.0, "onTimeTaskPct": 82.0, "lateJournalPct": 12.4, "dso": 50.2, "controlExceptionAgingDays": 16.7, "forecastBiasPct": 4.3, "inventoryShrinkPct": 1.11, "pipelineGapPct": 9.1, "netCash": 23.1 },
+    { "period": "2025-08", "revenueActual": 53.0, "revenueForecast": 53.4, "cogsActual": 39.0, "closeCycleDays": 9.2, "onTimeTaskPct": 80.9, "lateJournalPct": 12.9, "dso": 50.9, "controlExceptionAgingDays": 17.2, "forecastBiasPct": 4.7, "inventoryShrinkPct": 1.14, "pipelineGapPct": 9.4, "netCash": 22.8 },
+    { "period": "2025-09", "revenueActual": 53.5, "revenueForecast": 54.1, "cogsActual": 39.4, "closeCycleDays": 9.3, "onTimeTaskPct": 80.2, "lateJournalPct": 13.1, "dso": 51.3, "controlExceptionAgingDays": 17.8, "forecastBiasPct": 4.9, "inventoryShrinkPct": 1.18, "pipelineGapPct": 9.6, "netCash": 22.1 },
+    { "period": "2025-10", "revenueActual": 54.2, "revenueForecast": 54.8, "cogsActual": 39.8, "closeCycleDays": 9.4, "onTimeTaskPct": 79.8, "lateJournalPct": 13.5, "dso": 51.8, "controlExceptionAgingDays": 18.2, "forecastBiasPct": 5.1, "inventoryShrinkPct": 1.20, "pipelineGapPct": 9.8, "netCash": 21.6 },
+    { "period": "2025-11", "revenueActual": 54.8, "revenueForecast": 55.4, "cogsActual": 40.1, "closeCycleDays": 9.6, "onTimeTaskPct": 79.2, "lateJournalPct": 13.8, "dso": 52.1, "controlExceptionAgingDays": 18.5, "forecastBiasPct": 5.2, "inventoryShrinkPct": 1.22, "pipelineGapPct": 10.1, "netCash": 21.2 },
+    { "period": "2025-12", "revenueActual": 55.5, "revenueForecast": 56.0, "cogsActual": 40.5, "closeCycleDays": 9.8, "onTimeTaskPct": 78.4, "lateJournalPct": 14.1, "dso": 52.6, "controlExceptionAgingDays": 18.9, "forecastBiasPct": 5.4, "inventoryShrinkPct": 1.25, "pipelineGapPct": 10.4, "netCash": 20.8 }
+  ],
+  "closeTasks": [
+    { "owner": "Controller", "workstream": "Reconciliations", "delayedDays": 3, "blocker": "Intercompany tie-out", "agingDays": 4 },
+    { "owner": "Accounting Manager", "workstream": "Accruals", "delayedDays": 2, "blocker": "Freight accrual support", "agingDays": 3 },
+    { "owner": "Senior Tax Manager", "workstream": "Tax Provision", "delayedDays": 4, "blocker": "State apportionment inputs", "agingDays": 5 },
+    { "owner": "FP&A Manager", "workstream": "Forecast Pack", "delayedDays": 2, "blocker": "Pipeline refresh", "agingDays": 2 },
+    { "owner": "Treasury Analyst", "workstream": "Cash Forecast", "delayedDays": 3, "blocker": "Collections roll-forward", "agingDays": 4 }
+  ],
+  "cash13Week": [
+    { "week": "W1", "inflows": 9.8, "outflows": 10.2, "netCash": -0.4, "endingCash": 20.4 },
+    { "week": "W2", "inflows": 10.1, "outflows": 10.4, "netCash": -0.3, "endingCash": 20.1 },
+    { "week": "W3", "inflows": 9.9, "outflows": 10.5, "netCash": -0.6, "endingCash": 19.5 },
+    { "week": "W4", "inflows": 10.4, "outflows": 10.6, "netCash": -0.2, "endingCash": 19.3 },
+    { "week": "W5", "inflows": 10.2, "outflows": 10.8, "netCash": -0.6, "endingCash": 18.7 },
+    { "week": "W6", "inflows": 10.3, "outflows": 10.9, "netCash": -0.6, "endingCash": 18.1 },
+    { "week": "W7", "inflows": 10.5, "outflows": 11.0, "netCash": -0.5, "endingCash": 17.6 },
+    { "week": "W8", "inflows": 10.4, "outflows": 11.1, "netCash": -0.7, "endingCash": 16.9 },
+    { "week": "W9", "inflows": 10.6, "outflows": 11.2, "netCash": -0.6, "endingCash": 16.3 },
+    { "week": "W10", "inflows": 10.8, "outflows": 11.4, "netCash": -0.6, "endingCash": 15.7 },
+    { "week": "W11", "inflows": 10.9, "outflows": 11.5, "netCash": -0.6, "endingCash": 15.1 },
+    { "week": "W12", "inflows": 11.0, "outflows": 11.6, "netCash": -0.6, "endingCash": 14.5 },
+    { "week": "W13", "inflows": 11.1, "outflows": 11.8, "netCash": -0.7, "endingCash": 13.8 }
+  ],
+  "arAging": [
+    { "bucket": "0-30", "value": 71.2 },
+    { "bucket": "31-60", "value": 24.8 },
+    { "bucket": "61-90", "value": 12.1 },
+    { "bucket": "90+", "value": 8.7 }
+  ],
+  "apAging": [
+    { "bucket": "0-30", "value": 54.9 },
+    { "bucket": "31-60", "value": 21.6 },
+    { "bucket": "61-90", "value": 11.2 },
+    { "bucket": "90+", "value": 7.8 }
+  ],
+  "varianceDrivers": [
+    { "name": "Labor", "value": -2.4 },
+    { "name": "Freight", "value": -3.1 },
+    { "name": "Price", "value": 1.9 },
+    { "name": "Mix", "value": 1.1 },
+    { "name": "Volume", "value": 2.0 }
+  ],
+  "customerCashRisk": [
+    { "customer": "Vector MFG", "concentrationPct": 8.2, "risk": "Yellow", "exposure": 5.9 },
+    { "customer": "Omega Utilities", "concentrationPct": 7.4, "risk": "Red", "exposure": 6.4 },
+    { "customer": "Delta Contracting", "concentrationPct": 6.9, "risk": "Yellow", "exposure": 4.2 },
+    { "customer": "Meridian Public Works", "concentrationPct": 6.2, "risk": "Green", "exposure": 3.3 }
+  ]
+}
