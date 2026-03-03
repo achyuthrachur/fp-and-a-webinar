@@ -113,47 +113,47 @@
 | Requirement | Phase | Status |
 |-------------|-------|--------|
 | FOND-01 | Phase 1 | Pending |
-| FOND-02 | Phase 1 | Pending |
 | FOND-03 | Phase 1 | Pending |
-| FOND-04 | Phase 1 | Pending |
 | FOND-05 | Phase 1 | Pending |
 | FOND-06 | Phase 1 | Pending |
 | FOND-07 | Phase 1 | Pending |
-| FOND-08 | Phase 1 | Pending |
-| DYNM-01 | Phase 1 | Pending |
-| DYNM-03 | Phase 1 | Pending |
-| DYNM-04 | Phase 1 | Pending |
-| KPIS-01 | Phase 2 | Pending |
-| KPIS-02 | Phase 2 | Pending |
-| KPIS-03 | Phase 2 | Pending |
-| KPIS-04 | Phase 2 | Pending |
-| SCEN-01 | Phase 2 | Pending |
-| SCEN-02 | Phase 2 | Pending |
-| SCEN-03 | Phase 2 | Pending |
-| SCEN-04 | Phase 2 | Pending |
-| DYNM-02 | Phase 2 | Pending |
-| CLOS-01 | Phase 3 | Pending |
-| CLOS-02 | Phase 3 | Pending |
-| CLOS-03 | Phase 3 | Pending |
-| CLOS-04 | Phase 3 | Pending |
-| CHRT-02 | Phase 3 | Pending |
-| CHRT-03 | Phase 3 | Pending |
-| CHRT-04 | Phase 3 | Pending |
-| CHRT-01 | Phase 4 | Pending |
-| AISU-01 | Phase 5 | Pending |
-| AISU-02 | Phase 5 | Pending |
-| AISU-03 | Phase 5 | Pending |
-| AISU-04 | Phase 5 | Pending |
-| WBNR-01 | Phase 6 | Pending |
-| WBNR-02 | Phase 6 | Pending |
-| WBNR-03 | Phase 6 | Pending |
-| WBNR-04 | Phase 6 | Pending |
+| FOND-02 | Phase 2 | Pending |
+| FOND-04 | Phase 2 | Pending |
+| FOND-08 | Phase 2 | Pending |
+| DYNM-01 | Phase 2 | Pending |
+| DYNM-02 | Phase 3 | Pending |
+| DYNM-03 | Phase 2 | Pending |
+| DYNM-04 | Phase 2 | Pending |
+| KPIS-01 | Phase 3 | Pending |
+| KPIS-02 | Phase 3 | Pending |
+| KPIS-03 | Phase 3 | Pending |
+| KPIS-04 | Phase 3 | Pending |
+| SCEN-01 | Phase 4 | Pending |
+| SCEN-02 | Phase 4 | Pending |
+| SCEN-03 | Phase 4 | Pending |
+| SCEN-04 | Phase 4 | Pending |
+| CLOS-01 | Phase 5 | Pending |
+| CLOS-02 | Phase 5 | Pending |
+| CLOS-03 | Phase 5 | Pending |
+| CLOS-04 | Phase 5 | Pending |
+| CHRT-02 | Phase 6 | Pending |
+| CHRT-03 | Phase 6 | Pending |
+| CHRT-04 | Phase 6 | Pending |
+| CHRT-01 | Phase 7 | Pending |
+| AISU-01 | Phase 8 | Pending |
+| AISU-02 | Phase 8 | Pending |
+| AISU-03 | Phase 8 | Pending |
+| AISU-04 | Phase 8 | Pending |
+| WBNR-01 | Phase 9 | Pending |
+| WBNR-02 | Phase 9 | Pending |
+| WBNR-03 | Phase 9 | Pending |
+| WBNR-04 | Phase 9 | Pending |
 
 **Coverage:**
-- v1 requirements: 32 total
-- Mapped to phases: 32
+- v1 requirements: 36 total (note: original count of 32 was incorrect — actual count is 8 FOND + 4 KPIS + 4 CLOS + 4 SCEN + 4 CHRT + 4 AISU + 4 DYNM + 4 WBNR = 36)
+- Mapped to phases: 36
 - Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-03-03*
-*Last updated: 2026-03-03 after initial definition*
+*Last updated: 2026-03-03 after roadmap creation — traceability updated to 9-phase fine-granularity structure*
