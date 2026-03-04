@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 03-kpi-cards-and-variance-layer/03-03-PLAN.md
-last_updated: "2026-03-04T20:06:06.203Z"
+stopped_at: Completed 04-scenario-control-panel/04-01-PLAN.md
+last_updated: "2026-03-04T20:41:23.424Z"
 last_activity: 2026-03-04 — Phase 2 complete — 31/31 tests GREEN, variancePct wired, page.tsx async
 progress:
   total_phases: 9
   completed_phases: 3
-  total_plans: 10
-  completed_plans: 10
+  total_plans: 13
+  completed_plans: 11
   percent: 44
 ---
 
@@ -58,6 +58,7 @@ Progress: [████░░░░░░] 44%
 | Phase 03-kpi-cards-and-variance-layer P01 | 8 | 2 tasks | 3 files |
 | Phase 03-kpi-cards-and-variance-layer P02 | 15 | 2 tasks | 7 files |
 | Phase 03-kpi-cards-and-variance-layer P03-03 | 45 | 3 tasks | 6 files |
+| Phase 04-scenario-control-panel P01 | 2 | 1 tasks | 1 files |
 
 ## Accumulated Context
 
@@ -94,6 +95,7 @@ Recent decisions affecting current work:
 - [Phase 03-02]: Wave 0 test stub corrected: selectCogs fuel shock expected 7_999_360 fixed to 7_883_539 to match plan formula output
 - [Phase 03-02]: CountUp duration in SECONDS not milliseconds — use duration={0.5} for 500ms
 - [Phase 03-kpi-cards-and-variance-layer]: KpiCard/KpiSection omit 'use client' — run inside DashboardApp client boundary; CountUp uses raw integers with prefix/suffix labels; tsconfig jsx changed to react-jsx for standalone tsc --noEmit; Net Sales delta reads variancePct from seedData per DYNM-02
+- [Phase 04-scenario-control-panel]: scenarioSlice.ts already complete — tests pass GREEN immediately; reducer contract validated with direct reducer(state,action) pattern
 
 ### Pending Todos
 
@@ -107,6 +109,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-04T19:54:48.003Z
-Stopped at: Completed 03-kpi-cards-and-variance-layer/03-03-PLAN.md
+Last session: 2026-03-04T20:41:23.416Z
+Stopped at: Completed 04-scenario-control-panel/04-01-PLAN.md
 Resume file: None

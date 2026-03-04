@@ -34,10 +34,10 @@
 
 ### Scenario Panel
 
-- [ ] **SCEN-01**: User can adjust 7 financial levers — sliders for Revenue Growth (−4% to +8%), Gross Margin (18%–28%), Fuel Index (80–140), Collections Rate (94%–100%), Returns (0.6%–2.5%), Late Invoice Hours (0–14), Journal Load (0.8x–1.3x) using 21st.dev slider components, dispatching to Redux
-- [ ] **SCEN-02**: User can activate 4 business mode switches — toggles for Prioritize Cash Mode, Conservative Forecast Bias, Tighten Credit Holds, and Inventory Complexity using 21st.dev toggle components, dispatching to Redux
-- [ ] **SCEN-03**: User can load a named scenario in one click — a dropdown selector loads presets from `scenario-presets.json` with FP&A-framed names (e.g., "Conservative Close", "Q4 Push for Target"), immediately updating all controls
-- [ ] **SCEN-04**: User can return to base scenario — a "Reset to defaults" button restores all controls to the default scenario values from `scenario-presets.json`
+- [x] **SCEN-01**: User can adjust 7 financial levers — sliders for Revenue Growth (−4% to +8%), Gross Margin (18%–28%), Fuel Index (80–140), Collections Rate (94%–100%), Returns (0.6%–2.5%), Late Invoice Hours (0–14), Journal Load (0.8x–1.3x) using 21st.dev slider components, dispatching to Redux
+- [x] **SCEN-02**: User can activate 4 business mode switches — toggles for Prioritize Cash Mode, Conservative Forecast Bias, Tighten Credit Holds, and Inventory Complexity using 21st.dev toggle components, dispatching to Redux
+- [x] **SCEN-03**: User can load a named scenario in one click — a dropdown selector loads presets from `scenario-presets.json` with FP&A-framed names (e.g., "Conservative Close", "Q4 Push for Target"), immediately updating all controls
+- [x] **SCEN-04**: User can return to base scenario — a "Reset to defaults" button restores all controls to the default scenario values from `scenario-presets.json`
 
 ### Charts
 
@@ -128,10 +128,10 @@
 | KPIS-02 | Phase 3 | Complete |
 | KPIS-03 | Phase 3 | Complete |
 | KPIS-04 | Phase 3 | Complete |
-| SCEN-01 | Phase 4 | Pending |
-| SCEN-02 | Phase 4 | Pending |
-| SCEN-03 | Phase 4 | Pending |
-| SCEN-04 | Phase 4 | Pending |
+| SCEN-01 | Phase 4 | Complete |
+| SCEN-02 | Phase 4 | Complete |
+| SCEN-03 | Phase 4 | Complete |
+| SCEN-04 | Phase 4 | Complete |
 | CLOS-01 | Phase 5 | Pending |
 | CLOS-02 | Phase 5 | Pending |
 | CLOS-03 | Phase 5 | Pending |
