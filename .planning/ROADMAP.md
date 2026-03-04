@@ -68,7 +68,12 @@ Plans:
   2. Each KPI card shows a variance delta indicator (up/down arrow + formatted percentage) comparing current period to prior period — no card is missing this indicator
   3. Moving any scenario slider causes KPI card numbers to animate to their new values in under 600ms
   4. The KPI card(s) whose computed value changed by a scenario slider movement briefly show an amber glow that is visible to a presenter's audience
-**Plans**: TBD
+**Plans**: 3 plans
+
+Plans:
+- [ ] 03-01-PLAN.md — Wave 0: RED test stubs + fix BaseInputs type + fix dataLoader.ts apTotal/inventoryTotal
+- [ ] 03-02-PLAN.md — Wave 1: scenarioSlice.ts + kpiSelectors.ts + store/index.ts + CountUp.tsx + icons.tsx + globals.css glow keyframe
+- [ ] 03-03-PLAN.md — Wave 2: KpiCard.tsx + KpiSection.tsx + DashboardApp.tsx integration (checkpoint)
 
 ### Phase 4: Scenario Control Panel
 **Goal**: All 11 user controls (7 sliders + 4 toggles) are rendered with 21st.dev components, dispatch correctly to Redux, and cause KPI values to update live; preset selection and reset work
@@ -146,7 +151,7 @@ Note: Phase 5 (Close Tracker) depends only on Phase 2 and can begin after Phase 
 |-------|----------------|--------|-----------|
 | 1. Project Scaffolding | 2/3 | In Progress|  |
 | 2. Data Layer | 3/4 | In Progress | - |
-| 3. KPI Cards and Variance Layer | 0/TBD | Not started | - |
+| 3. KPI Cards and Variance Layer | 0/3 | Not started | - |
 | 4. Scenario Control Panel | 0/TBD | Not started | - |
 | 5. Close Stage Tracker | 0/TBD | Not started | - |
 | 6. Static Charts | 0/TBD | Not started | - |
