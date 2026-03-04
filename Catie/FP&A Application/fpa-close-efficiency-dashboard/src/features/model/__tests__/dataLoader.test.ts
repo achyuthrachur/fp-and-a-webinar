@@ -63,4 +63,16 @@ describe('loadDashboardSeedData integration', () => {
     if (loadError) throw loadError;
     expect(seedData!.externalVendorPriceIndex).toHaveLength(6);
   });
+
+  it('seedData includes arAging array with at least 1 row', () => {
+    if (loadError) throw loadError;
+    expect(Array.isArray(seedData!.arAging)).toBe(true);
+    expect(seedData!.arAging.length).toBeGreaterThan(0);
+  });
+
+  it('seedData includes crmPipeline array with at least 1 row', () => {
+    if (loadError) throw loadError;
+    expect(Array.isArray(seedData!.crmPipeline)).toBe(true);
+    expect(seedData!.crmPipeline.length).toBeGreaterThan(0);
+  });
 });
