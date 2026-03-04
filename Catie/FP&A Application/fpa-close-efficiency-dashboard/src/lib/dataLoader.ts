@@ -38,6 +38,8 @@ export type DashboardSeedData = {
   presets: ScenarioPreset[];
   baseInputs: BaseInputs;
   ar90Ratio: number;
+  arAging: ARRow[];
+  crmPipeline: PipelineRow[];
   closeStages: CloseStage[];
   journalEntries: JournalEntryRow[];
   inventoryAdjustments: InventoryAdjustmentRow[];
@@ -137,6 +139,8 @@ export async function loadDashboardSeedData(): Promise<DashboardSeedData> {
     presets,
     baseInputs,
     ar90Ratio: arTotal > 0 ? ar90 / arTotal : 0,
+    arAging: arRows,
+    crmPipeline: pipelineRows,
     closeStages,
     journalEntries,
     inventoryAdjustments,
