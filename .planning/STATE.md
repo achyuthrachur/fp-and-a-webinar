@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 05-close-stage-tracker/05-02-PLAN.md
-last_updated: "2026-03-04T22:02:19.749Z"
+stopped_at: Completed 05-close-stage-tracker/05-03-PLAN.md
+last_updated: "2026-03-04T22:19:46.869Z"
 last_activity: 2026-03-04 — Phase 2 complete — 31/31 tests GREEN, variancePct wired, page.tsx async
 progress:
   total_phases: 9
-  completed_phases: 4
+  completed_phases: 5
   total_plans: 16
-  completed_plans: 15
+  completed_plans: 16
   percent: 44
 ---
 
@@ -63,6 +63,7 @@ Progress: [████░░░░░░] 44%
 | Phase 04-scenario-control-panel P03 | 9 | 2 tasks | 2 files |
 | Phase 05-close-stage-tracker P01 | 3 | 2 tasks | 2 files |
 | Phase 05-close-stage-tracker P02 | 3 | 1 tasks | 1 files |
+| Phase 05-close-stage-tracker P03 | 35 | 3 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -109,6 +110,9 @@ Recent decisions affecting current work:
 - [Phase 05-close-stage-tracker]: pending-approval uses hyphen (not underscore) to match exact CSV status values in erp_journal_entries.csv
 - [Phase 05-close-stage-tracker]: RAG thresholds: on-track >=75, at-risk 50-74, delayed <50 — pure function tests GREEN immediately from inline definitions
 - [Phase 05-close-stage-tracker]: STAGE_NAMES uses exact CSV stage values ('Accruals & JEs', 'Revenue recognition') — two wrong names were in the hardcoded array
+- [Phase 05-close-stage-tracker]: Icons imported from @/components/ui/icons barrel — no direct iconsax-react imports in new component files
+- [Phase 05-close-stage-tracker]: CSS variables used for all RAG colors (--color-success, --accent, --color-error) — dark mode compatible without component changes
+- [Phase 05-close-stage-tracker]: Contextual note omitted for on-track stages — shown only for at-risk and delayed for clean actionable UX
 
 ### Pending Todos
 
@@ -122,6 +126,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-04T22:02:19.734Z
-Stopped at: Completed 05-close-stage-tracker/05-02-PLAN.md
+Last session: 2026-03-04T22:19:46.857Z
+Stopped at: Completed 05-close-stage-tracker/05-03-PLAN.md
 Resume file: None
