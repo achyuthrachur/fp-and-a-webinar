@@ -37,6 +37,7 @@ export default function KpiCard({
         // Force reflow to restart animation if already glowing
         void el.offsetHeight;
         el.classList.add('kpi-glow');
+        prevValueRef.current = value;
         const timer = setTimeout(() => el.classList.remove('kpi-glow'), 750);
         return () => clearTimeout(timer);
       }
