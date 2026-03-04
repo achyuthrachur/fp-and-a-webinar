@@ -121,8 +121,10 @@ describe('kpiSelectors', () => {
     const baselineCogs = selectors!.selectCogs(baselineState);
     const shockCogs = selectors!.selectCogs(shockState);
     // Fuel shock must produce noticeably higher COGS
+    // Formula: cogsAtMargin*(1 + FUEL_COGS_SHARE*((fuelIndex/100)-1)) where FUEL_COGS_SHARE=0.18
+    // 9_476_000 * 0.78 * (1 + 0.18 * 0.37) = 7_391_280 * 1.0666 ≈ 7_883_539
     expect(shockCogs).toBeGreaterThan(baselineCogs);
-    expect(shockCogs).toBeCloseTo(7_999_360, -2);
+    expect(shockCogs).toBeCloseTo(7_883_539, -2);
   });
 
   it('selectGrossProfit = selectNetSales - selectCogs', () => {
