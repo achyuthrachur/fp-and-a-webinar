@@ -11,11 +11,11 @@
 
 - [ ] **FOND-01**: User can access a running application — all missing source files exist (`page.tsx`, `layout.tsx`, `DashboardApp.tsx`, all chart/layout components, `package.json`, `tsconfig.json`, `next.config.ts`)
 - [ ] **FOND-02**: Application validates all data on load — `features/model/types.ts` contains all Zod schemas and TypeScript types for every data file
-- [ ] **FOND-03**: Application parses CSV data — `lib/csv.ts` provides a papaparse wrapper used by `dataLoader.ts`
+- [x] **FOND-03**: Application parses CSV data — `lib/csv.ts` provides a papaparse wrapper used by `dataLoader.ts`
 - [ ] **FOND-04**: Dashboard loads real data — all 10 files exist in `src/data/` (`company.json`, `scenario-presets.json`, and 8 CSVs) with internally consistent, realistic webinar-quality sample data
-- [ ] **FOND-05**: Dashboard displays all financial numbers in correct format — `lib/formatters.ts` provides `formatCurrency()` and `formatPercent()` used consistently across all KPI cards, chart axes, and tooltips
-- [ ] **FOND-06**: All icons render without errors — `src/components/ui/icons.tsx` wraps all Iconsax imports with `"use client"` to prevent server-side `window is not defined` errors
-- [ ] **FOND-07**: Dark mode activates without flash on page load — blocking `<script>` in `layout.tsx` reads `localStorage` before React hydrates; `suppressHydrationWarning` on `<html>`
+- [x] **FOND-05**: Dashboard displays all financial numbers in correct format — `lib/formatters.ts` provides `formatCurrency()` and `formatPercent()` used consistently across all KPI cards, chart axes, and tooltips
+- [x] **FOND-06**: All icons render without errors — `src/components/ui/icons.tsx` wraps all Iconsax imports with `"use client"` to prevent server-side `window is not defined` errors
+- [x] **FOND-07**: Dark mode activates without flash on page load — blocking `<script>` in `layout.tsx` reads `localStorage` before React hydrates; `suppressHydrationWarning` on `<html>`
 - [ ] **FOND-08**: OpenAI API key is available securely — `.env.local` contains `OPENAI_API_KEY`, is excluded from `.gitignore`, and is not committed to git
 
 ### KPI Cards
@@ -113,10 +113,10 @@
 | Requirement | Phase | Status |
 |-------------|-------|--------|
 | FOND-01 | Phase 1 | Pending |
-| FOND-03 | Phase 1 | Pending |
-| FOND-05 | Phase 1 | Pending |
-| FOND-06 | Phase 1 | Pending |
-| FOND-07 | Phase 1 | Pending |
+| FOND-03 | Phase 1 | Complete |
+| FOND-05 | Phase 1 | Complete |
+| FOND-06 | Phase 1 | Complete |
+| FOND-07 | Phase 1 | Complete |
 | FOND-02 | Phase 2 | Pending |
 | FOND-04 | Phase 2 | Pending |
 | FOND-08 | Phase 2 | Pending |

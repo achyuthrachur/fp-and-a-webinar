@@ -34,7 +34,12 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. Any icon imported from the Iconsax wrapper renders on the page without a `window is not defined` SSR error
   4. `formatCurrency(1234567.89)` returns `$1,234,567.89` and `formatPercent(0.045)` returns `4.5%`
   5. `lib/csv.ts` papaparse wrapper is importable from `dataLoader.ts` without browser bundle errors
-**Plans**: TBD
+**Plans**: 3 plans
+
+Plans:
+- [ ] 01-01-PLAN.md — Wave 0: test infrastructure (vitest.config.ts + 4 failing test stubs)
+- [ ] 01-02-PLAN.md — Wave 1: config files, Zod types, csv.ts, store stub (npm install)
+- [ ] 01-03-PLAN.md — Wave 2: app entry points (layout, page, DashboardApp), formatters, icons
 
 ### Phase 2: Data Layer
 **Goal**: All 10 data files exist with realistic, internally consistent webinar-quality sample data, Zod schemas validate every file, and `dataLoader.ts` returns a serializable `DashboardSeedData` object to `page.tsx`
@@ -133,7 +138,7 @@ Note: Phase 5 (Close Tracker) depends only on Phase 2 and can begin after Phase 
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Project Scaffolding | 0/TBD | Not started | - |
+| 1. Project Scaffolding | 2/3 | In Progress|  |
 | 2. Data Layer | 0/TBD | Not started | - |
 | 3. KPI Cards and Variance Layer | 0/TBD | Not started | - |
 | 4. Scenario Control Panel | 0/TBD | Not started | - |
