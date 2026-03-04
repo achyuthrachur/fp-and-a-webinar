@@ -10,7 +10,7 @@
 ### Foundation
 
 - [x] **FOND-01**: User can access a running application — all missing source files exist (`page.tsx`, `layout.tsx`, `DashboardApp.tsx`, all chart/layout components, `package.json`, `tsconfig.json`, `next.config.ts`)
-- [ ] **FOND-02**: Application validates all data on load — `features/model/types.ts` contains all Zod schemas and TypeScript types for every data file
+- [x] **FOND-02**: Application validates all data on load — `features/model/types.ts` contains all Zod schemas and TypeScript types for every data file
 - [x] **FOND-03**: Application parses CSV data — `lib/csv.ts` provides a papaparse wrapper used by `dataLoader.ts`
 - [x] **FOND-04**: Dashboard loads real data — all 10 files exist in `src/data/` (`company.json`, `scenario-presets.json`, and 8 CSVs) with internally consistent, realistic webinar-quality sample data
 - [x] **FOND-05**: Dashboard displays all financial numbers in correct format — `lib/formatters.ts` provides `formatCurrency()` and `formatPercent()` used consistently across all KPI cards, chart axes, and tooltips
