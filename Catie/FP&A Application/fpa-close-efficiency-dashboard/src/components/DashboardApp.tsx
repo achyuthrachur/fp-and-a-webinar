@@ -11,6 +11,7 @@ import type { AppStore } from '@/store';
 import type { DashboardSeedData } from '@/lib/dataLoader';
 import { initializeFromSeedData } from '@/store/scenarioSlice';
 import KpiSection from '@/components/dashboard/KpiSection';
+import ScenarioPanel from '@/components/dashboard/ScenarioPanel/ScenarioPanel';
 
 interface DashboardAppProps {
   seedData?: DashboardSeedData;
@@ -39,20 +40,50 @@ export default function DashboardApp({ seedData }: DashboardAppProps) {
 
   return (
     <Provider store={storeRef.current}>
-      <div style={{ minHeight: '100vh', padding: '1.5rem' }}>
-        <div id="slot-header" />
-        {seedData ? (
-          <KpiSection seedData={seedData} />
-        ) : (
-          <div id="slot-kpi-section" />
-        )}
-        <div id="slot-close-tracker" />
-        <div id="slot-scenario-panel" />
-        <div id="slot-charts" />
-        <div id="slot-ai-summary" />
-        <p style={{ color: 'var(--foreground)', fontFamily: 'var(--font-sans)', margin: 0, fontSize: '0.75rem', opacity: 0.4 }}>
-          FP&amp;A Close Efficiency Dashboard — Phase 3 KPI cards active
-        </p>
+      {/* Two-column layout: 280px sticky sidebar + flex-1 main content.
+          alignItems: flex-start ensures sidebar height is its own content height,
+          not stretched to match the (much taller) main column. */}
+      <div style={{ display: 'flex', minHeight: '100vh', alignItems: 'flex-start' }}>
+
+        {/* Left sidebar: fixed 280px, sticky, scrollable */}
+        <aside
+          style={{
+            width: '280px',
+            flexShrink: 0,
+            borderRight: '1px solid var(--border)',
+            overflowY: 'auto',
+            position: 'sticky',
+            top: 0,
+            height: '100vh',
+            background: 'var(--card)',
+          }}
+        >
+          {seedData && <ScenarioPanel presets={seedData.presets} />}
+        </aside>
+
+        {/* Main content area: flex-1, scrollable */}
+        <main style={{ flex: 1, minWidth: 0, padding: '1.5rem', overflowY: 'auto' }}>
+          <div id="slot-header" />
+          {seedData ? (
+            <KpiSection seedData={seedData} />
+          ) : (
+            <div id="slot-kpi-section" />
+          )}
+          <div id="slot-close-tracker" />
+          <div id="slot-charts" />
+          <div id="slot-ai-summary" />
+          <p
+            style={{
+              color: 'var(--foreground)',
+              fontFamily: 'var(--font-sans)',
+              margin: 0,
+              fontSize: '0.75rem',
+              opacity: 0.4,
+            }}
+          >
+            FP&amp;A Close Efficiency Dashboard — Phase 4 Scenario Panel active
+          </p>
+        </main>
       </div>
     </Provider>
   );
