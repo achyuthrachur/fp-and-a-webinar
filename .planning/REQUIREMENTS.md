@@ -9,7 +9,7 @@
 
 ### Foundation
 
-- [ ] **FOND-01**: User can access a running application — all missing source files exist (`page.tsx`, `layout.tsx`, `DashboardApp.tsx`, all chart/layout components, `package.json`, `tsconfig.json`, `next.config.ts`)
+- [x] **FOND-01**: User can access a running application — all missing source files exist (`page.tsx`, `layout.tsx`, `DashboardApp.tsx`, all chart/layout components, `package.json`, `tsconfig.json`, `next.config.ts`)
 - [ ] **FOND-02**: Application validates all data on load — `features/model/types.ts` contains all Zod schemas and TypeScript types for every data file
 - [x] **FOND-03**: Application parses CSV data — `lib/csv.ts` provides a papaparse wrapper used by `dataLoader.ts`
 - [ ] **FOND-04**: Dashboard loads real data — all 10 files exist in `src/data/` (`company.json`, `scenario-presets.json`, and 8 CSVs) with internally consistent, realistic webinar-quality sample data
@@ -112,7 +112,7 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| FOND-01 | Phase 1 | Pending |
+| FOND-01 | Phase 1 | Complete |
 | FOND-03 | Phase 1 | Complete |
 | FOND-05 | Phase 1 | Complete |
 | FOND-06 | Phase 1 | Complete |
