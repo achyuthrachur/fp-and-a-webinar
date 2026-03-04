@@ -76,7 +76,7 @@ Plans:
 - [ ] 03-03-PLAN.md — Wave 2: KpiCard.tsx + KpiSection.tsx + DashboardApp.tsx integration (checkpoint)
 
 ### Phase 4: Scenario Control Panel
-**Goal**: All 11 user controls (7 sliders + 4 toggles) are rendered with 21st.dev components, dispatch correctly to Redux, and cause KPI values to update live; preset selection and reset work
+**Goal**: All 11 user controls (7 sliders + 4 toggles) are rendered with Radix UI primitives, dispatch correctly to Redux, and cause KPI values to update live; preset selection and reset work
 **Depends on**: Phase 3
 **Requirements**: SCEN-01, SCEN-02, SCEN-03, SCEN-04
 **Success Criteria** (what must be TRUE):
@@ -84,7 +84,12 @@ Plans:
   2. All 4 toggles (Prioritize Cash Mode, Conservative Forecast Bias, Tighten Credit Holds, Inventory Complexity) toggle on/off and their state is reflected in KPI computations
   3. Selecting a named preset from the dropdown (e.g., "Conservative Close") updates all 11 controls to that preset's values and KPI cards reflect the new scenario
   4. Clicking "Reset to defaults" restores all 11 controls to their default values from `scenario-presets.json`
-**Plans**: TBD
+**Plans**: 3 plans
+
+Plans:
+- [ ] 04-01-PLAN.md — Wave 1: scenarioSlice Redux reducer tests (GREEN contract verification, all 4 SCEN requirements)
+- [ ] 04-02-PLAN.md — Wave 2: ScenarioPanel.tsx — all 7 sliders + 4 toggles with Radix primitives, Redux dispatch
+- [ ] 04-03-PLAN.md — Wave 3: DashboardApp two-column layout + PresetRow + Reset + human-verify checkpoint
 
 ### Phase 5: Close Stage Tracker
 **Goal**: The close stage tracker displays 6 stages with progress bars computed from journal entry data, RAG status badges with Iconsax icons, contextual notes for at-risk stages, and a days-to-close metric
@@ -152,7 +157,7 @@ Note: Phase 5 (Close Tracker) depends only on Phase 2 and can begin after Phase 
 | 1. Project Scaffolding | 2/3 | In Progress|  |
 | 2. Data Layer | 3/4 | In Progress | - |
 | 3. KPI Cards and Variance Layer | 2/3 | In Progress|  |
-| 4. Scenario Control Panel | 0/TBD | Not started | - |
+| 4. Scenario Control Panel | 0/3 | Not started | - |
 | 5. Close Stage Tracker | 0/TBD | Not started | - |
 | 6. Static Charts | 0/TBD | Not started | - |
 | 7. Reactive Margin Bridge | 0/TBD | Not started | - |
