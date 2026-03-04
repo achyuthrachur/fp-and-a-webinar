@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 05-close-stage-tracker/05-03-PLAN.md
-last_updated: "2026-03-04T22:24:32.671Z"
+stopped_at: Completed 06-static-charts/06-01-PLAN.md
+last_updated: "2026-03-04T23:45:32.671Z"
 last_activity: 2026-03-04 — Phase 2 complete — 31/31 tests GREEN, variancePct wired, page.tsx async
 progress:
   total_phases: 9
   completed_phases: 5
-  total_plans: 16
-  completed_plans: 16
+  total_plans: 19
+  completed_plans: 17
   percent: 44
 ---
 
@@ -64,6 +64,7 @@ Progress: [████░░░░░░] 44%
 | Phase 05-close-stage-tracker P01 | 3 | 2 tasks | 2 files |
 | Phase 05-close-stage-tracker P02 | 3 | 1 tasks | 1 files |
 | Phase 05-close-stage-tracker P03 | 35 | 3 tasks | 4 files |
+| Phase 06-static-charts P01 | 2 | 2 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -113,6 +114,8 @@ Recent decisions affecting current work:
 - [Phase 05-close-stage-tracker]: Icons imported from @/components/ui/icons barrel — no direct iconsax-react imports in new component files
 - [Phase 05-close-stage-tracker]: CSS variables used for all RAG colors (--color-success, --accent, --color-error) — dark mode compatible without component changes
 - [Phase 05-close-stage-tracker]: Contextual note omitted for on-track stages — shown only for at-risk and delayed for clean actionable UX
+- [Phase 06-static-charts]: arAging and crmPipeline inserted after ar90Ratio in DashboardSeedData type — preserves field ordering convention and groups computed vs raw data logically
+- [Phase 06-static-charts]: beforeAll error-capture pattern reused for charts.test.ts RED stubs — consistent with Phase 2 TDD approach; tests show as FAILED not SKIPPED in Vitest
 
 ### Pending Todos
 
@@ -126,6 +129,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-04T22:19:46.857Z
-Stopped at: Completed 05-close-stage-tracker/05-03-PLAN.md
+Last session: 2026-03-04T23:45:32.662Z
+Stopped at: Completed 06-static-charts/06-01-PLAN.md
 Resume file: None

@@ -42,9 +42,9 @@
 ### Charts
 
 - [ ] **CHRT-01**: User can see how scenario choices drive margin — Margin Bridge chart (Recharts BarChart, gold `#F5A800` bars, ReferenceLine at zero, currency-formatted tooltips) updates in real time as scenario sliders change
-- [ ] **CHRT-02**: User can see the sales-to-finance revenue funnel — Pipeline to Invoiced chart (Recharts BarChart, teal `#05AB8C` bars) shows 5 CRM stages (Qualified → Proposal → Negotiation → Closed Won → Invoiced) with probability-weighted amounts from `crm_pipeline.csv`
-- [ ] **CHRT-03**: User can see accounts receivable aging health — AR Aging panel (stacked bar or donut chart from `ar_aging.csv`) displays Current, 1–30, 31–60, 61–90, and 90+ day buckets with an `ar90Ratio` summary stat
-- [ ] **CHRT-04**: User can view 13-week cash flow outlook — a line/area chart from `cash_13_week.csv` clearly distinguishes actuals (solid) from forecast (dashed) weeks, with a toggle to show/hide the panel
+- [x] **CHRT-02**: User can see the sales-to-finance revenue funnel — Pipeline to Invoiced chart (Recharts BarChart, teal `#05AB8C` bars) shows 5 CRM stages (Qualified → Proposal → Negotiation → Closed Won → Invoiced) with probability-weighted amounts from `crm_pipeline.csv`
+- [x] **CHRT-03**: User can see accounts receivable aging health — AR Aging panel (stacked bar or donut chart from `ar_aging.csv`) displays Current, 1–30, 31–60, 61–90, and 90+ day buckets with an `ar90Ratio` summary stat
+- [x] **CHRT-04**: User can view 13-week cash flow outlook — a line/area chart from `cash_13_week.csv` clearly distinguishes actuals (solid) from forecast (dashed) weeks, with a toggle to show/hide the panel
 
 ### AI Summary
 
@@ -136,9 +136,9 @@
 | CLOS-02 | Phase 5 | Complete |
 | CLOS-03 | Phase 5 | Complete |
 | CLOS-04 | Phase 5 | Complete |
-| CHRT-02 | Phase 6 | Pending |
-| CHRT-03 | Phase 6 | Pending |
-| CHRT-04 | Phase 6 | Pending |
+| CHRT-02 | Phase 6 | Complete |
+| CHRT-03 | Phase 6 | Complete |
+| CHRT-04 | Phase 6 | Complete |
 | CHRT-01 | Phase 7 | Pending |
 | AISU-01 | Phase 8 | Pending |
 | AISU-02 | Phase 8 | Pending |
