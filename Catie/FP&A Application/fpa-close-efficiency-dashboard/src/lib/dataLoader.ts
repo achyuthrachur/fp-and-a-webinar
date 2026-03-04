@@ -28,6 +28,7 @@ import {
 type Company = {
   name: string;
   closeTargetBusinessDays: number;
+  variancePct: number;
   defaultAssumptions: Pick<ControlState, "revenueGrowthPct" | "grossMarginPct" | "fuelIndex" | "collectionsRatePct" | "returnsPct">;
 };
 
@@ -57,6 +58,7 @@ export async function loadDashboardSeedData(): Promise<DashboardSeedData> {
     .object({
       name: z.string(),
       closeTargetBusinessDays: z.number(),
+      variancePct: z.number(),
       defaultAssumptions: z.object({
         revenueGrowthPct: z.number(),
         grossMarginPct: z.number(),
@@ -105,7 +107,7 @@ export async function loadDashboardSeedData(): Promise<DashboardSeedData> {
     manualJeCount: latestGL.manual_je_count,
     closeAdjustmentsCount: latestGL.close_adjustments_count,
     pipelineExecutionRatio,
-    variancePct: 0.037,
+    variancePct: company.variancePct ?? 0.034,
   };
 
   return {
