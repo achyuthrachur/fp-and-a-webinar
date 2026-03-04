@@ -104,6 +104,8 @@ export async function loadDashboardSeedData(): Promise<DashboardSeedData> {
     baseCash: latestGL.cash,
     baseCashInWeekly: latestGL.net_sales / 4,
     arTotal,
+    apTotal: latestGL.ap_total,
+    inventoryTotal: latestGL.inventory_total,
     manualJeCount: latestGL.manual_je_count,
     closeAdjustmentsCount: latestGL.close_adjustments_count,
     pipelineExecutionRatio,

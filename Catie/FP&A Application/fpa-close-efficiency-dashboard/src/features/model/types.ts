@@ -109,6 +109,8 @@ export interface BaseInputs {
   baseCash: number;
   baseCashInWeekly: number;
   arTotal: number;
+  apTotal: number;
+  inventoryTotal: number;
   manualJeCount: number;
   closeAdjustmentsCount: number;
   pipelineExecutionRatio: number;
