@@ -58,3 +58,17 @@ select {
     scroll-behavior: auto !important;
   }
 }
+
+/* ─── KPI Card Amber Glow Animation ─── */
+/* Fires when a KPI card's computed value changes via scenario slider. */
+/* Triggered by .kpi-glow class toggle in KpiCard.tsx useEffect. */
+/* Guard: KpiCard.tsx only adds class if prevValueRef.current !== null && !== value (no first-render glow). */
+@keyframes kpi-amber-glow {
+  0%   { box-shadow: 0 0 0 0 rgba(245, 168, 0, 0.0); }
+  20%  { box-shadow: 0 0 8px 8px rgba(245, 168, 0, 0.45); }
+  100% { box-shadow: 0 0 0 0 rgba(245, 168, 0, 0.0); }
+}
+
+.kpi-glow {
+  animation: kpi-amber-glow 700ms ease-out forwards;
+}

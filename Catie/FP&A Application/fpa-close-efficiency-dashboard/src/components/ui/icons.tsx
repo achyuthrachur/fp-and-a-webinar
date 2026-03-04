@@ -13,6 +13,9 @@ export {
   Wallet,
   ArrowUp2,
   ArrowDown2,
+  MoneyRecive,   // COGS icon — cost inflow
+  Box,           // Inventory icon — physical goods
+  ReceiptText,   // AP icon — payables/bills
   // Close stage tracker status badges
   TickCircle,
   CloseCircle,
