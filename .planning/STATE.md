@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 05-close-stage-tracker/05-01-PLAN.md
-last_updated: "2026-03-04T21:55:55.602Z"
+stopped_at: Completed 05-close-stage-tracker/05-02-PLAN.md
+last_updated: "2026-03-04T22:02:19.749Z"
 last_activity: 2026-03-04 — Phase 2 complete — 31/31 tests GREEN, variancePct wired, page.tsx async
 progress:
   total_phases: 9
   completed_phases: 4
   total_plans: 16
-  completed_plans: 14
+  completed_plans: 15
   percent: 44
 ---
 
@@ -62,6 +62,7 @@ Progress: [████░░░░░░] 44%
 | Phase 04-scenario-control-panel P02 | 5 | 1 tasks | 1 files |
 | Phase 04-scenario-control-panel P03 | 9 | 2 tasks | 2 files |
 | Phase 05-close-stage-tracker P01 | 3 | 2 tasks | 2 files |
+| Phase 05-close-stage-tracker P02 | 3 | 1 tasks | 1 files |
 
 ## Accumulated Context
 
@@ -107,6 +108,7 @@ Recent decisions affecting current work:
 - [Phase 05-close-stage-tracker]: CloseStage.posted counts both posted AND approved status rows — progress = Math.round((posted+approved)/total*100)
 - [Phase 05-close-stage-tracker]: pending-approval uses hyphen (not underscore) to match exact CSV status values in erp_journal_entries.csv
 - [Phase 05-close-stage-tracker]: RAG thresholds: on-track >=75, at-risk 50-74, delayed <50 — pure function tests GREEN immediately from inline definitions
+- [Phase 05-close-stage-tracker]: STAGE_NAMES uses exact CSV stage values ('Accruals & JEs', 'Revenue recognition') — two wrong names were in the hardcoded array
 
 ### Pending Todos
 
@@ -120,6 +122,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-04T21:55:55.586Z
-Stopped at: Completed 05-close-stage-tracker/05-01-PLAN.md
+Last session: 2026-03-04T22:02:19.734Z
+Stopped at: Completed 05-close-stage-tracker/05-02-PLAN.md
 Resume file: None
