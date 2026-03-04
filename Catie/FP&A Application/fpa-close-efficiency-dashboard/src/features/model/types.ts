@@ -122,3 +122,11 @@ export interface ScenarioPreset {
   label: string;
   controls: ControlState;
 }
+
+export interface CloseStage {
+  name: string;
+  progress: number;        // 0–100, Math.round((posted + approved) / total * 100)
+  posted: number;          // count of JE rows where status === 'posted' OR status === 'approved'
+  pendingApproval: number; // count of JE rows where status === 'pending-approval' (hyphen, not underscore)
+  total: number;           // total JE row count for this stage
+}
