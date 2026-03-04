@@ -15,6 +15,7 @@ import {
   type ARRow,
   type BaseInputs,
   type Cash13WeekRow,
+  type CloseStage,
   type ControlState,
   type ExternalFuelIndexRow,
   type ExternalVendorPriceIndexRow,
@@ -37,7 +38,7 @@ export type DashboardSeedData = {
   presets: ScenarioPreset[];
   baseInputs: BaseInputs;
   ar90Ratio: number;
-  closeStages: { name: string; progress: number }[];
+  closeStages: CloseStage[];
   journalEntries: JournalEntryRow[];
   inventoryAdjustments: InventoryAdjustmentRow[];
   cash13Week: Cash13WeekRow[];
@@ -112,19 +113,31 @@ export async function loadDashboardSeedData(): Promise<DashboardSeedData> {
     variancePct: company.variancePct ?? 0.034,
   };
 
+  // Compute closeStages from journalEntries (replaces hardcoded values)
+  const STAGE_NAMES = [
+    'AP close',
+    'AR close',
+    'Revenue recognition',
+    'Inventory valuation',
+    'Accruals & JEs',
+    'Financial statement package',
+  ] as const;
+
+  const closeStages: CloseStage[] = STAGE_NAMES.map(name => {
+    const rows = journalEntries.filter(je => je.stage === name);
+    const total = rows.length;
+    const posted = rows.filter(je => je.status === 'posted' || je.status === 'approved').length;
+    const pendingApproval = rows.filter(je => je.status === 'pending-approval').length;
+    const progress = total > 0 ? Math.round((posted / total) * 100) : 0;
+    return { name, progress, posted, pendingApproval, total };
+  });
+
   return {
     company,
     presets,
     baseInputs,
     ar90Ratio: arTotal > 0 ? ar90 / arTotal : 0,
-    closeStages: [
-      { name: "AP close", progress: 78 },
-      { name: "AR close", progress: 70 },
-      { name: "Revenue recognition checks", progress: 66 },
-      { name: "Inventory valuation", progress: 59 },
-      { name: "Accruals and manual JEs", progress: 62 },
-      { name: "Financial statement package", progress: 47 },
-    ],
+    closeStages,
     journalEntries,
     inventoryAdjustments,
     cash13Week,
