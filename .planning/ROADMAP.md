@@ -169,7 +169,7 @@ Note: Phase 5 (Close Tracker) depends only on Phase 2 and can begin after Phase 
 | 3. KPI Cards and Variance Layer | 2/3 | In Progress|  |
 | 4. Scenario Control Panel | 2/3 | In Progress|  |
 | 5. Close Stage Tracker | 2/3 | In Progress|  |
-| 6. Static Charts | 1/3 | In Progress|  |
+| 6. Static Charts | 2/3 | In Progress|  |
 | 7. Reactive Margin Bridge | 0/TBD | Not started | - |
 | 8. AI Executive Summary | 0/TBD | Not started | - |
 | 9. Webinar Readiness and Polish | 0/TBD | Not started | - |

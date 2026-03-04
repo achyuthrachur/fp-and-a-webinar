@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 06-static-charts/06-01-PLAN.md
-last_updated: "2026-03-04T23:45:32.671Z"
+stopped_at: Completed 06-static-charts/06-02-PLAN.md
+last_updated: "2026-03-04T23:51:20.084Z"
 last_activity: 2026-03-04 — Phase 2 complete — 31/31 tests GREEN, variancePct wired, page.tsx async
 progress:
   total_phases: 9
   completed_phases: 5
   total_plans: 19
-  completed_plans: 17
+  completed_plans: 18
   percent: 44
 ---
 
@@ -65,6 +65,7 @@ Progress: [████░░░░░░] 44%
 | Phase 05-close-stage-tracker P02 | 3 | 1 tasks | 1 files |
 | Phase 05-close-stage-tracker P03 | 35 | 3 tasks | 4 files |
 | Phase 06-static-charts P01 | 2 | 2 tasks | 3 files |
+| Phase 06-static-charts P02 | 2 | 3 tasks | 6 files |
 
 ## Accumulated Context
 
@@ -116,6 +117,8 @@ Recent decisions affecting current work:
 - [Phase 05-close-stage-tracker]: Contextual note omitted for on-track stages — shown only for at-risk and delayed for clean actionable UX
 - [Phase 06-static-charts]: arAging and crmPipeline inserted after ar90Ratio in DashboardSeedData type — preserves field ordering convention and groups computed vs raw data logically
 - [Phase 06-static-charts]: beforeAll error-capture pattern reused for charts.test.ts RED stubs — consistent with Phase 2 TDD approach; tests show as FAILED not SKIPPED in Vitest
+- [Phase 06-static-charts]: No use client directives in ChartsSection files — they run inside DashboardApp existing client boundary
+- [Phase 06-static-charts]: Hardcoded hex for SVG fill colors in Recharts — CSS variables do not resolve reliably inside SVG attributes
 
 ### Pending Todos
 
@@ -129,6 +132,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-04T23:45:32.662Z
-Stopped at: Completed 06-static-charts/06-01-PLAN.md
+Last session: 2026-03-04T23:51:12.539Z
+Stopped at: Completed 06-static-charts/06-02-PLAN.md
 Resume file: None
