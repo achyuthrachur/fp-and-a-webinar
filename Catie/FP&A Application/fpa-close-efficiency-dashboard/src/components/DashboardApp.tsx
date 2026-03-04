@@ -12,6 +12,7 @@ import type { DashboardSeedData } from '@/lib/dataLoader';
 import { initializeFromSeedData } from '@/store/scenarioSlice';
 import KpiSection from '@/components/dashboard/KpiSection';
 import ScenarioPanel from '@/components/dashboard/ScenarioPanel/ScenarioPanel';
+import { CloseTracker } from '@/components/dashboard/CloseTracker/CloseTracker';
 
 interface DashboardAppProps {
   seedData?: DashboardSeedData;
@@ -69,7 +70,7 @@ export default function DashboardApp({ seedData }: DashboardAppProps) {
           ) : (
             <div id="slot-kpi-section" />
           )}
-          <div id="slot-close-tracker" />
+          {seedData && <CloseTracker seedData={seedData} />}
           <div id="slot-charts" />
           <div id="slot-ai-summary" />
           <p
@@ -81,7 +82,7 @@ export default function DashboardApp({ seedData }: DashboardAppProps) {
               opacity: 0.4,
             }}
           >
-            FP&amp;A Close Efficiency Dashboard — Phase 4 Scenario Panel active
+            FP&amp;A Close Efficiency Dashboard — Phase 5 Close Tracker active
           </p>
         </main>
       </div>
