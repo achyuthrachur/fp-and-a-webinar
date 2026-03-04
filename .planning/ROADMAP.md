@@ -55,7 +55,7 @@ Plans:
 
 Plans:
 - [x] 02-01-PLAN.md — Wave 0: failing dataLoader.test.ts stubs (RED — 10 assertions)
-- [ ] 02-02-PLAN.md — Wave 1: company.json, scenario-presets.json, GL/fuel/vendor/cash/inventory CSVs (7 files)
+- [x] 02-02-PLAN.md — Wave 1: company.json, scenario-presets.json, GL/fuel/vendor/cash/inventory CSVs (7 files)
 - [ ] 02-03-PLAN.md — Wave 1: ar_aging.csv, crm_pipeline.csv, erp_journal_entries.csv (3 arithmetic-critical files)
 - [ ] 02-04-PLAN.md — Wave 2: fix dataLoader.ts variancePct, wire page.tsx async, create .env.local
 
@@ -145,7 +145,7 @@ Note: Phase 5 (Close Tracker) depends only on Phase 2 and can begin after Phase 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Project Scaffolding | 2/3 | In Progress|  |
-| 2. Data Layer | 1/4 | In Progress | - |
+| 2. Data Layer | 2/4 | In Progress | - |
 | 3. KPI Cards and Variance Layer | 0/TBD | Not started | - |
 | 4. Scenario Control Panel | 0/TBD | Not started | - |
 | 5. Close Stage Tracker | 0/TBD | Not started | - |
