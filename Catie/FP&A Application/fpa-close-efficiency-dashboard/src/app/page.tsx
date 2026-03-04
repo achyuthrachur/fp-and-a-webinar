@@ -1,12 +1,10 @@
 // src/app/page.tsx
 // Root page — Server Component (no "use client")
-// Phase 1: renders DashboardApp with no props (data files don't exist yet).
-// Phase 2: will call loadDashboardSeedData() and pass seedData as props.
+// Phase 2: async — calls loadDashboardSeedData() and passes seedData to DashboardApp.
 import DashboardApp from '@/components/DashboardApp';
+import { loadDashboardSeedData } from '@/lib/dataLoader';
 
-export default function Page() {
-  // Phase 2 will add:
-  // const seedData = await loadDashboardSeedData();
-  // return <DashboardApp seedData={seedData} />;
-  return <DashboardApp />;
+export default async function Page() {
+  const seedData = await loadDashboardSeedData();
+  return <DashboardApp seedData={seedData} />;
 }
