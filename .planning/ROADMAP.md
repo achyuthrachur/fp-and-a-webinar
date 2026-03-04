@@ -116,7 +116,12 @@ Plans:
   2. The AR Aging panel displays Current, 1-30, 31-60, 61-90, and 90+ day buckets from `ar_aging.csv` and shows an `ar90Ratio` summary stat
   3. The 13-Week Cash Flow chart clearly distinguishes actual weeks (solid line) from forecast weeks (dashed line), with a toggle that shows or hides the entire panel
   4. No chart throws a Recharts SSR hydration error — all three charts load cleanly on initial page render
-**Plans**: TBD
+**Plans**: 3 plans
+
+Plans:
+- [ ] 06-01-PLAN.md — Wave 1: fix DashboardSeedData type gap (arAging + crmPipeline) + RED test stubs
+- [ ] 06-02-PLAN.md — Wave 2: PipelineChart + ArAgingChart + CashFlowChart + ChartsSection + DashboardApp wire-in
+- [ ] 06-03-PLAN.md — Wave 3: dev server start + human-verify checkpoint (charts render, no SSR errors)
 
 ### Phase 7: Reactive Margin Bridge
 **Goal**: The Margin Bridge chart updates in real time as scenario sliders change, serving as the visual centerpiece that demonstrates financial consequence of the scenario panel
@@ -164,7 +169,7 @@ Note: Phase 5 (Close Tracker) depends only on Phase 2 and can begin after Phase 
 | 3. KPI Cards and Variance Layer | 2/3 | In Progress|  |
 | 4. Scenario Control Panel | 2/3 | In Progress|  |
 | 5. Close Stage Tracker | 2/3 | In Progress|  |
-| 6. Static Charts | 0/TBD | Not started | - |
+| 6. Static Charts | 0/3 | Not started | - |
 | 7. Reactive Margin Bridge | 0/TBD | Not started | - |
 | 8. AI Executive Summary | 0/TBD | Not started | - |
 | 9. Webinar Readiness and Polish | 0/TBD | Not started | - |
