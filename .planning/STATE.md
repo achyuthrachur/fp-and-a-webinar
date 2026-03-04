@@ -2,15 +2,15 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: executing
-stopped_at: "Completed 02-data-layer/02-04-PLAN.md — Phase 2 complete"
-last_updated: "2026-03-04T17:30:00Z"
-last_activity: "2026-03-04 — Plan 02-04 complete: variancePct fixed, page.tsx wired async, .env.local created — 31/31 tests GREEN"
+status: planning
+stopped_at: Completed 03-kpi-cards-and-variance-layer/03-01-PLAN.md — Wave 0 RED tests committed
+last_updated: "2026-03-04T19:30:27.683Z"
+last_activity: 2026-03-04 — Phase 2 complete — 31/31 tests GREEN, variancePct wired, page.tsx async
 progress:
   total_phases: 9
   completed_phases: 2
-  total_plans: 7
-  completed_plans: 7
+  total_plans: 10
+  completed_plans: 8
   percent: 44
 ---
 
@@ -55,6 +55,7 @@ Progress: [████░░░░░░] 44%
 | Phase 02-data-layer P01 | 3 | 1 task | 1 file |
 | Phase 02-data-layer P02 | 3 | 2 tasks | 7 files |
 | Phase 02-data-layer P03 | 12 | 2 tasks | 3 files |
+| Phase 03-kpi-cards-and-variance-layer P01 | 8 | 2 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -84,6 +85,8 @@ Recent decisions affecting current work:
 - [Phase 02-03]: ar_aging.csv FINAL version scales ar_90_plus upward to reach ar90Ratio=0.1095 (within 0.10-0.12 target), redistributing from ar_current — all 13 rows still balance
 - [Phase 02-03]: erp_journal_entries.csv uses 98 rows with explicit posted/approved counts per stage to hit exact progress targets (78/70/67/59/62/47%)
 - [Phase 02-03]: JE description field left empty string — schema has .optional(), consistent with plan template rows
+- [Phase 03-01]: makeState uses inline Partial type cast to unknown as RootState to avoid Redux module resolution errors at test parse time
+- [Phase 03-01]: Wave 0 TDD: beforeAll error-capture pattern used for kpiSelectors — catch import error, re-throw in each it() for FAILED not SKIPPED status
 
 ### Pending Todos
 
@@ -97,6 +100,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-04T17:30:00Z
-Stopped at: Session resumed, proceeding to plan Phase 3
-Resume file: .planning/phases/03-kpi-cards/ (not yet created)
+Last session: 2026-03-04T19:30:27.666Z
+Stopped at: Completed 03-kpi-cards-and-variance-layer/03-01-PLAN.md — Wave 0 RED tests committed
+Resume file: None

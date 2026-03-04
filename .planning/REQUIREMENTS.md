@@ -20,8 +20,8 @@
 
 ### KPI Cards
 
-- [ ] **KPIS-01**: User can see all 8 financial metrics — KPI cards display Net Sales, COGS, Gross Profit, EBITDA, Cash, AR, AP, and Inventory with correctly formatted values from GL data
-- [ ] **KPIS-02**: User can see performance vs prior month — each KPI card shows a variance delta (▲/▼ indicator + formatted percentage) comparing current period to prior period
+- [x] **KPIS-01**: User can see all 8 financial metrics — KPI cards display Net Sales, COGS, Gross Profit, EBITDA, Cash, AR, AP, and Inventory with correctly formatted values from GL data
+- [x] **KPIS-02**: User can see performance vs prior month — each KPI card shows a variance delta (▲/▼ indicator + formatted percentage) comparing current period to prior period
 - [ ] **KPIS-03**: User sees visual confirmation that KPI values updated after scenario change — animated number counters (React Bits, under 600ms) trigger when Redux scenario state changes
 - [ ] **KPIS-04**: User can see which KPI cards were affected by a slider change — affected KPI cards display a brief amber glow animation when their computed value changes
 
@@ -56,7 +56,7 @@
 ### Dynamic Configuration
 
 - [ ] **DYNM-01**: Dashboard header shows the correct reporting period — `periodLabel` is derived from the latest period in `erp_gl_summary.csv`, not hardcoded
-- [ ] **DYNM-02**: Variance calculations use configurable or computed rates — `variancePct` is either derived from GL data comparison or loaded from `company.json`, not hardcoded
+- [x] **DYNM-02**: Variance calculations use configurable or computed rates — `variancePct` is either derived from GL data comparison or loaded from `company.json`, not hardcoded
 - [x] **DYNM-03**: Close stage target days are configurable — close progress and "days to target" metric read `closeTargetBusinessDays` from `company.json`
 - [x] **DYNM-04**: Dashboard header shows the correct company name — company name in header is loaded from `company.json`, not hardcoded
 
@@ -121,11 +121,11 @@
 | FOND-04 | Phase 2 | Pending |
 | FOND-08 | Phase 2 | Pending |
 | DYNM-01 | Phase 2 | Pending |
-| DYNM-02 | Phase 3 | Pending |
+| DYNM-02 | Phase 3 | Complete |
 | DYNM-03 | Phase 2 | Pending |
 | DYNM-04 | Phase 2 | Pending |
-| KPIS-01 | Phase 3 | Pending |
-| KPIS-02 | Phase 3 | Pending |
+| KPIS-01 | Phase 3 | Complete |
+| KPIS-02 | Phase 3 | Complete |
 | KPIS-03 | Phase 3 | Pending |
 | KPIS-04 | Phase 3 | Pending |
 | SCEN-01 | Phase 4 | Pending |

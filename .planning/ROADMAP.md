@@ -151,7 +151,7 @@ Note: Phase 5 (Close Tracker) depends only on Phase 2 and can begin after Phase 
 |-------|----------------|--------|-----------|
 | 1. Project Scaffolding | 2/3 | In Progress|  |
 | 2. Data Layer | 3/4 | In Progress | - |
-| 3. KPI Cards and Variance Layer | 0/3 | Not started | - |
+| 3. KPI Cards and Variance Layer | 1/3 | In Progress|  |
 | 4. Scenario Control Panel | 0/TBD | Not started | - |
 | 5. Close Stage Tracker | 0/TBD | Not started | - |
 | 6. Static Charts | 0/TBD | Not started | - |
