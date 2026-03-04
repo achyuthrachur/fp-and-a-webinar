@@ -1,13 +1,15 @@
 // src/components/dashboard/ScenarioPanel/ScenarioPanel.tsx
 // No "use client" — ScenarioPanel renders inside DashboardApp's existing client boundary.
 // All 11 controls: 7 sliders + 4 toggles wired to Redux scenarioSlice via setControl.
+// PresetRow: Radix Select dropdown + Reset button (Plan 03).
 
 import { useSelector, useDispatch } from 'react-redux';
 import type { RootState } from '@/store';
 import type { ControlState, ScenarioPreset } from '@/features/model/types';
-import { setControl } from '@/store/scenarioSlice';
+import { setControl, loadPreset, resetToDefaults } from '@/store/scenarioSlice';
 import * as SliderPrimitive from '@radix-ui/react-slider';
 import * as SwitchPrimitive from '@radix-ui/react-switch';
+import * as SelectPrimitive from '@radix-ui/react-select';
 
 // ─── Prop Types ───────────────────────────────────────────────────────────────
 
@@ -243,11 +245,139 @@ function ToggleControl({ label, value, onCheckedChange }: ToggleControlProps) {
   );
 }
 
+// ─── PresetRow ────────────────────────────────────────────────────────────────
+
+interface PresetRowProps {
+  presets: ScenarioPreset[];
+  controls: ControlState;
+  onSelect: (preset: ScenarioPreset) => void;
+  onReset: () => void;
+}
+
+// Field-by-field comparison (not JSON.stringify — key order is not guaranteed)
+const isMatch = (a: ControlState, b: ControlState): boolean =>
+  (Object.keys(a) as (keyof ControlState)[]).every((k) => a[k] === b[k]);
+
+function PresetRow({ presets, controls, onSelect, onReset }: PresetRowProps) {
+  const activePresetId = presets.find((p) => isMatch(p.controls, controls))?.id ?? 'custom';
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'row', gap: '0.5rem', alignItems: 'center' }}>
+      {/* Radix Select hover highlight style */}
+      <style>{`
+        [data-radix-select-item][data-highlighted] {
+          background: var(--accent-soft);
+          outline: none;
+        }
+      `}</style>
+
+      <SelectPrimitive.Root
+        value={activePresetId}
+        onValueChange={(id) => {
+          const p = presets.find((preset) => preset.id === id);
+          if (p) onSelect(p);
+        }}
+      >
+        <SelectPrimitive.Trigger
+          style={{
+            flex: 1,
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            padding: '0.375rem 0.625rem',
+            background: 'var(--card)',
+            border: '1px solid var(--border)',
+            borderRadius: '8px',
+            fontSize: '0.8125rem',
+            color: 'var(--foreground)',
+            cursor: 'pointer',
+            outline: 'none',
+          }}
+        >
+          <SelectPrimitive.Value />
+          <SelectPrimitive.Icon style={{ marginLeft: '0.25rem' }}>▾</SelectPrimitive.Icon>
+        </SelectPrimitive.Trigger>
+
+        <SelectPrimitive.Portal>
+          <SelectPrimitive.Content
+            position="popper"
+            style={{
+              background: 'var(--card)',
+              border: '1px solid var(--border)',
+              borderRadius: '8px',
+              padding: '0.25rem',
+              boxShadow: '0 4px 16px rgba(1,30,65,0.12)',
+              zIndex: 50,
+              minWidth: 'var(--radix-select-trigger-width)',
+            }}
+          >
+            <SelectPrimitive.Viewport>
+              {/* "Custom" placeholder shown when no preset matches */}
+              <SelectPrimitive.Item
+                value="custom"
+                style={{
+                  padding: '0.375rem 0.5rem',
+                  borderRadius: '6px',
+                  fontSize: '0.8125rem',
+                  cursor: 'pointer',
+                  color: 'var(--muted)',
+                  outline: 'none',
+                  fontStyle: 'italic',
+                }}
+              >
+                <SelectPrimitive.ItemText>— Custom —</SelectPrimitive.ItemText>
+              </SelectPrimitive.Item>
+
+              {presets.map((preset) => (
+                <SelectPrimitive.Item
+                  key={preset.id}
+                  value={preset.id}
+                  style={{
+                    padding: '0.375rem 0.5rem',
+                    borderRadius: '6px',
+                    fontSize: '0.8125rem',
+                    cursor: 'pointer',
+                    color: 'var(--foreground)',
+                    outline: 'none',
+                  }}
+                >
+                  <SelectPrimitive.ItemText>{preset.label}</SelectPrimitive.ItemText>
+                </SelectPrimitive.Item>
+              ))}
+            </SelectPrimitive.Viewport>
+          </SelectPrimitive.Content>
+        </SelectPrimitive.Portal>
+      </SelectPrimitive.Root>
+
+      {/* Reset button */}
+      <button
+        onClick={onReset}
+        style={{
+          padding: '0.375rem 0.625rem',
+          background: 'transparent',
+          border: '1px solid var(--border)',
+          borderRadius: '8px',
+          fontSize: '0.8125rem',
+          color: 'var(--muted)',
+          cursor: 'pointer',
+          whiteSpace: 'nowrap',
+          flexShrink: 0,
+        }}
+      >
+        Reset
+      </button>
+    </div>
+  );
+}
+
 // ─── Main Component ───────────────────────────────────────────────────────────
 
-export default function ScenarioPanel({ presets: _presets }: ScenarioPanelProps) {
+export default function ScenarioPanel({ presets }: ScenarioPanelProps) {
   const controls = useSelector((s: RootState) => s.scenario.controls);
   const dispatch = useDispatch();
+
+  const baseline = presets.find((p) => p.id === 'baseline') ?? presets[0];
 
   const handleSliderChange = (field: keyof ControlState) => (value: number) => {
     dispatch(setControl({ field, value }));
@@ -276,7 +406,13 @@ export default function ScenarioPanel({ presets: _presets }: ScenarioPanelProps)
         [data-radix-switch-thumb][data-state="checked"] { transform: translateX(18px); }
       `}</style>
 
-      {/* PresetRow placeholder — added in Plan 03 */}
+      {/* PresetRow: dropdown + reset button */}
+      <PresetRow
+        presets={presets}
+        controls={controls}
+        onSelect={(preset) => dispatch(loadPreset(preset.controls))}
+        onReset={() => dispatch(resetToDefaults(baseline.controls))}
+      />
 
       {/* Revenue Levers */}
       <ControlGroup label="Revenue Levers">
