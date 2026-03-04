@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Phase 2 context gathered
-last_updated: "2026-03-04T16:13:06.885Z"
-last_activity: "2026-03-04 — Plan 01-02 complete: config files, Zod schemas, CSV parser, Redux stub"
+stopped_at: "Completed 02-data-layer/02-02-PLAN.md"
+last_updated: "2026-03-04T16:45:00Z"
+last_activity: "2026-03-04 — Plan 02-02 complete: 7 seed data files (company.json, scenario-presets.json, 5 CSVs)"
 progress:
   total_phases: 9
   completed_phases: 1
-  total_plans: 3
-  completed_plans: 3
-  percent: 22
+  total_plans: 5
+  completed_plans: 5
+  percent: 28
 ---
 
 # Project State
@@ -21,16 +21,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-03)
 
 **Core value:** FP&A teams can interactively model real financial close scenarios and immediately see the impact on KPIs, charts, and an AI-generated executive narrative — fully functional for a live webinar demonstration.
-**Current focus:** Phase 1 — Project Scaffolding
+**Current focus:** Phase 2 — Data Layer
 
 ## Current Position
 
-Phase: 1 of 9 (Project Scaffolding)
-Plan: 2 of 3 in current phase
+Phase: 2 of 9 (Data Layer)
+Plan: 2 of 4 in current phase
 Status: In progress
-Last activity: 2026-03-04 — Plan 01-02 complete: config files, Zod schemas, CSV parser, Redux stub
+Last activity: 2026-03-04 — Plan 02-02 complete: 7 seed data files (company.json, scenario-presets.json, 5 CSVs)
 
-Progress: [██░░░░░░░░] 22%
+Progress: [███░░░░░░░] 28%
 
 ## Performance Metrics
 
@@ -44,13 +44,16 @@ Progress: [██░░░░░░░░] 22%
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | Phase 01-project-scaffolding | 2/3 | 58 min | 29 min |
+| Phase 02-data-layer | 2/4 | 6 min | 3 min |
 
 **Recent Trend:**
-- Last 5 plans: P01(23min), P02(35min)
+- Last 5 plans: P01(23min), P02(35min), P02-01(3min), P02-02(3min)
 - Trend: Stable
 
 *Updated after each plan completion*
 | Phase 01-project-scaffolding P02 | 35 | 2 tasks | 8 files |
+| Phase 02-data-layer P01 | 3 | 1 task | 1 file |
+| Phase 02-data-layer P02 | 3 | 2 tasks | 7 files |
 
 ## Accumulated Context
 
@@ -72,6 +75,11 @@ Recent decisions affecting current work:
 - [Phase 01-02]: @reduxjs/toolkit ^2.0.0 — plan stated 5.0.1 but npm max is 2.11.2
 - [Phase 01-02]: eslint ^9 required by eslint-config-next@16.1.6
 - [Phase 01-02]: makeStore factory pattern for Redux store SSR compatibility with Next.js App Router
+- [Phase 02-01]: beforeAll error-capture pattern for Wave 0 RED tests — catch ENOENT in beforeAll, re-throw in each it() so tests show as FAILED not SKIPPED in Vitest
+- [Phase 02-01]: No vi.mock in dataLoader integration tests — real FS calls verify actual data file presence and computed values
+- [Phase 02-02]: external_vendor_price_index.csv replaced entirely — existing file had wrong period format (YYYY-MM) and wrong scale (116+ vs 100-based baseline)
+- [Phase 02-02]: is_actual in cash_13_week.csv uses bare string literals (not JSON booleans) — z.string() schema, CSV format
+- [Phase 02-02]: variancePct=0.034 derived from MoM revenue: (9.2M-8.9M)/8.9M = 3.37% ≈ 3.4%
 
 ### Pending Todos
 
@@ -85,6 +93,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-04T16:13:06.867Z
-Stopped at: Phase 2 context gathered
-Resume file: .planning/phases/02-data-layer/02-CONTEXT.md
+Last session: 2026-03-04T16:45:00Z
+Stopped at: Completed 02-data-layer/02-02-PLAN.md
+Resume file: .planning/phases/02-data-layer/02-03-PLAN.md
