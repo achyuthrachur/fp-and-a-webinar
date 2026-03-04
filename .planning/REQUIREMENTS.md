@@ -22,8 +22,8 @@
 
 - [x] **KPIS-01**: User can see all 8 financial metrics — KPI cards display Net Sales, COGS, Gross Profit, EBITDA, Cash, AR, AP, and Inventory with correctly formatted values from GL data
 - [x] **KPIS-02**: User can see performance vs prior month — each KPI card shows a variance delta (▲/▼ indicator + formatted percentage) comparing current period to prior period
-- [ ] **KPIS-03**: User sees visual confirmation that KPI values updated after scenario change — animated number counters (React Bits, under 600ms) trigger when Redux scenario state changes
-- [ ] **KPIS-04**: User can see which KPI cards were affected by a slider change — affected KPI cards display a brief amber glow animation when their computed value changes
+- [x] **KPIS-03**: User sees visual confirmation that KPI values updated after scenario change — animated number counters (React Bits, under 600ms) trigger when Redux scenario state changes
+- [x] **KPIS-04**: User can see which KPI cards were affected by a slider change — affected KPI cards display a brief amber glow animation when their computed value changes
 
 ### Close Tracker
 
@@ -126,8 +126,8 @@
 | DYNM-04 | Phase 2 | Pending |
 | KPIS-01 | Phase 3 | Complete |
 | KPIS-02 | Phase 3 | Complete |
-| KPIS-03 | Phase 3 | Pending |
-| KPIS-04 | Phase 3 | Pending |
+| KPIS-03 | Phase 3 | Complete |
+| KPIS-04 | Phase 3 | Complete |
 | SCEN-01 | Phase 4 | Pending |
 | SCEN-02 | Phase 4 | Pending |
 | SCEN-03 | Phase 4 | Pending |

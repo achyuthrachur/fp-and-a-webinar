@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 03-kpi-cards-and-variance-layer/03-01-PLAN.md — Wave 0 RED tests committed
-last_updated: "2026-03-04T19:30:27.683Z"
+stopped_at: Completed 03-kpi-cards-and-variance-layer/03-02-PLAN.md
+last_updated: "2026-03-04T19:40:33.754Z"
 last_activity: 2026-03-04 — Phase 2 complete — 31/31 tests GREEN, variancePct wired, page.tsx async
 progress:
   total_phases: 9
   completed_phases: 2
   total_plans: 10
-  completed_plans: 8
+  completed_plans: 9
   percent: 44
 ---
 
@@ -56,6 +56,7 @@ Progress: [████░░░░░░] 44%
 | Phase 02-data-layer P02 | 3 | 2 tasks | 7 files |
 | Phase 02-data-layer P03 | 12 | 2 tasks | 3 files |
 | Phase 03-kpi-cards-and-variance-layer P01 | 8 | 2 tasks | 3 files |
+| Phase 03-kpi-cards-and-variance-layer P02 | 15 | 2 tasks | 7 files |
 
 ## Accumulated Context
 
@@ -87,6 +88,10 @@ Recent decisions affecting current work:
 - [Phase 02-03]: JE description field left empty string — schema has .optional(), consistent with plan template rows
 - [Phase 03-01]: makeState uses inline Partial type cast to unknown as RootState to avoid Redux module resolution errors at test parse time
 - [Phase 03-01]: Wave 0 TDD: beforeAll error-capture pattern used for kpiSelectors — catch import error, re-throw in each it() for FAILED not SKIPPED status
+- [Phase 03-02]: FUEL_COGS_SHARE=0.18: fuel delta applies to 18% of cogsAtMargin to prevent unrealistic negative EBITDA at high fuel indexes
+- [Phase 03-02]: redux installed explicitly: @reduxjs/toolkit requires redux as peer dep for ESM resolution in Vitest v4 node path
+- [Phase 03-02]: Wave 0 test stub corrected: selectCogs fuel shock expected 7_999_360 fixed to 7_883_539 to match plan formula output
+- [Phase 03-02]: CountUp duration in SECONDS not milliseconds — use duration={0.5} for 500ms
 
 ### Pending Todos
 
@@ -100,6 +105,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-04T19:30:27.666Z
-Stopped at: Completed 03-kpi-cards-and-variance-layer/03-01-PLAN.md — Wave 0 RED tests committed
+Last session: 2026-03-04T19:40:33.746Z
+Stopped at: Completed 03-kpi-cards-and-variance-layer/03-02-PLAN.md
 Resume file: None
