@@ -100,7 +100,12 @@ Plans:
   2. Every close stage shows a color-coded RAG badge (On Track green, At Risk amber, Delayed red) with a matching Iconsax icon that is large enough to read at a glance
   3. Any stage with "At Risk" or "Delayed" status displays a contextual note explaining why (e.g., "12 of 15 expected JEs posted — 3 pending approval") derived from JE data
   4. A "days to close target" metric is visible and shows a non-zero computed value based on `closeTargetBusinessDays` from `company.json`
-**Plans**: TBD
+**Plans**: 3 plans
+
+Plans:
+- [ ] 05-01-PLAN.md — Wave 1: CloseStage type interface + RED test stubs
+- [ ] 05-02-PLAN.md — Wave 2: dataLoader.ts JE-computed closeStages (makes tests GREEN)
+- [ ] 05-03-PLAN.md — Wave 3: CloseTracker components + DashboardApp wire-in + human verify
 
 ### Phase 6: Static Charts
 **Goal**: AR Aging, Pipeline to Invoiced, and 13-Week Cash Flow charts render correctly from their CSV data files with formatted tooltips and no SSR hydration errors
