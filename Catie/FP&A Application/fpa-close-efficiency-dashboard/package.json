@@ -1,0 +1,41 @@
+{
+  "name": "fpa-close-efficiency-dashboard",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "next": "16.1.6",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "@reduxjs/toolkit": "^2.0.0",
+    "react-redux": "^9.2.0",
+    "recharts": "^2.15.0",
+    "zod": "^3.24.0",
+    "papaparse": "^5.4.1",
+    "iconsax-react": "^0.0.8",
+    "@radix-ui/react-slider": "^1.2.0",
+    "@radix-ui/react-switch": "^1.1.0",
+    "@radix-ui/react-select": "^2.1.0",
+    "@radix-ui/react-tooltip": "^1.1.0",
+    "openai": "^4.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@types/papaparse": "^5.3.14",
+    "vitest": "^4.0.0",
+    "@vitejs/plugin-react": "^4.0.0",
+    "eslint": "^9",
+    "eslint-config-next": "16.1.6"
+  }
+}
