@@ -27,9 +27,9 @@
 
 ### Close Tracker
 
-- [ ] **CLOS-01**: User can see month-end close progress — 6 close stages (AP close, AR close, Revenue recognition, Inventory valuation, Accruals & manual JEs, Financial statement package) display progress bars computed from actual journal entry data counts
-- [ ] **CLOS-02**: User can see close health at a glance — each stage shows a RAG status badge (On Track / At Risk / Delayed) with an Iconsax icon, color-coded and visually prominent
-- [ ] **CLOS-03**: User can understand why a stage is at risk — at-risk stages display a contextual note derived from JE data (e.g., "12 of 15 expected JEs posted — 3 pending approval")
+- [x] **CLOS-01**: User can see month-end close progress — 6 close stages (AP close, AR close, Revenue recognition, Inventory valuation, Accruals & manual JEs, Financial statement package) display progress bars computed from actual journal entry data counts
+- [x] **CLOS-02**: User can see close health at a glance — each stage shows a RAG status badge (On Track / At Risk / Delayed) with an Iconsax icon, color-coded and visually prominent
+- [x] **CLOS-03**: User can understand why a stage is at risk — at-risk stages display a contextual note derived from JE data (e.g., "12 of 15 expected JEs posted — 3 pending approval")
 - [ ] **CLOS-04**: User can see time pressure in the close — a "days to close target" metric is displayed, computed from `company.closeTargetBusinessDays`
 
 ### Scenario Panel
@@ -132,9 +132,9 @@
 | SCEN-02 | Phase 4 | Complete |
 | SCEN-03 | Phase 4 | Complete |
 | SCEN-04 | Phase 4 | Complete |
-| CLOS-01 | Phase 5 | Pending |
-| CLOS-02 | Phase 5 | Pending |
-| CLOS-03 | Phase 5 | Pending |
+| CLOS-01 | Phase 5 | Complete |
+| CLOS-02 | Phase 5 | Complete |
+| CLOS-03 | Phase 5 | Complete |
 | CLOS-04 | Phase 5 | Pending |
 | CHRT-02 | Phase 6 | Pending |
 | CHRT-03 | Phase 6 | Pending |

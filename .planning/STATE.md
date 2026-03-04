@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 04-scenario-control-panel/04-03-PLAN.md
-last_updated: "2026-03-04T21:08:54.834Z"
+stopped_at: Completed 05-close-stage-tracker/05-01-PLAN.md
+last_updated: "2026-03-04T21:55:55.602Z"
 last_activity: 2026-03-04 — Phase 2 complete — 31/31 tests GREEN, variancePct wired, page.tsx async
 progress:
   total_phases: 9
   completed_phases: 4
-  total_plans: 13
-  completed_plans: 13
+  total_plans: 16
+  completed_plans: 14
   percent: 44
 ---
 
@@ -61,6 +61,7 @@ Progress: [████░░░░░░] 44%
 | Phase 04-scenario-control-panel P01 | 2 | 1 tasks | 1 files |
 | Phase 04-scenario-control-panel P02 | 5 | 1 tasks | 1 files |
 | Phase 04-scenario-control-panel P03 | 9 | 2 tasks | 2 files |
+| Phase 05-close-stage-tracker P01 | 3 | 2 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -103,6 +104,9 @@ Recent decisions affecting current work:
 - [Phase 04-scenario-control-panel]: field-by-field ControlState comparison used for activePresetId — JSON.stringify risks key-order false negatives
 - [Phase 04-scenario-control-panel]: Custom sentinel option added to Radix Select so partial edits show '— Custom —' not blank
 - [Phase 04-scenario-control-panel]: align-items:flex-start on outer flex container required for position:sticky to work on sidebar
+- [Phase 05-close-stage-tracker]: CloseStage.posted counts both posted AND approved status rows — progress = Math.round((posted+approved)/total*100)
+- [Phase 05-close-stage-tracker]: pending-approval uses hyphen (not underscore) to match exact CSV status values in erp_journal_entries.csv
+- [Phase 05-close-stage-tracker]: RAG thresholds: on-track >=75, at-risk 50-74, delayed <50 — pure function tests GREEN immediately from inline definitions
 
 ### Pending Todos
 
@@ -116,6 +120,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-04T20:59:34.231Z
-Stopped at: Completed 04-scenario-control-panel/04-03-PLAN.md
+Last session: 2026-03-04T21:55:55.586Z
+Stopped at: Completed 05-close-stage-tracker/05-01-PLAN.md
 Resume file: None
