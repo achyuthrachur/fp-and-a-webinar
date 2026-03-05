@@ -19,6 +19,7 @@ import {
   selectInventory,
 } from '@/store/kpiSelectors';
 import { formatCurrency } from '@/lib/formatters';
+import SectionHeader from '@/components/dashboard/SectionHeader';
 
 // Dynamic import — InfinityLoader uses browser APIs; ssr: false prevents SSR crash.
 const InfinityLoader = dynamic(
@@ -145,9 +146,14 @@ export default function AiSummarySection({ seedData }: AiSummarySectionProps) {
     .filter(Boolean);
 
   return (
-    <section
-      style={{
-        marginTop: '1.5rem',
+    <>
+      <SectionHeader
+        title="AI Executive Summary"
+        subtitle="AI-Generated CFO Narrative — Two-paragraph executive summary synthesized from current scenario KPIs"
+      />
+      <section
+        style={{
+          marginTop: '1.5rem',
         background: 'var(--card)',
         borderRadius: '12px',
         boxShadow:
@@ -308,6 +314,7 @@ export default function AiSummarySection({ seedData }: AiSummarySectionProps) {
           </p>
         )}
       </div>
-    </section>
+      </section>
+    </>
   );
 }

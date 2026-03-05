@@ -2,6 +2,7 @@ import type { DashboardSeedData } from '@/lib/dataLoader';
 import PipelineChart from './PipelineChart';
 import ArAgingChart from './ArAgingChart';
 import CashFlowChart from './CashFlowChart';
+import SectionHeader from '@/components/dashboard/SectionHeader';
 
 interface ChartsSectionProps {
   seedData: DashboardSeedData;
@@ -10,6 +11,10 @@ interface ChartsSectionProps {
 export default function ChartsSection({ seedData }: ChartsSectionProps) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', marginTop: '1.5rem' }}>
+      <SectionHeader
+        title="Pipeline & Collections Health"
+        subtitle="AR aging risk, CRM pipeline funnel, and 13-week cash outlook"
+      />
       {/* Top row: Pipeline (left ~50%) + AR Aging (right ~50%) */}
       <div style={{ display: 'flex', gap: '1.5rem' }}>
         <div style={{ flex: 1, minWidth: 0 }}>

@@ -10,6 +10,7 @@ import {
 import { buildMarginBridgeData } from '@/components/dashboard/ChartsSection/chartDataUtils';
 import { formatCurrency } from '@/lib/formatters';
 import MarginBridgeChart from './MarginBridgeChart';
+import SectionHeader from '@/components/dashboard/SectionHeader';
 
 export default function MarginBridgeSection() {
   const adjustedEbitda = useSelector(selectEbitda);
@@ -55,9 +56,14 @@ export default function MarginBridgeSection() {
   const chartData = buildMarginBridgeData(baselineEbitda, adjustedEbitda, store.getState());
 
   return (
-    <div
-      ref={cardRef}
-      style={{
+    <>
+      <SectionHeader
+        title="Margin Bridge"
+        subtitle="Scenario Impact on EBITDA — How lever adjustments flow through revenue, margin, and cost to adjusted EBITDA"
+      />
+      <div
+        ref={cardRef}
+        style={{
         background: 'var(--card)',
         borderRadius: 12,
         boxShadow:
@@ -103,5 +109,6 @@ export default function MarginBridgeSection() {
         <MarginBridgeChart chartData={chartData} isDark={isDark} />
       </div>
     </div>
+    </>
   );
 }

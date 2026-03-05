@@ -10,6 +10,7 @@ import { setControl, loadPreset, resetToDefaults } from '@/store/scenarioSlice';
 import * as SliderPrimitive from '@radix-ui/react-slider';
 import * as SwitchPrimitive from '@radix-ui/react-switch';
 import * as SelectPrimitive from '@radix-ui/react-select';
+import SectionHeader from '@/components/dashboard/SectionHeader';
 
 // ─── Prop Types ───────────────────────────────────────────────────────────────
 
@@ -400,6 +401,10 @@ export default function ScenarioPanel({ presets }: ScenarioPanelProps) {
         gap: '1.25rem',
       }}
     >
+      <SectionHeader
+        title="Scenario Controls"
+        subtitle="Adjust revenue, cost, and operations levers to model close outcomes in real time"
+      />
       {/* Switch thumb CSS — uses data-state selectors for smooth animation without re-render jank */}
       <style>{`
         [data-radix-switch-thumb] { left: 3px; transition: transform 150ms ease; }

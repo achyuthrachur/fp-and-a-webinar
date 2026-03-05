@@ -26,6 +26,7 @@ import {
   Box,
 } from '@/components/ui/icons';
 import KpiCard from './KpiCard';
+import SectionHeader from '@/components/dashboard/SectionHeader';
 
 interface KpiSectionProps {
   seedData: DashboardSeedData;
@@ -51,16 +52,21 @@ export default function KpiSection({ seedData }: KpiSectionProps) {
     base !== 0 ? (cur - base) / Math.abs(base) : 0;
 
   return (
-    <section
-      aria-label="KPI Metrics"
-      style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(4, 1fr)',
-        gap: '1rem',
-        padding: '0 0 1.5rem 0',
-      }}
-    >
-      {/* Row 1: P&L narrative (Net Sales → Gross Profit → EBITDA → Cash) */}
+    <>
+      <SectionHeader
+        title="KPI Cards"
+        subtitle="January 2026 Performance Snapshot — Key financials against prior month and scenario adjustments"
+      />
+      <section
+        aria-label="KPI Metrics"
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(4, 1fr)',
+          gap: '1rem',
+          padding: '0 0 1.5rem 0',
+        }}
+      >
+        {/* Row 1: P&L narrative (Net Sales → Gross Profit → EBITDA → Cash) */}
       <KpiCard
         label="Net Sales"
         icon={TrendUp}
@@ -114,6 +120,7 @@ export default function KpiSection({ seedData }: KpiSectionProps) {
         delta={safeDiv(inventory, bi.inventoryTotal)}
         deltaNeutral
       />
-    </section>
+      </section>
+    </>
   );
 }
