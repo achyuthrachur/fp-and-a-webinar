@@ -115,6 +115,8 @@ export interface BaseInputs {
   closeAdjustmentsCount: number;
   pipelineExecutionRatio: number;
   variancePct: number;
+  baseEbitda: number;         // Seed EBITDA: baseNetSales * baseGrossMarginPct - baseOpex (at fuelIndex=100)
+  baseGrossMarginPct: number; // Seed gross margin from baseline preset controls.grossMarginPct
 }
 
 export interface ScenarioPreset {
