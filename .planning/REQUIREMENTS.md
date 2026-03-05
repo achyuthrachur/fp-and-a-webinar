@@ -48,10 +48,10 @@
 
 ### AI Summary
 
-- [ ] **AISU-01**: AI narrative generation is available — `/api/enhance-summary` POST route handler exists using OpenAI GPT-4o with streaming output, `export const runtime = 'nodejs'`, `max_tokens: 300`, `temperature: 0.3`
+- [x] **AISU-01**: AI narrative generation is available — `/api/enhance-summary` POST route handler exists using OpenAI GPT-4o with streaming output, `export const runtime = 'nodejs'`, `max_tokens: 300`, `temperature: 0.3`
 - [ ] **AISU-02**: User can read an AI-generated executive summary — an AI summary panel (21st.dev card component) displays the streaming narrative response, updating character-by-character as the OpenAI stream arrives
 - [ ] **AISU-03**: User sees feedback while AI is generating — a React Bits loading animation displays while the streaming response is in progress
-- [ ] **AISU-04**: Primary demo scenario narrative renders immediately — the default scenario's AI narrative is pre-generated and cached so the first webinar demo load shows output instantly without waiting for the API
+- [x] **AISU-04**: Primary demo scenario narrative renders immediately — the default scenario's AI narrative is pre-generated and cached so the first webinar demo load shows output instantly without waiting for the API
 
 ### Dynamic Configuration
 
@@ -140,10 +140,10 @@
 | CHRT-03 | Phase 6 | Complete |
 | CHRT-04 | Phase 6 | Complete |
 | CHRT-01 | Phase 7 | Complete |
-| AISU-01 | Phase 8 | Pending |
+| AISU-01 | Phase 8 | Complete |
 | AISU-02 | Phase 8 | Pending |
 | AISU-03 | Phase 8 | Pending |
-| AISU-04 | Phase 8 | Pending |
+| AISU-04 | Phase 8 | Complete |
 | WBNR-01 | Phase 9 | Pending |
 | WBNR-02 | Phase 9 | Pending |
 | WBNR-03 | Phase 9 | Pending |
