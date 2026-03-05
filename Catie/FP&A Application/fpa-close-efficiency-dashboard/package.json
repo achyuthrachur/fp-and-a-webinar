@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build --webpack",
     "start": "next start",
     "lint": "next lint",
     "test": "vitest run",
@@ -25,7 +25,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-redux": "^9.2.0",
-    "recharts": "^2.14.1",
+    "recharts": "^2.15.4",
     "redux": "^5.0.1",
     "tailwind-merge": "^3.5.0",
     "zod": "^3.24.0"

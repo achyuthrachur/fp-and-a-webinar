@@ -1,7 +1,7 @@
 // src/features/model/__tests__/aiSummary.test.ts
 // Wave 0 RED stubs — all tests must FAIL until Plan 08-02 implements the real code.
 import { describe, it, expect, beforeAll } from 'vitest';
-import type { KpiPayload } from '@/app/api/enhance-summary/route';
+import type { KpiPayload } from '@/features/model/aiPromptUtils';
 
 let buildUserPrompt: (kpis: KpiPayload, presetName: string) => string;
 let BASELINE_SUMMARY: string;
@@ -10,8 +10,8 @@ let cacheImportError: unknown;
 
 beforeAll(async () => {
   try {
-    const routeMod = await import('@/app/api/enhance-summary/route');
-    buildUserPrompt = (routeMod as unknown as Record<string, unknown>).buildUserPrompt as typeof buildUserPrompt;
+    const routeMod = await import('@/features/model/aiPromptUtils');
+    buildUserPrompt = routeMod.buildUserPrompt;
   } catch (err) {
     routeImportError = err;
   }

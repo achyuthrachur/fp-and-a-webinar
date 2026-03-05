@@ -6,6 +6,10 @@ export const runtime = 'nodejs';
 
 import OpenAI from 'openai';
 import { NextRequest } from 'next/server';
+import { type KpiPayload, buildUserPrompt } from '@/features/model/aiPromptUtils';
+
+// Re-export KpiPayload type so existing imports from this route still work.
+export type { KpiPayload };
 
 // Lazily instantiated inside POST so that module-level import does not throw
 // when OPENAI_API_KEY is absent (e.g., in Vitest test environment).
@@ -15,36 +19,6 @@ function getOpenAI(): OpenAI {
     _openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
   }
   return _openai;
-}
-
-export interface KpiPayload {
-  netSales: string;
-  cogs: string;
-  grossProfit: string;
-  ebitda: string;
-  cash: string;
-  ar: string;
-  ap: string;
-  inventory: string;
-}
-
-// Pure function — exported for Vitest testability (no React, no fetch).
-// Produces the user message sent to GPT-4o. Contains all 8 KPI labels
-// plus the preset name so the AI can reference scenario context.
-export function buildUserPrompt(kpis: KpiPayload, presetName: string): string {
-  return [
-    `Scenario: ${presetName}`,
-    `Net Sales: ${kpis.netSales}`,
-    `COGS: ${kpis.cogs}`,
-    `Gross Profit: ${kpis.grossProfit}`,
-    `EBITDA: ${kpis.ebitda}`,
-    `Cash: ${kpis.cash}`,
-    `Accounts Receivable: ${kpis.ar}`,
-    `Accounts Payable: ${kpis.ap}`,
-    `Inventory: ${kpis.inventory}`,
-    '',
-    'Write the two-paragraph executive summary.',
-  ].join('\n');
 }
 
 export async function POST(req: NextRequest) {
