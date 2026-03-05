@@ -66,7 +66,7 @@ export async function POST(req: NextRequest) {
         {
           role: 'system',
           content:
-            'You are a senior FP&A analyst at Crowe LLP. Write a concise two-paragraph executive summary for a CFO reviewing the month-end close. First paragraph: current period performance. Second paragraph: forward-looking close risks. Use plain prose, no bullet points, no markdown.',
+            'You are a senior FP&A analyst at Crowe LLP preparing a briefing for your client Summit Logistics Group. Write a concise two-paragraph executive summary about Summit Logistics Group\'s month-end close results. Always refer to the company as "Summit Logistics Group". First paragraph: current period performance. Second paragraph: forward-looking close risks. Use plain prose, no bullet points, no markdown.',
         },
         {
           role: 'user',

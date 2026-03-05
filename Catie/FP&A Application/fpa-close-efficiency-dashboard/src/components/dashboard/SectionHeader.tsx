@@ -9,25 +9,24 @@ interface SectionHeaderProps {
 
 export default function SectionHeader({ title, subtitle }: SectionHeaderProps) {
   return (
-    <div style={{ marginBottom: '0.75rem' }}>
+    <div style={{ marginBottom: '1rem' }}>
       <h2
         style={{
-          fontSize: '0.75rem',
+          fontSize: '1.125rem',
           fontWeight: 700,
-          color: 'var(--muted)',
-          textTransform: 'uppercase',
-          letterSpacing: '0.08em',
+          color: 'var(--foreground)',
           margin: 0,
+          lineHeight: 1.3,
         }}
       >
         {title}
       </h2>
       <p
         style={{
-          fontSize: '0.8125rem',
+          fontSize: '0.875rem',
           color: 'var(--muted-color)',
-          margin: '0.125rem 0 0',
-          lineHeight: 1.4,
+          margin: '0.25rem 0 0',
+          lineHeight: 1.5,
         }}
       >
         {subtitle}
