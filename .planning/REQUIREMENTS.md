@@ -65,7 +65,7 @@
 - [x] **WBNR-01**: Dashboard fills a presenter display without awkward whitespace — layout is responsive and optimized for 1080p/4K widescreen presentation
 - [x] **WBNR-02**: All components and charts render correctly in both light and dark themes — Recharts chart colors use CSS variables (`var(--color-accent-primary)`, etc.) so they respond to theme changes; no chart is invisible in either mode
 - [x] **WBNR-03**: Production build is clean — `npm run build` completes without errors and `npm run start` shows zero console errors or React dev warnings
-- [ ] **WBNR-04**: All scenario presets work end-to-end — each named preset in `scenario-presets.json` can be selected and produces correct, non-error KPI values and chart renders
+- [x] **WBNR-04**: All scenario presets work end-to-end — each named preset in `scenario-presets.json` can be selected and produces correct, non-error KPI values and chart renders
 
 ---
 
@@ -147,7 +147,7 @@
 | WBNR-01 | Phase 9 | Complete |
 | WBNR-02 | Phase 9 | Complete |
 | WBNR-03 | Phase 9 | Complete |
-| WBNR-04 | Phase 9 | Pending |
+| WBNR-04 | Phase 9 | Complete |
 
 **Coverage:**
 - v1 requirements: 36 total (note: original count of 32 was incorrect — actual count is 8 FOND + 4 KPIS + 4 CLOS + 4 SCEN + 4 CHRT + 4 AISU + 4 DYNM + 4 WBNR = 36)

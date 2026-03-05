@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 09-01-PLAN.md
-last_updated: "2026-03-05T17:40:45.797Z"
+stopped_at: "Completed 09-03-PLAN.md — checkpoint:human-verify pending browser QA sign-off"
+last_updated: "2026-03-05T17:44:46.105Z"
 last_activity: 2026-03-04 — Phase 2 complete — 31/31 tests GREEN, variancePct wired, page.tsx async
 progress:
   total_phases: 9
-  completed_phases: 8
+  completed_phases: 9
   total_plans: 29
-  completed_plans: 28
+  completed_plans: 29
   percent: 44
 ---
 
@@ -77,6 +77,7 @@ Progress: [████░░░░░░] 44%
 | Phase 08-ai-executive-summary P03 | 6 | 4 tasks | 4 files |
 | Phase 09-webinar-readiness-and-polish P02 | 3 | 2 tasks | 7 files |
 | Phase 09-webinar-readiness-and-polish P01 | 7 | 2 tasks | 3 files |
+| Phase 09-webinar-readiness-and-polish P03 | 5 | 1 tasks | 0 files |
 
 ## Accumulated Context
 
@@ -150,6 +151,7 @@ Recent decisions affecting current work:
 - [Phase 09-webinar-readiness-and-polish]: SectionHeader uses var(--muted) for title and var(--muted-color) for subtitle — intentional color hierarchy; no 'use client' directive; CloseTracker h2 fully replaced not wrapped
 - [Phase 09-webinar-readiness-and-polish]: periodLabel does not exist on DashboardSeedData — DashboardHeader uses baseline preset label instead (same semantic value, correct type)
 - [Phase 09-webinar-readiness-and-polish]: --muted-foreground alias pattern: add as alias of --muted-color in every theme block so chart tick fills and secondary text resolve across themes
+- [Phase 09-webinar-readiness-and-polish]: Vitest must run from app directory (not repo root) — repo-root cwd picks up both Achyuth and Catie test files causing @/ alias resolution failures in Achyuth tests
 
 ### Pending Todos
 
@@ -163,7 +165,7 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-05T17:40:45.787Z
-Stopped at: Completed 09-01-PLAN.md
+Last session: 2026-03-05T17:44:46.098Z
+Stopped at: Completed 09-03-PLAN.md — checkpoint:human-verify pending browser QA sign-off
 Resume file: None
 Resumed: Session resumed, proceeding to execute 06-03 (human verify static charts)
