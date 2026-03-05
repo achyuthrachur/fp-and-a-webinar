@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 07-03-PLAN.md
-last_updated: "2026-03-05T02:40:06.339Z"
+stopped_at: Completed 07-04-PLAN.md — Phase 7 complete
+last_updated: "2026-03-05T14:10:15.621Z"
 last_activity: 2026-03-04 — Phase 2 complete — 31/31 tests GREEN, variancePct wired, page.tsx async
 progress:
   total_phases: 9
-  completed_phases: 6
+  completed_phases: 7
   total_plans: 23
-  completed_plans: 22
+  completed_plans: 23
   percent: 44
 ---
 
@@ -70,6 +70,7 @@ Progress: [████░░░░░░] 44%
 | Phase 07-reactive-margin-bridge P01 | 2 | 2 tasks | 3 files |
 | Phase 07-reactive-margin-bridge P02 | 5 | 2 tasks | 2 files |
 | Phase 07-reactive-margin-bridge P03 | 6 | 2 tasks | 3 files |
+| Phase 07-reactive-margin-bridge P04 | 15 | 2 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -131,6 +132,8 @@ Recent decisions affecting current work:
 - [Phase 07-reactive-margin-bridge]: selectFuelIndexImpact uses || 0 guard to prevent -0 floating point artifact (JavaScript -0 != 0 under Object.is used by Vitest toBe)
 - [Phase 07-reactive-margin-bridge]: useStore().getState() used in MarginBridgeSection to pass full Redux state to 3-param buildMarginBridgeData (inline state computation avoids 6 separate useSelector calls)
 - [Phase 07-reactive-margin-bridge]: No 'use client' in MarginBridgeChart.tsx or MarginBridgeSection.tsx — both run inside DashboardApp client boundary
+- [Phase 07-reactive-margin-bridge]: Vercel production QA used instead of localhost — ampersand in FP&A path crashes Turbopack SQLite persistence from bash; production build is equivalent verification surface
+- [Phase 07-reactive-margin-bridge]: 3 Vercel build fixes: BOM stripped from globals.css, tailwindcss added to devDependencies, baseEbitda/baseGrossMarginPct added to DEFAULT_BASE_INPUTS
 
 ### Pending Todos
 
@@ -144,7 +147,7 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-05T02:40:06.333Z
-Stopped at: Completed 07-03-PLAN.md
+Last session: 2026-03-05T14:10:15.616Z
+Stopped at: Completed 07-04-PLAN.md — Phase 7 complete
 Resume file: None
 Resumed: Session resumed, proceeding to execute 06-03 (human verify static charts)

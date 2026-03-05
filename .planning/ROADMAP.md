@@ -18,7 +18,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [ ] **Phase 4: Scenario Control Panel** - All 7 sliders, 4 toggles, preset selector, and reset button are wired to Redux and update KPI values live
 - [ ] **Phase 5: Close Stage Tracker** - 6 close stages display JE-computed progress, RAG status badges, contextual at-risk notes, and days-to-close metric
 - [x] **Phase 6: Static Charts** - AR Aging, Pipeline to Invoiced, and 13-Week Cash Flow charts render correctly from CSV data (completed 2026-03-05)
-- [ ] **Phase 7: Reactive Margin Bridge** - Margin Bridge chart updates in real time as scenario sliders change
+- [x] **Phase 7: Reactive Margin Bridge** - Margin Bridge chart updates in real time as scenario sliders change (completed 2026-03-05)
 - [ ] **Phase 8: AI Executive Summary** - Streaming AI narrative panel generates and displays an executive summary from scenario state
 - [ ] **Phase 9: Webinar Readiness and Polish** - Layout fills presenter display, both themes work on all charts, build is clean, all presets tested end-to-end
 
@@ -176,6 +176,6 @@ Note: Phase 5 (Close Tracker) depends only on Phase 2 and can begin after Phase 
 | 4. Scenario Control Panel | 2/3 | In Progress|  |
 | 5. Close Stage Tracker | 2/3 | In Progress|  |
 | 6. Static Charts | 3/3 | Complete   | 2026-03-05 |
-| 7. Reactive Margin Bridge | 3/4 | In Progress|  |
+| 7. Reactive Margin Bridge | 4/4 | Complete   | 2026-03-05 |
 | 8. AI Executive Summary | 0/TBD | Not started | - |
 | 9. Webinar Readiness and Polish | 0/TBD | Not started | - |
