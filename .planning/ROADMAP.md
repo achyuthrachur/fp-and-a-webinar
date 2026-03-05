@@ -131,7 +131,13 @@ Plans:
   1. The Margin Bridge chart renders as a Recharts BarChart with gold (`#F5A800`) bars, a ReferenceLine at zero, and currency-formatted tooltips
   2. Moving the Revenue Growth or Gross Margin slider causes the Margin Bridge chart to visually update within one second without causing other dashboard components to flicker or re-render noticeably
   3. The chart renders correctly in both light and dark themes without any bar or label becoming invisible
-**Plans**: TBD
+**Plans**: 4 plans
+
+Plans:
+- [ ] 07-01-PLAN.md — Wave 1: RED test stubs (marginBridge.test.ts) + BaseInputs type extension + dataLoader computation
+- [ ] 07-02-PLAN.md — Wave 2: 5 new kpiSelectors + buildMarginBridgeData in chartDataUtils (tests GREEN)
+- [ ] 07-03-PLAN.md — Wave 3: MarginBridgeChart.tsx + MarginBridgeSection.tsx + DashboardApp wire-in
+- [ ] 07-04-PLAN.md — Wave 4: dev server start + human-verify checkpoint (chart renders, animates, dark mode correct)
 
 ### Phase 8: AI Executive Summary
 **Goal**: An AI-generated executive narrative streams character-by-character into a 21st.dev panel, with a React Bits loading animation during generation and a pre-cached response for the primary demo scenario
@@ -170,6 +176,6 @@ Note: Phase 5 (Close Tracker) depends only on Phase 2 and can begin after Phase 
 | 4. Scenario Control Panel | 2/3 | In Progress|  |
 | 5. Close Stage Tracker | 2/3 | In Progress|  |
 | 6. Static Charts | 3/3 | Complete   | 2026-03-05 |
-| 7. Reactive Margin Bridge | 0/TBD | Not started | - |
+| 7. Reactive Margin Bridge | 0/4 | Not started | - |
 | 8. AI Executive Summary | 0/TBD | Not started | - |
 | 9. Webinar Readiness and Polish | 0/TBD | Not started | - |
