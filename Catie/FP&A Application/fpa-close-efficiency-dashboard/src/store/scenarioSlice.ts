@@ -22,6 +22,8 @@ const DEFAULT_BASE_INPUTS: BaseInputs = {
   closeAdjustmentsCount: 0,
   pipelineExecutionRatio: 0,
   variancePct: 0.034,
+  baseEbitda: 0,
+  baseGrossMarginPct: 0.25,
 };
 
 const DEFAULT_CONTROLS: ControlState = {
