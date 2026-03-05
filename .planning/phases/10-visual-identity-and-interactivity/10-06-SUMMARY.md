@@ -2,7 +2,7 @@
 phase: 10-visual-identity-and-interactivity
 plan: "06"
 subsystem: infra
-tags: [vercel, webpack, recharts, next.js, build, deployment, qa]
+tags: [vercel, webpack, recharts, next.js, build, deployment, qa, browser-qa]
 
 requires:
   - phase: 10-05
@@ -13,7 +13,7 @@ provides:
   - Vercel production deployment at https://fpa-close-efficiency-dashboard.vercel.app
   - aiPromptUtils.ts extracted from route.ts — buildUserPrompt no longer causes Next.js route type violation
   - .npmrc with legacy-peer-deps=true for Vercel npm install compatibility
-  - AWAITING: 19-point browser QA human verification
+  - All 4 VISU requirements VERIFIED by 19-point human browser QA at production URL
 
 affects: []
 
@@ -40,38 +40,44 @@ key-decisions:
   - "recharts webpack alias to lib/index.js (CJS): prevents webpack from picking the es6/ module entry via package.json 'module' field"
   - "buildUserPrompt extracted to aiPromptUtils.ts: Next.js build-time type checking enforces that route files only export HTTP handlers — non-handler exports cause type constraint failures in .next/types/"
   - ".npmrc legacy-peer-deps=true: recharts 2.15.4 declares peer react@'^16||^17||^18' but project uses react@19; --legacy-peer-deps bypasses this on Vercel where npm ci would otherwise fail"
-  - "CHECKPOINT STATUS: awaiting 19-point browser QA human verification"
+  - "19-point browser QA APPROVED 2026-03-05 — all VISU-01 through VISU-04 verified at production URL"
 
-requirements-completed: []
+patterns-established:
+  - "Production QA gate: browser verification is the final gate for visual/interactive features that cannot be covered by unit tests"
+  - "Webpack fallback pattern: for ESM-problematic libraries in Next.js, --webpack build with CJS alias is the reliable fix"
 
-duration: TBD (checkpoint reached)
+requirements-completed: [VISU-01, VISU-02, VISU-03, VISU-04]
+
+duration: 30min
 completed: "2026-03-05"
 ---
 
 # Phase 10 Plan 06: Production Build and Browser QA Summary
 
-**Production webpack build passing, Vercel deployed — 19-point browser QA checkpoint awaiting human verification of all 4 VISU requirements**
+**Production webpack build, Vercel deployment, and 19-point human browser QA — all 4 VISU requirements verified at https://fpa-close-efficiency-dashboard.vercel.app**
 
 ## Performance
 
-- **Duration:** ~25 min (Task 1 complete; checkpoint at Task 2)
+- **Duration:** ~30 min
 - **Started:** 2026-03-05T22:30:00Z
-- **Status:** CHECKPOINT REACHED — awaiting human QA at production URL
+- **Completed:** 2026-03-05T23:00:00Z
+- **Tasks:** 2/2 (Task 1: production build + deploy; Task 2: 19-point browser QA checkpoint — approved)
+- **Files modified:** 7
 
 ## Accomplishments
 
-- Diagnosed and fixed three production build blockers:
-  1. Turbopack ESM build failure: recharts 2.15.x `es6/` build imports missing files (`isWellBehavedNumber`, `PanoramaContext`) not published in the tarball; victory-vendor ESM stubs use bare `export * from "d3-scale"` which fails Turbopack strict ESM resolution
-  2. Route type violation: `buildUserPrompt` exported from a Next.js route file triggers `OmitWithTag` constraint failure in `.next/types/` — extracted to `aiPromptUtils.ts`
-  3. Vercel `npm install` peer dep conflict: recharts 2.15.4 requires React `^16||^17||^18` but project uses React 19 — added `.npmrc` with `legacy-peer-deps=true`
-- Switched build to `next build --webpack` — webpack + CJS alias for recharts resolves all ESM issues
-- Vitest 86/86 GREEN throughout all fix iterations
-- Vercel production deployment succeeded: https://fpa-close-efficiency-dashboard.vercel.app
+- Diagnosed and fixed three production build blockers (Turbopack ESM failure, route type violation, npm peer dep conflict)
+- Switched to webpack build with recharts CJS alias — reliable fix for Next.js 16.x + recharts 2.x
+- Deployed to Vercel production: https://fpa-close-efficiency-dashboard.vercel.app
+- 19/19 browser QA checks passed — VISU-01 through VISU-04 all verified by human at production URL
+- Vitest 86/86 GREEN confirmed post-approval
+- Phase 10 complete. Milestone v1.0 complete — all 10 phases done.
 
 ## Task Commits
 
 1. **Task 1 (partial fix): Downgrade recharts + set turbopack.root** — `71f8f4e` (fix)
 2. **Task 1 (final fix): Webpack build + route exports + .npmrc** — `49d6763` (fix)
+3. **Task 2: 19-point browser QA checkpoint** — human approved, no code changes required
 
 ## Files Created/Modified
 
@@ -83,11 +89,40 @@ completed: "2026-03-05"
 - `src/app/api/enhance-summary/route.ts` — imports from aiPromptUtils, re-exports KpiPayload type
 - `src/features/model/__tests__/aiSummary.test.ts` — imports from aiPromptUtils directly
 
+## Browser QA Results (19/19 PASSED)
+
+**VISU-01 — Landing Page**
+1. `/` renders: Crowe Indigo Dark background, particles animation, wordmark, headline, 3 feature bullets, Amber CTA — PASS
+2. "Enter Dashboard" CTA navigates to `/dashboard` — PASS
+3. `/dashboard` directly loads all functionality — PASS
+
+**VISU-02 — Animations**
+4. KPI cards stagger left-to-right (~60ms delay) on fresh load — PASS
+5. Sections fade+slide-up as they enter viewport on scroll — PASS
+6. Animations do NOT re-fire on second scroll (once: true) — PASS
+7. prefers-reduced-motion respected — PASS
+
+**VISU-03 — shadcn Components**
+8. shadcn Button in AI Summary (amber, rounded, hover state) — PASS
+9. shadcn Select preset dropdown shows all 6 named presets, Crowe-themed — PASS
+10. Preset selection updates KPI values correctly — PASS
+11. Reset to defaults button works — PASS
+12. KPI label hover shows Tooltip with description — PASS
+13. Dark mode: Button/Select/Tooltip render correctly — PASS
+
+**VISU-04 — Explain Mode**
+14. Explain button appears in DashboardHeader left of theme toggle — PASS
+15. Click Explain: all 6 panels reveal simultaneously, label changes to "Hide Explanations" — PASS
+16. KPI Cards explanation text matches exactly — PASS
+17. Close Tracker explanation text matches exactly — PASS
+18. "Hide Explanations" collapses all 6 panels smoothly — PASS
+19. Refresh with Explain ON: panels still visible (localStorage persistence) — PASS
+
 ## Decisions Made
 
 - Switch to webpack build: Turbopack in Next.js 16.1.6 cannot resolve recharts' victory-vendor ESM stubs due to the bare `export * from "d3-scale"` pattern; webpack with a CJS alias resolves cleanly
-- Extract buildUserPrompt: Next.js App Router enforces that route files only export HTTP method handlers (`GET`, `POST`, etc.) and special directives (`runtime`, `dynamic`); any other export causes a type constraint failure during `next build`
-- .npmrc legacy-peer-deps: Vercel's fresh `npm install` fails without this flag because recharts 2.15.x peer deps predate React 19; the flag was needed locally too but had been applied with `--legacy-peer-deps` inline
+- Extract buildUserPrompt: Next.js App Router enforces that route files only export HTTP method handlers; any other export causes a type constraint failure during `next build`
+- .npmrc legacy-peer-deps: Vercel's fresh `npm install` fails without this flag because recharts 2.15.x peer deps predate React 19
 
 ## Deviations from Plan
 
@@ -95,7 +130,7 @@ completed: "2026-03-05"
 
 **1. [Rule 3 - Blocking] Fixed Turbopack ESM build failure blocking npm run build**
 - **Found during:** Task 1 (production build check)
-- **Issue:** recharts 2.15.x ES6 module build imports `isWellBehavedNumber` and `PanoramaContext` from victory-vendor's ESM stubs which re-export from bare `"d3-scale"` — Turbopack strict ESM resolution fails; these files are missing from the published tarball in 2.15.4
+- **Issue:** recharts 2.15.x ES6 module build imports `isWellBehavedNumber` and `PanoramaContext` from victory-vendor's ESM stubs which re-export from bare `"d3-scale"` — Turbopack strict ESM resolution fails
 - **Fix:** Switched build to `next build --webpack`; added webpack `resolve.alias` to redirect `recharts` to its CJS `lib/index.js` build; set `turbopack.root: __dirname` to silence workspace root warning
 - **Files modified:** `next.config.ts`, `package.json`
 - **Verification:** `npm run build` completes cleanly with webpack; 86/86 tests GREEN
@@ -103,8 +138,8 @@ completed: "2026-03-05"
 
 **2. [Rule 3 - Blocking] Fixed Next.js route type violation (buildUserPrompt export)**
 - **Found during:** Task 1 (production build TypeScript phase)
-- **Issue:** Next.js `next build` type-checks route files via `.next/types/` — any non-HTTP-method export causes `OmitWithTag` constraint failure; `buildUserPrompt` and `KpiPayload` exported from `route.ts` since Phase 8 were invisible to `tsc --noEmit` but fail `next build`
-- **Fix:** Created `aiPromptUtils.ts` with `buildUserPrompt` and `KpiPayload`; updated `route.ts` to import from there; updated test to import directly from `aiPromptUtils`; kept type-only re-export in route for backward compatibility
+- **Issue:** Next.js `next build` type-checks route files via `.next/types/` — any non-HTTP-method export causes `OmitWithTag` constraint failure; `buildUserPrompt` and `KpiPayload` exported from `route.ts` since Phase 8
+- **Fix:** Created `aiPromptUtils.ts` with `buildUserPrompt` and `KpiPayload`; updated `route.ts` to import from there; updated test to import directly from `aiPromptUtils`
 - **Files modified:** `src/app/api/enhance-summary/route.ts`, `src/features/model/__tests__/aiSummary.test.ts`, `src/features/model/aiPromptUtils.ts` (new)
 - **Verification:** webpack build TypeScript phase passes; 86/86 tests GREEN
 - **Committed in:** `49d6763`
@@ -112,7 +147,7 @@ completed: "2026-03-05"
 **3. [Rule 3 - Blocking] Added .npmrc with legacy-peer-deps for Vercel npm install**
 - **Found during:** Task 1 (Vercel deploy after recharts downgrade attempt)
 - **Issue:** recharts 2.15.4 peer dep `react@"^16||^17||^18"` conflicts with project's `react@^19.0.0`; Vercel's `npm install` without `--legacy-peer-deps` fails with ERESOLVE
-- **Fix:** Added `.npmrc` with `legacy-peer-deps=true` — Vercel reads this file during install
+- **Fix:** Added `.npmrc` with `legacy-peer-deps=true`
 - **Files modified:** `.npmrc` (new)
 - **Verification:** Vercel deploy succeeded — npm install completed, build completed
 - **Committed in:** `49d6763`
@@ -133,17 +168,19 @@ None — Vercel environment variables already configured in previous phases (OPE
 
 ## Next Phase Readiness
 
+- Phase 10 complete. Milestone v1.0 complete — all 10 phases done.
 - Production URL: https://fpa-close-efficiency-dashboard.vercel.app
-- Checkpoint Task 2 (19-point browser QA) is active — human verification required
-- After approval: SUMMARY.md will be updated, STATE.md advanced to mark Phase 10 complete
+- All 35/35 plans complete. All 10 phases complete.
 
 ## Self-Check: PASSED
 
 - Verified files: aiPromptUtils.ts exists, .npmrc exists, next.config.ts has webpack config
 - Commits verified: 71f8f4e and 49d6763 in git log
 - Vercel deploy succeeded at https://fpa-close-efficiency-dashboard.vercel.app
-- Vitest 86/86 GREEN; TypeScript clean; npm run build passes
+- Vitest 86/86 GREEN (confirmed post-QA-approval)
+- 19/19 browser QA checks: APPROVED by human 2026-03-05
+- VISU-01, VISU-02, VISU-03, VISU-04 all verified
 
 ---
 *Phase: 10-visual-identity-and-interactivity*
-*Completed: 2026-03-05 (checkpoint pending)*
+*Completed: 2026-03-05*
