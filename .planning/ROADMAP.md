@@ -140,7 +140,7 @@ Plans:
 - [ ] 07-04-PLAN.md — Wave 4: dev server start + human-verify checkpoint (chart renders, animates, dark mode correct)
 
 ### Phase 8: AI Executive Summary
-**Goal**: An AI-generated executive narrative streams character-by-character into a 21st.dev panel, with a React Bits loading animation during generation and a pre-cached response for the primary demo scenario
+**Goal**: An AI-generated executive narrative streams character-by-character into a panel, with a React Bits loading animation during generation and a pre-cached response for the primary demo scenario
 **Depends on**: Phase 4
 **Requirements**: AISU-01, AISU-02, AISU-03, AISU-04
 **Success Criteria** (what must be TRUE):
@@ -148,7 +148,12 @@ Plans:
   2. The AI summary panel displays the streaming narrative updating character-by-character as the OpenAI stream arrives — text is readable and not jumbled
   3. While the AI is generating, a React Bits loading animation is visible in the panel — the panel does not show a blank white box
   4. On the very first page load with the default scenario active, the AI summary panel displays a complete pre-cached narrative immediately without waiting for an API call
-**Plans**: TBD
+**Plans**: 3 plans
+
+Plans:
+- [ ] 08-01-PLAN.md — Wave 0: RED test stubs (aiSummary.test.ts) + stub route.ts + stub aiSummaryCache.ts
+- [ ] 08-02-PLAN.md — Wave 1: full route.ts implementation (OpenAI streaming) + BASELINE_SUMMARY content (tests GREEN)
+- [ ] 08-03-PLAN.md — Wave 2: InfinityLoader.tsx + AiSummarySection.tsx + DashboardApp wire-in + browser QA checkpoint
 
 ### Phase 9: Webinar Readiness and Polish
 **Goal**: The complete dashboard is presentation-ready — responsive for 1080p/4K widescreen, both themes work on every component including charts, the production build is clean, and all scenario presets produce valid output
@@ -177,5 +182,5 @@ Note: Phase 5 (Close Tracker) depends only on Phase 2 and can begin after Phase 
 | 5. Close Stage Tracker | 2/3 | In Progress|  |
 | 6. Static Charts | 3/3 | Complete   | 2026-03-05 |
 | 7. Reactive Margin Bridge | 4/4 | Complete   | 2026-03-05 |
-| 8. AI Executive Summary | 0/TBD | Not started | - |
+| 8. AI Executive Summary | 0/3 | Not started | - |
 | 9. Webinar Readiness and Polish | 0/TBD | Not started | - |
