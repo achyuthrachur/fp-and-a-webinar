@@ -13,6 +13,7 @@ html[data-theme="light"] {
   --track: #d7deea;
   --shadow: #011e41;
   --muted-color: #60728f;
+  --muted-foreground: var(--muted-color);
 }
 
 html[data-theme="dark"] {
@@ -27,6 +28,7 @@ html[data-theme="dark"] {
   --track: #2a4464;
   --shadow: #000000;
   --muted-color: #9ab2d4;
+  --muted-foreground: var(--muted-color);
 }
 
 * {
