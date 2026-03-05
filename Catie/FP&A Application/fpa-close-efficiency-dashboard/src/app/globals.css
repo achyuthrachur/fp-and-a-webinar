@@ -31,6 +31,15 @@ html[data-theme="dark"] {
   --muted-foreground: var(--muted-color);
 }
 
+/* ─── shadcn compatibility — radius token only ─── */
+/* Components use existing Crowe CSS variables directly (var(--accent), var(--border), etc.). */
+/* --radius is the only new token needed; all other shadcn HSL tokens are skipped to avoid conflict. */
+:root,
+html[data-theme="light"],
+html[data-theme="dark"] {
+  --radius: 0.625rem;
+}
+
 * {
   box-sizing: border-box;
 }
