@@ -2,6 +2,7 @@
 // 4x2 KPI card grid. No "use client" — runs inside DashboardApp Provider.
 // Row 1 (P&L narrative): Net Sales → Gross Profit → EBITDA → Cash
 // Row 2 (Balance sheet): COGS → AR → AP → Inventory
+import { motion } from 'framer-motion';
 import { useSelector } from 'react-redux';
 import type { RootState } from '@/store';
 import type { DashboardSeedData } from '@/lib/dataLoader';
@@ -32,6 +33,22 @@ interface KpiSectionProps {
   seedData: DashboardSeedData;
 }
 
+// Stagger container — orchestrates 60ms delay between each card
+const kpiContainerVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.06 } },
+} as const;
+
+// Individual card variant — fade + slide up 20px
+const kpiItemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] as const },
+  },
+} as const;
+
 export default function KpiSection({ seedData }: KpiSectionProps) {
   const netSales = useSelector((state: RootState) => selectNetSales(state));
   const cogs = useSelector((state: RootState) => selectCogs(state));
@@ -41,6 +58,12 @@ export default function KpiSection({ seedData }: KpiSectionProps) {
   const ar = useSelector((state: RootState) => selectAr(state));
   const ap = useSelector((state: RootState) => selectAp(state));
   const inventory = useSelector((state: RootState) => selectInventory(state));
+
+  // prefers-reduced-motion check — JS-level (CSS media query doesn't disable Framer Motion)
+  const reducedMotion =
+    typeof window !== 'undefined'
+      ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      : false;
 
   // Base values for delta computation (default controls: 3% growth, 25% margin, fuel=118, etc.)
   const bi = seedData.baseInputs;
@@ -57,8 +80,13 @@ export default function KpiSection({ seedData }: KpiSectionProps) {
         title="KPI Cards"
         subtitle="January 2026 Performance Snapshot — Key financials against prior month and scenario adjustments"
       />
-      <section
+      {/* motion.section: stagger container — each KpiCard child animates with 60ms offset */}
+      <motion.section
         aria-label="KPI Metrics"
+        variants={kpiContainerVariants}
+        initial={reducedMotion ? false : 'hidden'}
+        whileInView={reducedMotion ? undefined : 'visible'}
+        viewport={{ once: true, margin: '-40px' }}
         style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(4, 1fr)',
@@ -67,60 +95,76 @@ export default function KpiSection({ seedData }: KpiSectionProps) {
         }}
       >
         {/* Row 1: P&L narrative (Net Sales → Gross Profit → EBITDA → Cash) */}
-      <KpiCard
-        label="Net Sales"
-        icon={TrendUp}
-        value={netSales}
-        delta={bi.variancePct}
-      />
-      <KpiCard
-        label="Gross Profit"
-        icon={DollarCircle}
-        value={grossProfit}
-        delta={safeDiv(grossProfit, baseGrossProfit)}
-      />
-      <KpiCard
-        label="EBITDA"
-        icon={ChartSquare}
-        value={ebitda}
-        delta={safeDiv(ebitda, baseEbitda)}
-      />
-      <KpiCard
-        label="Cash"
-        icon={Wallet}
-        value={cash}
-        delta={safeDiv(cash, bi.baseCash)}
-      />
+        <motion.div variants={kpiItemVariants}>
+          <KpiCard
+            label="Net Sales"
+            icon={TrendUp}
+            value={netSales}
+            delta={bi.variancePct}
+          />
+        </motion.div>
+        <motion.div variants={kpiItemVariants}>
+          <KpiCard
+            label="Gross Profit"
+            icon={DollarCircle}
+            value={grossProfit}
+            delta={safeDiv(grossProfit, baseGrossProfit)}
+          />
+        </motion.div>
+        <motion.div variants={kpiItemVariants}>
+          <KpiCard
+            label="EBITDA"
+            icon={ChartSquare}
+            value={ebitda}
+            delta={safeDiv(ebitda, baseEbitda)}
+          />
+        </motion.div>
+        <motion.div variants={kpiItemVariants}>
+          <KpiCard
+            label="Cash"
+            icon={Wallet}
+            value={cash}
+            delta={safeDiv(cash, bi.baseCash)}
+          />
+        </motion.div>
 
-      {/* Row 2: Balance sheet (COGS, AR, AP, Inventory) */}
-      <KpiCard
-        label="COGS"
-        icon={MoneyRecive}
-        value={cogs}
-        delta={safeDiv(cogs, baseCogs)}
-        deltaInverted
-      />
-      <KpiCard
-        label="Accounts Receivable"
-        icon={ReceiptItem}
-        value={ar}
-        delta={safeDiv(ar, bi.arTotal)}
-      />
-      <KpiCard
-        label="Accounts Payable"
-        icon={ReceiptText}
-        value={ap}
-        delta={safeDiv(ap, bi.apTotal)}
-        deltaNeutral
-      />
-      <KpiCard
-        label="Inventory"
-        icon={Box}
-        value={inventory}
-        delta={safeDiv(inventory, bi.inventoryTotal)}
-        deltaNeutral
-      />
-      </section>
+        {/* Row 2: Balance sheet (COGS, AR, AP, Inventory) */}
+        <motion.div variants={kpiItemVariants}>
+          <KpiCard
+            label="COGS"
+            icon={MoneyRecive}
+            value={cogs}
+            delta={safeDiv(cogs, baseCogs)}
+            deltaInverted
+          />
+        </motion.div>
+        <motion.div variants={kpiItemVariants}>
+          <KpiCard
+            label="Accounts Receivable"
+            icon={ReceiptItem}
+            value={ar}
+            delta={safeDiv(ar, bi.arTotal)}
+          />
+        </motion.div>
+        <motion.div variants={kpiItemVariants}>
+          <KpiCard
+            label="Accounts Payable"
+            icon={ReceiptText}
+            value={ap}
+            delta={safeDiv(ap, bi.apTotal)}
+            deltaNeutral
+          />
+        </motion.div>
+        <motion.div variants={kpiItemVariants}>
+          <KpiCard
+            label="Inventory"
+            icon={Box}
+            value={inventory}
+            delta={safeDiv(inventory, bi.inventoryTotal)}
+            deltaNeutral
+          />
+        </motion.div>
+      </motion.section>
     </>
   );
 }
