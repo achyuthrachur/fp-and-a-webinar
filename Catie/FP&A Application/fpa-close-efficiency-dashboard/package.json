@@ -17,6 +17,7 @@
     "@radix-ui/react-switch": "^1.1.0",
     "@radix-ui/react-tooltip": "^1.1.0",
     "@reduxjs/toolkit": "^2.0.0",
+    "framer-motion": "^12.35.0",
     "iconsax-react": "^0.0.8",
     "next": "16.1.6",
     "openai": "^4.0.0",
@@ -26,6 +27,7 @@
     "react-redux": "^9.2.0",
     "recharts": "^2.15.0",
     "redux": "^5.0.1",
+    "tailwind-merge": "^3.5.0",
     "zod": "^3.24.0"
   },
   "devDependencies": {
