@@ -79,6 +79,7 @@ export default function KpiSection({ seedData }: KpiSectionProps) {
       <SectionHeader
         title="KPI Cards"
         subtitle="January 2026 Performance Snapshot — Key financials against prior month and scenario adjustments"
+        explanation="These 8 metrics reflect Summit Logistics Group's January 2026 GL data, adjusted in real time for the active scenario. Net Sales and EBITDA update immediately as sliders move — the variance delta shows movement against the December prior period."
       />
       {/* motion.section: stagger container — each KpiCard child animates with 60ms offset */}
       <motion.section

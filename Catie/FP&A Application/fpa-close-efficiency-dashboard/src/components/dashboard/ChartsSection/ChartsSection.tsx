@@ -14,6 +14,7 @@ export default function ChartsSection({ seedData }: ChartsSectionProps) {
       <SectionHeader
         title="Pipeline & Collections Health"
         subtitle="AR aging risk, CRM pipeline funnel, and 13-week cash outlook"
+        explanation="The Pipeline to Invoiced chart shows the CRM funnel from Qualified leads to Invoiced revenue. AR Aging breaks the $2.8M receivables balance into aging buckets — the 90-plus-day ratio is the key watch metric for collection risk. The 13-Week Cash Flow distinguishes actuals (solid) from forecast (dashed)."
       />
       {/* Top row: Pipeline (left ~50%) + AR Aging (right ~50%) */}
       <div style={{ display: 'flex', gap: '1.5rem' }}>

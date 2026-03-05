@@ -328,6 +328,7 @@ export default function ScenarioPanel({ presets }: ScenarioPanelProps) {
       <SectionHeader
         title="Scenario Controls"
         subtitle="Adjust revenue, cost, and operations levers to model close outcomes in real time"
+        explanation="Use these levers to model different close scenarios. Sliders adjust financial rates and operational factors; toggles activate business mode assumptions. Select a named preset from the dropdown to jump to a pre-configured scenario in one click."
       />
       {/* Switch thumb CSS — uses data-state selectors for smooth animation without re-render jank */}
       <style>{`

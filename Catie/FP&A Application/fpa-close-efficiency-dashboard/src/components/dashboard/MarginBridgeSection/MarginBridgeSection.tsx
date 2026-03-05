@@ -60,6 +60,7 @@ export default function MarginBridgeSection() {
       <SectionHeader
         title="Margin Bridge"
         subtitle="Scenario Impact on EBITDA — How lever adjustments flow through revenue, margin, and cost to adjusted EBITDA"
+        explanation="This waterfall chart shows how each scenario lever — revenue growth, gross margin, fuel index, and all other inputs combined — flows through to the change in adjusted EBITDA versus the baseline. Bars above zero help EBITDA; bars below hurt it."
       />
       <div
         ref={cardRef}

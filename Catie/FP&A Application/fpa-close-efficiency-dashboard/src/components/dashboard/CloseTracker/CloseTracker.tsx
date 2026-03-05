@@ -16,6 +16,7 @@ export function CloseTracker({ seedData }: CloseTrackerProps) {
       <SectionHeader
         title="Close Tracker"
         subtitle="Month-End Close Progress — Journal entry completion rates and days remaining to close target"
+        explanation="Progress bars are computed from actual journal entry counts in erp_journal_entries.csv. RAG status (On Track / At Risk / Delayed) is determined by completion percentage thresholds. The days-to-close metric reads from company.json."
       />
       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
         <DaysToCloseCard days={seedData.company.closeTargetBusinessDays} />
