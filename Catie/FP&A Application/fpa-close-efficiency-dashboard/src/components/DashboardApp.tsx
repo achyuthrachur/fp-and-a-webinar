@@ -19,6 +19,7 @@ import MarginBridgeSection from '@/components/dashboard/MarginBridgeSection/Marg
 import AiSummarySection from '@/components/dashboard/AiSummarySection/AiSummarySection';
 import DashboardHeader from '@/components/dashboard/DashboardHeader';
 import { TooltipProvider } from '@/components/ui/Tooltip';
+import { ExplainProvider } from '@/components/ExplainContext';
 
 interface DashboardAppProps {
   seedData?: DashboardSeedData;
@@ -77,6 +78,7 @@ export default function DashboardApp({ seedData }: DashboardAppProps) {
 
   return (
     <Provider store={storeRef.current}>
+      <ExplainProvider>
       <TooltipProvider delayDuration={300}>
       {/* Two-column layout: 280px sticky sidebar + flex-1 main content.
           alignItems: flex-start ensures sidebar height is its own content height,
@@ -148,6 +150,7 @@ export default function DashboardApp({ seedData }: DashboardAppProps) {
         </main>
       </div>
       </TooltipProvider>
+      </ExplainProvider>
     </Provider>
   );
 }

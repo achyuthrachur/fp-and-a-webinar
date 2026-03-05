@@ -4,6 +4,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Sun1, Moon } from '@/components/ui/icons';
 import type { DashboardSeedData } from '@/lib/dataLoader';
+import { useExplainMode } from '@/components/ExplainContext';
 
 interface DashboardHeaderProps {
   seedData: DashboardSeedData;
@@ -32,6 +33,8 @@ export default function DashboardHeader({ seedData }: DashboardHeaderProps) {
     document.documentElement.setAttribute('data-theme', next);
     try { localStorage.setItem('theme', next); } catch (_) {}
   }, []);
+
+  const { explainMode, toggleExplainMode } = useExplainMode();
 
   return (
     <header
@@ -80,26 +83,51 @@ export default function DashboardHeader({ seedData }: DashboardHeaderProps) {
         }
       </span>
 
-      {/* Right: theme toggle button */}
-      <button
-        onClick={toggleTheme}
-        aria-label={isDark ? 'Switch to light theme' : 'Switch to dark theme'}
-        style={{
-          background: 'none',
-          border: 'none',
-          cursor: 'pointer',
-          color: 'var(--muted)',
-          padding: 4,
-          display: 'flex',
-          alignItems: 'center',
-          borderRadius: 6,
-        }}
-      >
-        {isDark
-          ? <Sun1 size={20} color="var(--accent)" />
-          : <Moon size={20} color="var(--foreground)" />
-        }
-      </button>
+      {/* Right controls: Explain button + theme toggle */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+        {/* Explain mode toggle */}
+        <button
+          onClick={toggleExplainMode}
+          aria-label={explainMode ? 'Hide explanation panels' : 'Show explanation panels'}
+          aria-pressed={explainMode}
+          style={{
+            padding: '0.3125rem 0.75rem',
+            borderRadius: 6,
+            border: explainMode ? '1px solid var(--accent)' : '1px solid var(--border)',
+            background: explainMode ? 'var(--accent-soft)' : 'transparent',
+            color: explainMode ? 'var(--accent)' : 'var(--muted)',
+            fontWeight: 600,
+            fontSize: '0.75rem',
+            cursor: 'pointer',
+            transition: 'all 150ms ease',
+            fontFamily: 'inherit',
+            whiteSpace: 'nowrap',
+          }}
+        >
+          {explainMode ? 'Hide Explanations' : 'Explain'}
+        </button>
+
+        {/* Theme toggle */}
+        <button
+          onClick={toggleTheme}
+          aria-label={isDark ? 'Switch to light theme' : 'Switch to dark theme'}
+          style={{
+            background: 'none',
+            border: 'none',
+            cursor: 'pointer',
+            color: 'var(--muted)',
+            padding: 4,
+            display: 'flex',
+            alignItems: 'center',
+            borderRadius: 6,
+          }}
+        >
+          {isDark
+            ? <Sun1 size={20} color="var(--accent)" />
+            : <Moon size={20} color="var(--foreground)" />
+          }
+        </button>
+      </div>
     </header>
   );
 }
