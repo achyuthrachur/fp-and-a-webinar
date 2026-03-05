@@ -5,6 +5,7 @@
 'use client';
 
 import { useRef, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { Provider } from 'react-redux';
 import { makeStore } from '@/store';
 import type { AppStore } from '@/store';
@@ -22,11 +23,28 @@ interface DashboardAppProps {
   seedData?: DashboardSeedData;
 }
 
+// Section-level entrance animation — fade + slide up 20px
+const SECTION_ANIM = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] as const },
+  },
+} as const;
+
 export default function DashboardApp({ seedData }: DashboardAppProps) {
   const storeRef = useRef<AppStore | null>(null);
   if (!storeRef.current) {
     storeRef.current = makeStore();
   }
+
+  // prefers-reduced-motion check — JS-level (CSS media query doesn't disable Framer Motion)
+  // Evaluated inside component body (not module scope) to avoid SSR window access
+  const reducedMotion =
+    typeof window !== 'undefined'
+      ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      : false;
 
   // Seed Redux store with real financial data from the server.
   // Finds the 'baseline' preset (or first preset) to initialize controls.
@@ -42,6 +60,19 @@ export default function DashboardApp({ seedData }: DashboardAppProps) {
       );
     }
   }, [seedData]);
+
+  // Helper: wrap a section in motion.div for scroll-triggered entrance.
+  // viewport margin -60px triggers animation slightly before section is fully visible.
+  const SectionWrapper = ({ children }: { children: React.ReactNode }) => (
+    <motion.div
+      variants={SECTION_ANIM}
+      initial={reducedMotion ? false : 'hidden'}
+      whileInView={reducedMotion ? undefined : 'visible'}
+      viewport={{ once: true, margin: '-60px' }}
+    >
+      {children}
+    </motion.div>
+  );
 
   return (
     <Provider store={storeRef.current}>
@@ -68,16 +99,39 @@ export default function DashboardApp({ seedData }: DashboardAppProps) {
 
         {/* Main content area: flex-1, scrollable */}
         <main style={{ flex: 1, minWidth: 0, padding: '1.5rem', overflowY: 'auto' }}>
+          {/* DashboardHeader is NOT animated — it is always visible at the top */}
           {seedData && <DashboardHeader seedData={seedData} />}
+
+          {/* KPI section — stagger handled inside KpiSection.tsx */}
           {seedData ? (
             <KpiSection seedData={seedData} />
           ) : (
             <div id="slot-kpi-section" />
           )}
-          {seedData && <CloseTracker seedData={seedData} />}
-          <MarginBridgeSection />
-          {seedData && <ChartsSection seedData={seedData} />}
-          {seedData && <AiSummarySection seedData={seedData} />}
+
+          {/* Sections 2-5: each wrapped in scroll-triggered motion.div */}
+          {seedData && (
+            <SectionWrapper>
+              <CloseTracker seedData={seedData} />
+            </SectionWrapper>
+          )}
+
+          <SectionWrapper>
+            <MarginBridgeSection />
+          </SectionWrapper>
+
+          {seedData && (
+            <SectionWrapper>
+              <ChartsSection seedData={seedData} />
+            </SectionWrapper>
+          )}
+
+          {seedData && (
+            <SectionWrapper>
+              <AiSummarySection seedData={seedData} />
+            </SectionWrapper>
+          )}
+
           <p
             style={{
               color: 'var(--foreground)',
@@ -87,7 +141,7 @@ export default function DashboardApp({ seedData }: DashboardAppProps) {
               opacity: 0.4,
             }}
           >
-            FP&amp;A Close Efficiency Dashboard — Phase 9 Webinar Ready
+            FP&amp;A Close Efficiency Dashboard — Phase 10 Visual Identity
           </p>
         </main>
       </div>
