@@ -16,6 +16,7 @@ import { CloseTracker } from '@/components/dashboard/CloseTracker/CloseTracker';
 import ChartsSection from '@/components/dashboard/ChartsSection/ChartsSection';
 import MarginBridgeSection from '@/components/dashboard/MarginBridgeSection/MarginBridgeSection';
 import AiSummarySection from '@/components/dashboard/AiSummarySection/AiSummarySection';
+import DashboardHeader from '@/components/dashboard/DashboardHeader';
 
 interface DashboardAppProps {
   seedData?: DashboardSeedData;
@@ -67,7 +68,7 @@ export default function DashboardApp({ seedData }: DashboardAppProps) {
 
         {/* Main content area: flex-1, scrollable */}
         <main style={{ flex: 1, minWidth: 0, padding: '1.5rem', overflowY: 'auto' }}>
-          <div id="slot-header" />
+          {seedData && <DashboardHeader seedData={seedData} />}
           {seedData ? (
             <KpiSection seedData={seedData} />
           ) : (
@@ -86,7 +87,7 @@ export default function DashboardApp({ seedData }: DashboardAppProps) {
               opacity: 0.4,
             }}
           >
-            FP&amp;A Close Efficiency Dashboard — Phase 8 AI Executive Summary active
+            FP&amp;A Close Efficiency Dashboard — Phase 9 Webinar Ready
           </p>
         </main>
       </div>
