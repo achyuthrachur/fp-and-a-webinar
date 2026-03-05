@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 10-03-PLAN.md
-last_updated: "2026-03-05T22:19:02.679Z"
+stopped_at: Completed 10-04-PLAN.md
+last_updated: "2026-03-05T22:24:11.749Z"
 last_activity: 2026-03-04 — Phase 2 complete — 31/31 tests GREEN, variancePct wired, page.tsx async
 progress:
   total_phases: 10
   completed_phases: 9
   total_plans: 35
-  completed_plans: 32
+  completed_plans: 33
   percent: 44
 ---
 
@@ -81,6 +81,7 @@ Progress: [████░░░░░░] 44%
 | Phase 10-visual-identity-and-interactivity P01 | 8 | 2 tasks | 4 files |
 | Phase 10-visual-identity-and-interactivity P02 | 3 | 2 tasks | 3 files |
 | Phase 10-visual-identity-and-interactivity P03 | 2 | 2 tasks | 2 files |
+| Phase 10-visual-identity-and-interactivity P04 | 3 | 2 tasks | 8 files |
 
 ## Accumulated Context
 
@@ -163,6 +164,8 @@ Recent decisions affecting current work:
 - [Phase 10-visual-identity-and-interactivity]: LandingBackground uses export default for next/dynamic compatibility; reducedMotion checked via window.matchMedia with SSR guard
 - [Phase 10-visual-identity-and-interactivity]: SECTION_ANIM at module scope; reducedMotion check inside component body to avoid SSR window access
 - [Phase 10-visual-identity-and-interactivity]: motion.section used (not div+section nesting) in KpiSection to preserve aria-label on animated stagger container
+- [Phase 10-visual-identity-and-interactivity]: Copy-paste shadcn model: components use cn() + Crowe CSS vars directly (no --primary HSL tokens, no CLI) to avoid Tailwind v4 conflict
+- [Phase 10-visual-identity-and-interactivity]: Only --radius added to globals.css (not full shadcn HSL token set) — components reference var(--accent), var(--border), var(--card) directly
 
 ### Pending Todos
 
@@ -176,7 +179,7 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-05T22:19:02.670Z
-Stopped at: Completed 10-03-PLAN.md
+Last session: 2026-03-05T22:24:11.744Z
+Stopped at: Completed 10-04-PLAN.md
 Resume file: None
 Resumed: N/A — project complete
