@@ -79,6 +79,10 @@ export async function loadDashboardSeedData(): Promise<DashboardSeedData> {
   });
   const presets = z.array(presetSchema).parse(JSON.parse(presetsRaw));
 
+  // Derive baseline preset for seed EBITDA computation (added for Phase 7)
+  const baselinePreset = presets.find(p => p.id === 'baseline') ?? presets[0];
+  const seedGrossMarginPct = baselinePreset.controls.grossMarginPct;
+
   const glRows = z.array(glRowSchema).parse(parseCsv(await readDataFile("erp_gl_summary.csv"))) as GLRow[];
   const arRows = z.array(arRowSchema).parse(parseCsv(await readDataFile("ar_aging.csv"))) as ARRow[];
   const pipelineRows = z.array(pipelineRowSchema).parse(parseCsv(await readDataFile("crm_pipeline.csv"))) as PipelineRow[];
@@ -113,6 +117,10 @@ export async function loadDashboardSeedData(): Promise<DashboardSeedData> {
     closeAdjustmentsCount: latestGL.close_adjustments_count,
     pipelineExecutionRatio,
     variancePct: company.variancePct ?? 0.034,
+    baseGrossMarginPct: seedGrossMarginPct,
+    baseEbitda: latestGL.net_sales * seedGrossMarginPct - latestGL.opex,
+    // Formula: baseNetSales * baseGrossMarginPct - baseOpex
+    // fuelIndex=100 means no fuel delta (FUEL_COGS_SHARE * 0 = 0), so no fuel adjustment needed here.
   };
 
   // Compute closeStages from journalEntries (replaces hardcoded values)
