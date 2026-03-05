@@ -164,7 +164,12 @@ Plans:
   2. Toggling between light and dark themes with all scenario presets active shows every chart, KPI card, badge, and label remaining readable — no element becomes invisible in either theme
   3. `npm run build` completes without TypeScript errors, and `npm run start` in a browser shows zero console errors and zero React dev warnings
   4. Each of the named presets in `scenario-presets.json` can be selected, and every KPI card and every chart displays a non-error, non-NaN value for that preset
-**Plans**: TBD
+**Plans**: 3 plans
+
+Plans:
+- [ ] 09-01-PLAN.md — Wave 1: globals.css --muted-foreground alias + DashboardHeader component + DashboardApp wire-in
+- [ ] 09-02-PLAN.md — Wave 1: SectionHeader component + add to all 6 sections
+- [ ] 09-03-PLAN.md — Wave 2: production build check + Vercel deploy + browser QA checkpoint (all 6 presets, dark mode, 1920px)
 
 ## Progress
 
@@ -183,4 +188,4 @@ Note: Phase 5 (Close Tracker) depends only on Phase 2 and can begin after Phase 
 | 6. Static Charts | 3/3 | Complete   | 2026-03-05 |
 | 7. Reactive Margin Bridge | 4/4 | Complete   | 2026-03-05 |
 | 8. AI Executive Summary | 3/3 | Complete    | 2026-03-05 |
-| 9. Webinar Readiness and Polish | 0/TBD | Not started | - |
+| 9. Webinar Readiness and Polish | 0/3 | Not started | - |
