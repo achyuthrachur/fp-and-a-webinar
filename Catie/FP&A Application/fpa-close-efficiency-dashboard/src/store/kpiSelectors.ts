@@ -68,3 +68,45 @@ export const selectInventory = createSelector(
   [selectBaseInputs, selectControls],
   (base, controls) => base.inventoryTotal * (controls.inventoryComplexity ? 1.12 : 1.0)
 );
+
+// ─── MARGIN BRIDGE SELECTORS (Phase 7 — CHRT-01) ───────────────────────────
+// These selectors decompose EBITDA change into 4 lever-attributed deltas.
+// selectOtherLeversImpact is a residual and is always ~0 with current formulas
+// because collections/returns/toggles only affect Cash/AR/AP (not EBITDA).
+
+export const selectBaselineEbitda = (state: RootState): number =>
+  state.scenario.baseInputs.baseEbitda;
+
+export const selectRevenueGrowthImpact = createSelector(
+  [selectBaseInputs, selectControls],
+  (base, controls) =>
+    base.baseNetSales * controls.revenueGrowthPct * controls.grossMarginPct
+);
+
+export const selectGrossMarginImpact = createSelector(
+  [selectBaseInputs, selectControls, selectNetSales],
+  (base, controls, netSales) =>
+    netSales * (controls.grossMarginPct - base.baseGrossMarginPct)
+);
+
+export const selectFuelIndexImpact = createSelector(
+  [selectControls, selectNetSales],
+  (controls, netSales) => {
+    const cogsAtMargin = netSales * (1 - controls.grossMarginPct);
+    const fuelDelta =
+      cogsAtMargin * FUEL_COGS_SHARE * (controls.fuelIndex / FUEL_BASE_INDEX - 1);
+    return -fuelDelta || 0; // avoid -0 floating point artefact
+  }
+);
+
+export const selectOtherLeversImpact = createSelector(
+  [
+    selectEbitda,
+    selectBaselineEbitda,
+    selectRevenueGrowthImpact,
+    selectGrossMarginImpact,
+    selectFuelIndexImpact,
+  ],
+  (adjusted, baseline, revGrowth, grossMargin, fuel) =>
+    adjusted - baseline - revGrowth - grossMargin - fuel
+);
