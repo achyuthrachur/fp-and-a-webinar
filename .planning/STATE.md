@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 07-01-PLAN.md
-last_updated: "2026-03-05T02:30:37.825Z"
+stopped_at: Completed 07-02-PLAN.md
+last_updated: "2026-03-05T02:35:44.466Z"
 last_activity: 2026-03-04 — Phase 2 complete — 31/31 tests GREEN, variancePct wired, page.tsx async
 progress:
   total_phases: 9
   completed_phases: 6
   total_plans: 23
-  completed_plans: 20
+  completed_plans: 21
   percent: 44
 ---
 
@@ -68,6 +68,7 @@ Progress: [████░░░░░░] 44%
 | Phase 06-static-charts P02 | 2 | 3 tasks | 6 files |
 | Phase 06-static-charts P03 | 8 | 2 tasks | 0 files |
 | Phase 07-reactive-margin-bridge P01 | 2 | 2 tasks | 3 files |
+| Phase 07-reactive-margin-bridge P02 | 5 | 2 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -125,6 +126,8 @@ Recent decisions affecting current work:
 - [Phase 07-reactive-margin-bridge]: Dual beforeAll blocks with chartUtilsError/selectorError: two separate modules need independent import error isolation in marginBridge.test.ts
 - [Phase 07-reactive-margin-bridge]: baseEbitda formula: net_sales * seedGrossMarginPct - opex with no fuel adjustment (fuelIndex=100 baseline means FUEL_COGS_SHARE * 0 = 0)
 - [Phase 07-reactive-margin-bridge]: seedGrossMarginPct derived from baseline preset in dataLoader.ts via presets.find(p => p.id === 'baseline') ?? presets[0]
+- [Phase 07-reactive-margin-bridge]: buildMarginBridgeData accepts (baselineEbitda, adjustedEbitda, state) 3-param signature matching test stub; inline state computation derives lever deltas to avoid circular @/store import
+- [Phase 07-reactive-margin-bridge]: selectFuelIndexImpact uses || 0 guard to prevent -0 floating point artifact (JavaScript -0 != 0 under Object.is used by Vitest toBe)
 
 ### Pending Todos
 
@@ -138,7 +141,7 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-05T02:30:37.803Z
-Stopped at: Completed 07-01-PLAN.md
+Last session: 2026-03-05T02:35:44.454Z
+Stopped at: Completed 07-02-PLAN.md
 Resume file: None
 Resumed: Session resumed, proceeding to execute 06-03 (human verify static charts)
