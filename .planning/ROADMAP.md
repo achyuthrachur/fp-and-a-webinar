@@ -180,7 +180,15 @@ Plans:
   2. At least 3 dashboard sections feature React Bits entrance animations (fade, slide, stagger, or similar) that fire on page load or scroll into view
   3. shadcn/ui components are used for at least the primary interactive controls (buttons, dropdowns, toggles) replacing current hand-crafted equivalents
   4. Each of the 6 main dashboard sections displays a contextual explanation callout that the presenter can show or hide during the webinar
-**Plans**: TBD
+**Plans**: 6 plans
+
+Plans:
+- [ ] 10-01-PLAN.md — Wave 0: install framer-motion + tailwind-merge, create cn() utility + ExplainContext
+- [ ] 10-02-PLAN.md — Wave 1: landing page at / + dashboard route at /dashboard + LandingBackground component
+- [ ] 10-03-PLAN.md — Wave 2: Framer Motion whileInView animations on all 6 sections + KPI card stagger
+- [ ] 10-04-PLAN.md — Wave 3: shadcn Button + Select + Tooltip copy-paste components + replace in AiSummarySection, ScenarioPanel, KpiCard
+- [ ] 10-05-PLAN.md — Wave 3: Explain mode — ExplainProvider in DashboardApp, Explain button in DashboardHeader, explanation panels in SectionHeader (all 6 texts)
+- [ ] 10-06-PLAN.md — Wave 4: production build + Vercel deploy + 19-point browser QA checkpoint (all 4 VISU requirements)
 
 ## Progress
 
@@ -200,4 +208,4 @@ Note: Phase 5 (Close Tracker) depends only on Phase 2 and can begin after Phase 
 | 7. Reactive Margin Bridge | 4/4 | Complete   | 2026-03-05 |
 | 8. AI Executive Summary | 3/3 | Complete    | 2026-03-05 |
 | 9. Webinar Readiness and Polish | 3/3 | Complete    | 2026-03-05 |
-| 10. Visual Identity and Interactivity | 0/TBD | Not started | - |
+| 10. Visual Identity and Interactivity | 0/6 | Not started | - |
