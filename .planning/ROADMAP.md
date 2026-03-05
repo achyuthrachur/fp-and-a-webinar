@@ -169,7 +169,7 @@ Plans:
 Plans:
 - [ ] 09-01-PLAN.md — Wave 1: globals.css --muted-foreground alias + DashboardHeader component + DashboardApp wire-in
 - [ ] 09-02-PLAN.md — Wave 1: SectionHeader component + add to all 6 sections
-- [ ] 09-03-PLAN.md — Wave 2: production build check + Vercel deploy + browser QA checkpoint (all 6 presets, dark mode, 1920px)
+- [x] 09-03-PLAN.md — Wave 2: production build check + Vercel deploy + browser QA checkpoint (all 6 presets, dark mode, 1920px)
 
 ## Progress
 
