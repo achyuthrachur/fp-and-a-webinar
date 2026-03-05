@@ -171,10 +171,21 @@ Plans:
 - [ ] 09-02-PLAN.md — Wave 1: SectionHeader component + add to all 6 sections
 - [x] 09-03-PLAN.md — Wave 2: production build check + Vercel deploy + browser QA checkpoint (all 6 presets, dark mode, 1920px)
 
+### Phase 10: Visual Identity and Interactivity
+**Goal**: The dashboard is visually compelling and immersive — a landing/splash experience introduces the app, React Bits animations add motion throughout, shadcn/ui components replace hand-crafted primitives where appropriate, and contextual explanations help the webinar audience understand each section
+**Depends on**: Phase 9
+**Requirements**: VISU-01, VISU-02, VISU-03, VISU-04
+**Success Criteria** (what must be TRUE):
+  1. A landing/splash screen is the first thing a visitor sees before entering the dashboard — it clearly communicates the product's purpose and includes a call-to-action to enter
+  2. At least 3 dashboard sections feature React Bits entrance animations (fade, slide, stagger, or similar) that fire on page load or scroll into view
+  3. shadcn/ui components are used for at least the primary interactive controls (buttons, dropdowns, toggles) replacing current hand-crafted equivalents
+  4. Each of the 6 main dashboard sections displays a contextual explanation callout that the presenter can show or hide during the webinar
+**Plans**: TBD
+
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 → 9
+Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 → 9 → 10
 
 Note: Phase 5 (Close Tracker) depends only on Phase 2 and can begin after Phase 2 completes, in parallel with Phases 3-4. Phase 6 (Static Charts) also depends only on Phase 2.
 
@@ -189,3 +200,4 @@ Note: Phase 5 (Close Tracker) depends only on Phase 2 and can begin after Phase 
 | 7. Reactive Margin Bridge | 4/4 | Complete   | 2026-03-05 |
 | 8. AI Executive Summary | 3/3 | Complete    | 2026-03-05 |
 | 9. Webinar Readiness and Polish | 3/3 | Complete    | 2026-03-05 |
+| 10. Visual Identity and Interactivity | 0/TBD | Not started | - |
