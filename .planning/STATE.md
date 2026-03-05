@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 08-ai-executive-summary 08-01-PLAN.md
-last_updated: "2026-03-05T15:20:05.528Z"
+stopped_at: Completed 08-ai-executive-summary 08-02-PLAN.md
+last_updated: "2026-03-05T15:24:41.164Z"
 last_activity: 2026-03-04 — Phase 2 complete — 31/31 tests GREEN, variancePct wired, page.tsx async
 progress:
   total_phases: 9
   completed_phases: 7
   total_plans: 26
-  completed_plans: 24
+  completed_plans: 25
   percent: 44
 ---
 
@@ -72,6 +72,7 @@ Progress: [████░░░░░░] 44%
 | Phase 07-reactive-margin-bridge P03 | 6 | 2 tasks | 3 files |
 | Phase 07-reactive-margin-bridge P04 | 15 | 2 tasks | 3 files |
 | Phase 08-ai-executive-summary P01 | 2 | 2 tasks | 3 files |
+| Phase 08-ai-executive-summary P02 | 4 | 1 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -137,6 +138,7 @@ Recent decisions affecting current work:
 - [Phase 07-reactive-margin-bridge]: 3 Vercel build fixes: BOM stripped from globals.css, tailwindcss added to devDependencies, baseEbitda/baseGrossMarginPct added to DEFAULT_BASE_INPUTS
 - [Phase 08-ai-executive-summary]: Dual beforeAll blocks for route/cache modules — independent routeImportError/cacheImportError variables prevent one import failure masking the other in Wave 0 RED stubs
 - [Phase 08-ai-executive-summary]: KpiPayload interface defined in route.ts and type-imported in aiSummary.test.ts — establishes the type contract Wave 1 must satisfy
+- [Phase 08-ai-executive-summary]: Lazy OpenAI client init via getOpenAI() factory — module-level new OpenAI() throws when OPENAI_API_KEY absent in Vitest; moved to factory called only inside POST handler
 
 ### Pending Todos
 
@@ -150,7 +152,7 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-05T15:20:05.510Z
-Stopped at: Completed 08-ai-executive-summary 08-01-PLAN.md
+Last session: 2026-03-05T15:24:41.154Z
+Stopped at: Completed 08-ai-executive-summary 08-02-PLAN.md
 Resume file: None
 Resumed: Session resumed, proceeding to execute 06-03 (human verify static charts)
