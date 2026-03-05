@@ -5,6 +5,19 @@ import { useEffect, useRef } from 'react';
 import type { Icon } from 'iconsax-react';
 import CountUp from '@/components/ui/CountUp';
 import { formatPercent } from '@/lib/formatters';
+import { Tooltip, TooltipTrigger, TooltipContent } from '@/components/ui/Tooltip';
+
+// Brief descriptions shown in the tooltip when hovering over a KPI label.
+const KPI_DESCRIPTIONS: Record<string, string> = {
+  'Net Sales': 'Revenue after returns and discounts for the period',
+  'Gross Profit': 'Net Sales minus Cost of Goods Sold',
+  'EBITDA': 'Earnings before interest, taxes, depreciation, and amortization',
+  'Cash': '13-week cash position from cash flow statement',
+  'COGS': 'Cost of Goods Sold — decreases indicate margin improvement',
+  'Accounts Receivable': 'Outstanding customer invoices — aging tracked separately',
+  'Accounts Payable': 'Outstanding vendor invoices due for payment',
+  'Inventory': 'On-hand inventory value at period end',
+};
 
 interface KpiCardProps {
   label: string;
@@ -93,17 +106,25 @@ export default function KpiCard({
       {/* Header: icon + label */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
         <Icon color="var(--accent)" variant="Bold" size={20} />
-        <span
-          style={{
-            fontSize: '0.75rem',
-            fontWeight: 600,
-            color: 'var(--muted)',
-            textTransform: 'uppercase',
-            letterSpacing: '0.05em',
-          }}
-        >
-          {label}
-        </span>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <span
+              style={{
+                fontSize: '0.75rem',
+                fontWeight: 600,
+                color: 'var(--muted)',
+                textTransform: 'uppercase',
+                letterSpacing: '0.05em',
+                cursor: 'help',
+              }}
+            >
+              {label}
+            </span>
+          </TooltipTrigger>
+          <TooltipContent>
+            {KPI_DESCRIPTIONS[label] ?? label}
+          </TooltipContent>
+        </Tooltip>
       </div>
 
       {/* Value: CountUp animated counter */}

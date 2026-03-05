@@ -9,7 +9,8 @@ import type { ControlState, ScenarioPreset } from '@/features/model/types';
 import { setControl, loadPreset, resetToDefaults } from '@/store/scenarioSlice';
 import * as SliderPrimitive from '@radix-ui/react-slider';
 import * as SwitchPrimitive from '@radix-ui/react-switch';
-import * as SelectPrimitive from '@radix-ui/react-select';
+import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from '@/components/ui/Select';
+import { Button } from '@/components/ui/Button';
 import SectionHeader from '@/components/dashboard/SectionHeader';
 
 // ─── Prop Types ───────────────────────────────────────────────────────────────
@@ -264,110 +265,33 @@ function PresetRow({ presets, controls, onSelect, onReset }: PresetRowProps) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'row', gap: '0.5rem', alignItems: 'center' }}>
-      {/* Radix Select hover highlight style */}
-      <style>{`
-        [data-radix-select-item][data-highlighted] {
-          background: var(--accent-soft);
-          outline: none;
-        }
-      `}</style>
-
-      <SelectPrimitive.Root
+      <Select
         value={activePresetId}
         onValueChange={(id) => {
           const p = presets.find((preset) => preset.id === id);
           if (p) onSelect(p);
         }}
       >
-        <SelectPrimitive.Trigger
-          style={{
-            flex: 1,
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            padding: '0.375rem 0.625rem',
-            background: 'var(--card)',
-            border: '1px solid var(--border)',
-            borderRadius: '8px',
-            fontSize: '0.8125rem',
-            color: 'var(--foreground)',
-            cursor: 'pointer',
-            outline: 'none',
-          }}
-        >
-          <SelectPrimitive.Value />
-          <SelectPrimitive.Icon style={{ marginLeft: '0.25rem' }}>▾</SelectPrimitive.Icon>
-        </SelectPrimitive.Trigger>
-
-        <SelectPrimitive.Portal>
-          <SelectPrimitive.Content
-            position="popper"
-            style={{
-              background: 'var(--card)',
-              border: '1px solid var(--border)',
-              borderRadius: '8px',
-              padding: '0.25rem',
-              boxShadow: '0 4px 16px rgba(1,30,65,0.12)',
-              zIndex: 50,
-              minWidth: 'var(--radix-select-trigger-width)',
-            }}
-          >
-            <SelectPrimitive.Viewport>
-              {/* "Custom" placeholder shown when no preset matches */}
-              <SelectPrimitive.Item
-                value="custom"
-                style={{
-                  padding: '0.375rem 0.5rem',
-                  borderRadius: '6px',
-                  fontSize: '0.8125rem',
-                  cursor: 'pointer',
-                  color: 'var(--muted)',
-                  outline: 'none',
-                  fontStyle: 'italic',
-                }}
-              >
-                <SelectPrimitive.ItemText>— Custom —</SelectPrimitive.ItemText>
-              </SelectPrimitive.Item>
-
-              {presets.map((preset) => (
-                <SelectPrimitive.Item
-                  key={preset.id}
-                  value={preset.id}
-                  style={{
-                    padding: '0.375rem 0.5rem',
-                    borderRadius: '6px',
-                    fontSize: '0.8125rem',
-                    cursor: 'pointer',
-                    color: 'var(--foreground)',
-                    outline: 'none',
-                  }}
-                >
-                  <SelectPrimitive.ItemText>{preset.label}</SelectPrimitive.ItemText>
-                </SelectPrimitive.Item>
-              ))}
-            </SelectPrimitive.Viewport>
-          </SelectPrimitive.Content>
-        </SelectPrimitive.Portal>
-      </SelectPrimitive.Root>
+        <SelectTrigger style={{ flex: 1 }}>
+          <SelectValue />
+        </SelectTrigger>
+        <SelectContent>
+          {/* "Custom" placeholder shown when no preset matches */}
+          <SelectItem value="custom" className="italic text-[var(--muted-color)]">
+            — Custom —
+          </SelectItem>
+          {presets.map((preset) => (
+            <SelectItem key={preset.id} value={preset.id}>
+              {preset.label}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
 
       {/* Reset button */}
-      <button
-        onClick={onReset}
-        style={{
-          padding: '0.375rem 0.625rem',
-          background: 'transparent',
-          border: '1px solid var(--border)',
-          borderRadius: '8px',
-          fontSize: '0.8125rem',
-          color: 'var(--muted)',
-          cursor: 'pointer',
-          whiteSpace: 'nowrap',
-          flexShrink: 0,
-        }}
-      >
+      <Button onClick={onReset} variant="outline" size="sm" style={{ flexShrink: 0 }}>
         Reset
-      </button>
+      </Button>
     </div>
   );
 }

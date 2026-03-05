@@ -20,6 +20,7 @@ import {
 } from '@/store/kpiSelectors';
 import { formatCurrency } from '@/lib/formatters';
 import SectionHeader from '@/components/dashboard/SectionHeader';
+import { Button } from '@/components/ui/Button';
 
 // Dynamic import — InfinityLoader uses browser APIs; ssr: false prevents SSR crash.
 const InfinityLoader = dynamic(
@@ -223,24 +224,14 @@ export default function AiSummarySection({ seedData }: AiSummarySectionProps) {
         </div>
 
         {/* Right: Generate / Regenerate button */}
-        <button
+        <Button
           onClick={handleGenerate}
           disabled={isStreaming}
-          style={{
-            padding: '0.375rem 0.875rem',
-            borderRadius: '6px',
-            border: 'none',
-            background: isStreaming ? 'var(--muted)' : 'var(--accent)',
-            color: isStreaming ? 'var(--muted-foreground)' : '#011E41',
-            fontWeight: 600,
-            fontSize: '0.8125rem',
-            cursor: isStreaming ? 'not-allowed' : 'pointer',
-            opacity: isStreaming ? 0.6 : 1,
-            transition: 'opacity 150ms ease, background 150ms ease',
-          }}
+          variant="default"
+          size="sm"
         >
           {isStreaming ? 'Generating\u2026' : buttonLabel}
-        </button>
+        </Button>
       </div>
 
       {/* Card body */}
