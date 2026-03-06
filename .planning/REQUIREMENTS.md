@@ -162,9 +162,9 @@ Requirements for Milestone v1.1 — Polish, Navigation, Storytelling, Reports.
 
 ### Polish & Fixes
 
-- [ ] **PLSH-01**: Section title typography is clearly hierarchical — matching Crowe heading scale (size, weight, color) so titles read as prominent headings, not muted labels
-- [ ] **PLSH-02**: KPI card currency symbol ($) renders at the same visual size as the number, not subscript-small
-- [ ] **PLSH-03**: Explain mode panel enters and exits with an elegant spring animation — clean, smooth, no height flicker
+- [x] **PLSH-01**: Section title typography is clearly hierarchical — matching Crowe heading scale (size, weight, color) so titles read as prominent headings, not muted labels
+- [x] **PLSH-02**: KPI card currency symbol ($) renders at the same visual size as the number, not subscript-small
+- [x] **PLSH-03**: Explain mode panel enters and exits with an elegant spring animation — clean, smooth, no height flicker
 
 ### Navigation
 

@@ -1,16 +1,16 @@
 ---
 gsd_state_version: 1.0
-milestone: v1.1
-milestone_name: polish-navigation-storytelling-reports
-status: planning
-stopped_at: Milestone v1.1 kicked off — 3 phases defined (11-13), requirements and roadmap written
-last_updated: "2026-03-05T00:00:00.000Z"
-last_activity: 2026-03-05 — Milestone v1.1 started
+milestone: v1.0
+milestone_name: milestone
+status: Defining requirements
+stopped_at: Completed 11-01-PLAN.md — PLSH-01, PLSH-02, PLSH-03 visual polish fixes applied
+last_updated: "2026-03-06T01:35:55.995Z"
+last_activity: 2026-03-05 — Milestone v1.1 started — 3 phases, 8 plans, 12 requirements defined
 progress:
-  total_phases: 3
-  completed_phases: 0
-  total_plans: 8
-  completed_plans: 0
+  total_phases: 13
+  completed_phases: 10
+  total_plans: 38
+  completed_plans: 36
   percent: 0
 ---
 
@@ -84,6 +84,7 @@ Progress: [░░░░░░░░░░] 0%
 | Phase 10-visual-identity-and-interactivity P04 | 3 | 2 tasks | 8 files |
 | Phase 10-visual-identity-and-interactivity P05 | 3 | 2 tasks | 9 files |
 | Phase 10-visual-identity-and-interactivity P06 | 30 | 2 tasks | 7 files |
+| Phase 11-polish-and-tab-navigation P01 | 2 | 2 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -172,6 +173,9 @@ Recent decisions affecting current work:
 - [Phase 10-visual-identity-and-interactivity]: explanation prop is optional on SectionHeader — zero-change backward compatibility for all existing callers
 - [Phase 10-visual-identity-and-interactivity]: overflow: hidden on motion.div wrapper (not inner div) — required for height: 0 collapse to clip content correctly
 - [Phase 10-visual-identity-and-interactivity]: 19-point browser QA APPROVED 2026-03-05 — all VISU-01 through VISU-04 verified at production URL; Milestone v1.0 complete
+- [Phase 11-polish-and-tab-navigation]: Two-layer spring pattern: outer height spring (stiffness:300, damping:28) + inner opacity (delay:0.08) for explain panel — eliminates simultaneous opacity+height tween flash
+- [Phase 11-polish-and-tab-navigation]: SectionHeader amber border: wrapper div with borderLeft+paddingLeft around h2 at 1.5rem — subtitle p stays outside wrapper
+- [Phase 11-polish-and-tab-navigation]: KpiCard $ prefix: removed fontSize/fontWeight override entirely — CSS inheritance from parent 1.75rem/700 div handles it
 
 ### Pending Todos
 
@@ -185,7 +189,7 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-05T23:00:04.781Z
-Stopped at: Completed 10-06-PLAN.md — Phase 10 complete, Milestone v1.0 complete, all 35/35 plans done
+Last session: 2026-03-06T01:35:55.988Z
+Stopped at: Completed 11-01-PLAN.md — PLSH-01, PLSH-02, PLSH-03 visual polish fixes applied
 Resume file: None
 Resumed: N/A — project complete
