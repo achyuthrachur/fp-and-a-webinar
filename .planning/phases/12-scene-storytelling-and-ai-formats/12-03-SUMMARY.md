@@ -97,15 +97,27 @@ None - plan executed exactly as written.
 
 Pre-existing test failure in `dataLoader.test.ts` (baseNetSales expected 9200000, got 14920000) caused by a modified `erp_gl_summary.csv` that was already in git working tree before this plan. This failure is **out of scope** — it is not caused by any changes in this plan. Logged to deferred items.
 
+## Browser QA Checkpoint — APPROVED
+
+**Task 3: checkpoint:human-verify** — All 12 checks passed (approved 2026-03-06).
+
+Verified by human QA:
+- SceneNarrative banner visible on all 5 tabs (indigo wash, amber left border)
+- Callout badges functioning with correct teal/amber/coral threshold colors
+- Audience + Focus dropdowns visible between SectionHeader and card in AI Summary tab
+- Stale detection fires correctly on dropdown change (badge reappears)
+- Regenerate with "Operations Team" audience produces operational-language narrative
+- Regenerate with "Cash & Working Capital" focus produces cash/AR-focused narrative
+
 ## User Setup Required
 
-None — no external service configuration required for this plan. The browser QA checkpoint (Task 3) follows and requires manual verification.
+None — no external service configuration required for this plan.
 
 ## Next Phase Readiness
 
-- All automated work complete: aiPromptUtils extended, route extended, AiSummarySection has Audience + Focus dropdowns
-- Browser QA checkpoint (Task 3) is next: user verifies SceneNarrative banners + callout badges + dropdown behavior in browser
-- After QA approval, Phase 12 plan 03 is fully complete
+- Phase 12 Plan 03 fully complete including browser QA approval
+- All AIFMT-01 and AIFMT-02 requirements verified end-to-end in production
+- Audience tone + focus area prompt injection working in live dashboard
 
 ---
 *Phase: 12-scene-storytelling-and-ai-formats*

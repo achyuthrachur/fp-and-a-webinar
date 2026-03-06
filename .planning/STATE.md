@@ -3,8 +3,8 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: Defining requirements
-stopped_at: "Completed 12-scene-storytelling-and-ai-formats/12-03-PLAN.md (at checkpoint:human-verify)"
-last_updated: "2026-03-06T15:52:54.627Z"
+stopped_at: "Completed 12-scene-storytelling-and-ai-formats/12-03-PLAN.md — browser QA approved"
+last_updated: "2026-03-06T16:00:00.000Z"
 last_activity: 2026-03-05 — Milestone v1.1 started — 3 phases, 8 plans, 12 requirements defined
 progress:
   total_phases: 13
@@ -193,6 +193,7 @@ Recent decisions affecting current work:
 - [Phase 12-scene-storytelling-and-ai-formats]: Non-streaming /api/scene-narrative route: lazy getOpenAI() factory, tab-scoped system prompts, Response.json({ text }), max_tokens:80
 - [Phase 12-scene-storytelling-and-ai-formats]: Focus addition includes focus key name to satisfy AIFMT-02 toContain assertion
 - [Phase 12-scene-storytelling-and-ai-formats]: AUDIENCE_SYSTEM_MODIFIERS and FOCUS_USER_ADDITIONS exported from aiPromptUtils.ts for testability
+- [Phase 12-scene-storytelling-and-ai-formats]: Browser QA APPROVED 2026-03-06 — all 12 checks passed: SceneNarrative banners on all 5 tabs, callout badges, audience/focus dropdowns, stale detection, and narrative quality verified
 
 ### Pending Todos
 
@@ -206,7 +207,7 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-06T15:52:54.618Z
-Stopped at: Completed 12-scene-storytelling-and-ai-formats/12-03-PLAN.md (at checkpoint:human-verify)
+Last session: 2026-03-06T16:00:00.000Z
+Stopped at: Completed 12-scene-storytelling-and-ai-formats/12-03-PLAN.md — browser QA approved
 Resume file: None
 Resumed: N/A — project complete
