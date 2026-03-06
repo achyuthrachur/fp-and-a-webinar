@@ -5,7 +5,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Provider } from 'react-redux';
 import { makeStore } from '@/store';
 import type { AppStore } from '@/store';
@@ -158,52 +158,60 @@ export default function DashboardApp({ seedData }: DashboardAppProps) {
           ))}
         </nav>
 
-        {/* Tab content — no AnimatePresence yet (added in Plan 11-03) */}
-        <div>
-          {/* Overview: KPI cards + close tracker + margin bridge */}
-          {activeTab === 'overview' && seedData && (
-            <div>
-              <KpiSection seedData={seedData} />
-              <SectionWrapper>
+        {/* Tab content — AnimatePresence fade on tab switch (NAV-03) */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeTab}
+            initial={reducedMotion ? false : { opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={reducedMotion ? undefined : { opacity: 0 }}
+            transition={{ duration: 0.18, ease: 'easeOut' }}
+          >
+            {/* Overview: KPI cards + close tracker + margin bridge */}
+            {activeTab === 'overview' && seedData && (
+              <div>
+                <KpiSection seedData={seedData} />
+                <SectionWrapper>
+                  <CloseTracker seedData={seedData} />
+                </SectionWrapper>
+                <SectionWrapper>
+                  <MarginBridgeSection />
+                </SectionWrapper>
+              </div>
+            )}
+
+            {/* Close Tracker: full close tracker */}
+            {activeTab === 'close-tracker' && seedData && (
+              <div>
                 <CloseTracker seedData={seedData} />
-              </SectionWrapper>
-              <SectionWrapper>
-                <MarginBridgeSection />
-              </SectionWrapper>
-            </div>
-          )}
+              </div>
+            )}
 
-          {/* Close Tracker: full close tracker */}
-          {activeTab === 'close-tracker' && seedData && (
-            <div>
-              <CloseTracker seedData={seedData} />
-            </div>
-          )}
+            {/* Charts: static charts + margin bridge */}
+            {activeTab === 'charts' && seedData && (
+              <div>
+                <ChartsSection seedData={seedData} />
+                <SectionWrapper>
+                  <MarginBridgeSection />
+                </SectionWrapper>
+              </div>
+            )}
 
-          {/* Charts: static charts + margin bridge */}
-          {activeTab === 'charts' && seedData && (
-            <div>
-              <ChartsSection seedData={seedData} />
-              <SectionWrapper>
-                <MarginBridgeSection />
-              </SectionWrapper>
-            </div>
-          )}
+            {/* AI Summary */}
+            {activeTab === 'ai-summary' && seedData && (
+              <div>
+                <AiSummarySection seedData={seedData} />
+              </div>
+            )}
 
-          {/* AI Summary */}
-          {activeTab === 'ai-summary' && seedData && (
-            <div>
-              <AiSummarySection seedData={seedData} />
-            </div>
-          )}
-
-          {/* Scenario: full-width scenario panel (moved from sidebar) */}
-          {activeTab === 'scenario' && seedData && (
-            <div>
-              <ScenarioPanel presets={seedData.presets} />
-            </div>
-          )}
-        </div>
+            {/* Scenario: full-width scenario panel (moved from sidebar) */}
+            {activeTab === 'scenario' && seedData && (
+              <div>
+                <ScenarioPanel presets={seedData.presets} />
+              </div>
+            )}
+          </motion.div>
+        </AnimatePresence>
 
         <p
           style={{
