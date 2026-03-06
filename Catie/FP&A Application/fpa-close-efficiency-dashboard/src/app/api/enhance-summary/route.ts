@@ -6,7 +6,13 @@ export const runtime = 'nodejs';
 
 import OpenAI from 'openai';
 import { NextRequest } from 'next/server';
-import { type KpiPayload, buildUserPrompt } from '@/features/model/aiPromptUtils';
+import {
+  type KpiPayload,
+  type AudienceOption,
+  type FocusOption,
+  buildUserPrompt,
+  AUDIENCE_SYSTEM_MODIFIERS,
+} from '@/features/model/aiPromptUtils';
 
 // Re-export KpiPayload type so existing imports from this route still work.
 export type { KpiPayload };
@@ -23,10 +29,18 @@ function getOpenAI(): OpenAI {
 
 export async function POST(req: NextRequest) {
   try {
-    const { kpis, presetName } = (await req.json()) as {
+    const { kpis, presetName, audience, focus } = (await req.json()) as {
       kpis: KpiPayload;
       presetName: string;
+      audience?: AudienceOption;
+      focus?: FocusOption;
     };
+
+    const baseSystemPrompt =
+      'You are a senior FP&A analyst at Crowe LLP preparing a briefing for your client Summit Logistics Group. Write a concise two-paragraph executive summary about Summit Logistics Group\'s month-end close results. Always refer to the company as "Summit Logistics Group". First paragraph: current period performance. Second paragraph: forward-looking close risks. Use plain prose, no bullet points, no markdown.';
+    const systemPrompt = audience
+      ? `${baseSystemPrompt} ${AUDIENCE_SYSTEM_MODIFIERS[audience]}`
+      : baseSystemPrompt;
 
     // Use the non-beta stable API surface: chat.completions.create with stream: true.
     // Returns AsyncIterable<ChatCompletionChunk> — iterate with for-await.
@@ -39,12 +53,11 @@ export async function POST(req: NextRequest) {
       messages: [
         {
           role: 'system',
-          content:
-            'You are a senior FP&A analyst at Crowe LLP preparing a briefing for your client Summit Logistics Group. Write a concise two-paragraph executive summary about Summit Logistics Group\'s month-end close results. Always refer to the company as "Summit Logistics Group". First paragraph: current period performance. Second paragraph: forward-looking close risks. Use plain prose, no bullet points, no markdown.',
+          content: systemPrompt,
         },
         {
           role: 'user',
-          content: buildUserPrompt(kpis, presetName),
+          content: buildUserPrompt(kpis, presetName, audience, focus),
         },
       ],
     });
