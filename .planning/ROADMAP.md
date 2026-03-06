@@ -208,19 +208,23 @@ Plans:
 - [ ] 11-02-PLAN.md — Wave 2: Tab navigation component + DashboardApp tab layout + localStorage persistence (NAV-01, NAV-02)
 - [ ] 11-03-PLAN.md — Wave 3: Tab content transitions + production build + browser QA checkpoint (NAV-03)
 
-### Phase 12: Scene Storytelling
-**Goal**: Each of the 5 tabs has a narrative header that tells the data story for Summit Logistics Group and 1-2 highlight callouts that surface the most important watch items for that scene
+### Phase 12: Scene Storytelling and AI Formats
+**Goal**: Each of the 5 tabs has a narrative header and highlight callouts that tell the data story, and the AI Summary tab gains Audience + Focus dropdowns so the generated narrative adapts to different readers and metrics
 **Depends on**: Phase 11
-**Requirements**: STORY-01, STORY-02
+**Requirements**: STORY-01, STORY-02, AIFMT-01, AIFMT-02
 **Success Criteria** (what must be TRUE):
   1. Every tab displays a 2-3 sentence narrative header written in plain FP&A prose — a presenter can read it aloud to frame the data for the audience
   2. Every tab surfaces at least 1 highlight callout — a flagged number with a color-coded indicator (good/watch/concern) and a one-line explanation of what it means
   3. Callout indicators and narrative text update appropriately when the scenario preset changes
-**Plans**: 2 plans
+  4. AI Summary tab has an Audience dropdown with 5 options (CFO, Board, Operations Team, External Stakeholders, Internal FP&A) — each produces a distinctly different narrative tone and framing
+  5. AI Summary tab has a Focus dropdown with 5 options (Full Overview, Revenue & Profitability, Cash & Working Capital, Close Efficiency, Scenario Impact) — each directs GPT-4o to emphasize different metrics
+  6. Changing either dropdown marks the current summary as stale (same pattern as scenario changes)
+**Plans**: 3 plans
 
 Plans:
-- [ ] 12-01-PLAN.md — Wave 1: SceneNarrative component + per-tab narrative text + callout data structure
-- [ ] 12-02-PLAN.md — Wave 2: SceneCallout component + wire callouts into all 5 tabs + browser QA checkpoint
+- [ ] 12-01-PLAN.md — Wave 1: SceneNarrative component + per-tab narrative text + callout data structure (STORY-01)
+- [ ] 12-02-PLAN.md — Wave 2: SceneCallout component + wire callouts into all 5 tabs (STORY-02)
+- [ ] 12-03-PLAN.md — Wave 3: AI Summary Audience + Focus dropdowns + updated prompt logic + browser QA checkpoint (AIFMT-01, AIFMT-02)
 
 ### Phase 13: Report Templates and PDF Export
 **Goal**: Three presentation-ready report templates (CFO Brief, Board Deck, Ops Detail) can be viewed and downloaded as PDF from the dashboard
@@ -258,5 +262,5 @@ Note: Phase 5 (Close Tracker) depends only on Phase 2 and can begin after Phase 
 | 9. Webinar Readiness and Polish | 3/3 | Complete | 2026-03-05 |
 | 10. Visual Identity and Interactivity | 6/6 | Complete | 2026-03-06 |
 | 11. Polish and Tab Navigation | 3/3 | Complete   | 2026-03-06 |
-| 12. Scene Storytelling | 0/2 | Pending | — |
+| 12. Scene Storytelling and AI Formats | 0/3 | Pending | — |
 | 13. Report Templates and PDF Export | 0/3 | Pending | — |

@@ -177,6 +177,11 @@ Requirements for Milestone v1.1 — Polish, Navigation, Storytelling, Reports.
 - [ ] **STORY-01**: Each tab displays a 2-3 sentence narrative header scoped to the scene — tells the data story for Summit Logistics Group in plain language a presenter can read aloud
 - [ ] **STORY-02**: Each tab surfaces 1-2 highlight callouts (watch items) — key numbers flagged as good or concerning with color, icon, and a one-line explanation
 
+### AI Summary Formats
+
+- [ ] **AIFMT-01**: AI Summary tab has an Audience dropdown (CFO, Board of Directors, Operations Team, External Stakeholders, Internal FP&A) — selected audience changes the tone, depth, and framing of the generated narrative
+- [ ] **AIFMT-02**: AI Summary tab has a Focus dropdown (Full Dashboard Overview, Revenue & Profitability, Cash & Working Capital, Close Efficiency, Scenario Impact) — selected focus directs the AI to emphasize specific metrics and omit others
+
 ### Reports
 
 - [ ] **RPT-01**: CFO Brief template — 1-page view: KPIs, AI narrative, close status summary
