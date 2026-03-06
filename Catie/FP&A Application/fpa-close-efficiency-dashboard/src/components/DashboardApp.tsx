@@ -4,7 +4,7 @@
 // Redux state leaking between SSR requests in Next.js App Router.
 'use client';
 
-import { useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Provider } from 'react-redux';
 import { makeStore } from '@/store';
@@ -24,6 +24,16 @@ import { ExplainProvider } from '@/components/ExplainContext';
 interface DashboardAppProps {
   seedData?: DashboardSeedData;
 }
+
+type TabId = 'overview' | 'close-tracker' | 'charts' | 'ai-summary' | 'scenario';
+
+const TABS: { id: TabId; label: string }[] = [
+  { id: 'overview', label: 'Overview' },
+  { id: 'close-tracker', label: 'Close Tracker' },
+  { id: 'charts', label: 'Charts' },
+  { id: 'ai-summary', label: 'AI Summary' },
+  { id: 'scenario', label: 'Scenario' },
+];
 
 // Section-level entrance animation — fade + slide up 20px
 const SECTION_ANIM = {
@@ -47,6 +57,22 @@ export default function DashboardApp({ seedData }: DashboardAppProps) {
     typeof window !== 'undefined'
       ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
       : false;
+
+  const [activeTab, setActiveTab] = useState<TabId>('overview');
+
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem('activeTab') as TabId | null;
+      const valid: TabId[] = ['overview', 'close-tracker', 'charts', 'ai-summary', 'scenario'];
+      if (stored && valid.includes(stored)) setActiveTab(stored);
+    } catch (_) {}
+  }, []);
+
+  const handleTabChange = (tab: TabId) => {
+    setActiveTab(tab);
+    window.scrollTo(0, 0);
+    try { localStorage.setItem('activeTab', tab); } catch (_) {}
+  };
 
   // Seed Redux store with real financial data from the server.
   // Finds the 'baseline' preset (or first preset) to initialize controls.
@@ -80,75 +106,117 @@ export default function DashboardApp({ seedData }: DashboardAppProps) {
     <Provider store={storeRef.current}>
       <ExplainProvider>
       <TooltipProvider delayDuration={300}>
-      {/* Two-column layout: 280px sticky sidebar + flex-1 main content.
-          alignItems: flex-start ensures sidebar height is its own content height,
-          not stretched to match the (much taller) main column. */}
-      <div style={{ display: 'flex', minHeight: '100vh', alignItems: 'flex-start' }}>
+      {/* Full-width layout — sidebar removed, tab row added */}
+      <main style={{ minHeight: '100vh', padding: '1.5rem' }}>
 
-        {/* Left sidebar: fixed 280px, sticky, scrollable */}
-        <aside
+        {/* DashboardHeader — sticky, top: 0, height: 56px (unchanged) */}
+        {seedData && <DashboardHeader seedData={seedData} />}
+
+        {/* Tab row — sticky, top: 56px (below header), height: 48px */}
+        <nav
           style={{
-            width: '280px',
-            flexShrink: 0,
-            borderRight: '1px solid var(--border)',
-            overflowY: 'auto',
             position: 'sticky',
-            top: 0,
-            height: '100vh',
+            top: 56,
+            zIndex: 40,
+            height: 48,
+            display: 'flex',
+            alignItems: 'flex-end',
             background: 'var(--card)',
+            borderBottom: '1px solid var(--border)',
+            marginLeft: '-1.5rem',
+            marginRight: '-1.5rem',
+            width: 'calc(100% + 3rem)',
+            padding: '0 1.5rem',
+            marginBottom: '1.5rem',
+          }}
+          aria-label="Dashboard navigation"
+        >
+          {TABS.map(tab => (
+            <button
+              key={tab.id}
+              onClick={() => handleTabChange(tab.id)}
+              aria-selected={activeTab === tab.id}
+              style={{
+                height: '100%',
+                padding: '0 1rem',
+                background: 'none',
+                border: 'none',
+                borderBottom: activeTab === tab.id
+                  ? '2px solid var(--accent)'
+                  : '2px solid transparent',
+                color: activeTab === tab.id ? 'var(--foreground)' : 'var(--muted-color)',
+                fontWeight: activeTab === tab.id ? 600 : 400,
+                fontSize: '0.875rem',
+                cursor: 'pointer',
+                transition: 'color 150ms ease, border-color 150ms ease',
+                fontFamily: 'inherit',
+                whiteSpace: 'nowrap',
+              }}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </nav>
+
+        {/* Tab content — no AnimatePresence yet (added in Plan 11-03) */}
+        <div>
+          {/* Overview: KPI cards + close tracker + margin bridge */}
+          {activeTab === 'overview' && seedData && (
+            <div>
+              <KpiSection seedData={seedData} />
+              <SectionWrapper>
+                <CloseTracker seedData={seedData} />
+              </SectionWrapper>
+              <SectionWrapper>
+                <MarginBridgeSection />
+              </SectionWrapper>
+            </div>
+          )}
+
+          {/* Close Tracker: full close tracker */}
+          {activeTab === 'close-tracker' && seedData && (
+            <div>
+              <CloseTracker seedData={seedData} />
+            </div>
+          )}
+
+          {/* Charts: static charts + margin bridge */}
+          {activeTab === 'charts' && seedData && (
+            <div>
+              <ChartsSection seedData={seedData} />
+              <SectionWrapper>
+                <MarginBridgeSection />
+              </SectionWrapper>
+            </div>
+          )}
+
+          {/* AI Summary */}
+          {activeTab === 'ai-summary' && seedData && (
+            <div>
+              <AiSummarySection seedData={seedData} />
+            </div>
+          )}
+
+          {/* Scenario: full-width scenario panel (moved from sidebar) */}
+          {activeTab === 'scenario' && seedData && (
+            <div>
+              <ScenarioPanel presets={seedData.presets} />
+            </div>
+          )}
+        </div>
+
+        <p
+          style={{
+            color: 'var(--foreground)',
+            fontFamily: 'var(--font-sans)',
+            margin: '2rem 0 0',
+            fontSize: '0.75rem',
+            opacity: 0.4,
           }}
         >
-          {seedData && <ScenarioPanel presets={seedData.presets} />}
-        </aside>
-
-        {/* Main content area: flex-1, scrollable */}
-        <main style={{ flex: 1, minWidth: 0, padding: '1.5rem', overflowY: 'auto' }}>
-          {/* DashboardHeader is NOT animated — it is always visible at the top */}
-          {seedData && <DashboardHeader seedData={seedData} />}
-
-          {/* KPI section — stagger handled inside KpiSection.tsx */}
-          {seedData ? (
-            <KpiSection seedData={seedData} />
-          ) : (
-            <div id="slot-kpi-section" />
-          )}
-
-          {/* Sections 2-5: each wrapped in scroll-triggered motion.div */}
-          {seedData && (
-            <SectionWrapper>
-              <CloseTracker seedData={seedData} />
-            </SectionWrapper>
-          )}
-
-          <SectionWrapper>
-            <MarginBridgeSection />
-          </SectionWrapper>
-
-          {seedData && (
-            <SectionWrapper>
-              <ChartsSection seedData={seedData} />
-            </SectionWrapper>
-          )}
-
-          {seedData && (
-            <SectionWrapper>
-              <AiSummarySection seedData={seedData} />
-            </SectionWrapper>
-          )}
-
-          <p
-            style={{
-              color: 'var(--foreground)',
-              fontFamily: 'var(--font-sans)',
-              margin: 0,
-              fontSize: '0.75rem',
-              opacity: 0.4,
-            }}
-          >
-            FP&amp;A Close Efficiency Dashboard — Phase 10 Visual Identity
-          </p>
-        </main>
-      </div>
+          FP&amp;A Close Efficiency Dashboard — Phase 11 Tab Navigation
+        </p>
+      </main>
       </TooltipProvider>
       </ExplainProvider>
     </Provider>
