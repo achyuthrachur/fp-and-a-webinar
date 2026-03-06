@@ -23,6 +23,15 @@ function getContextualNote(stage: CloseStage): string | null {
   return `${stage.posted} of ${stage.total} JEs complete \u00b7 ${stage.pendingApproval} pending approval`;
 }
 
+const STAGE_DESCRIPTIONS: Record<string, string> = {
+  'AP Close': 'Vendor invoices posted and payment runs approved for the period',
+  'AR Close': 'Customer invoices matched, credit memos applied, collections reconciled',
+  'Revenue recognition': 'Revenue deferred or recognized per ASC 606 contract performance obligations',
+  'Inventory valuation': 'Physical count reconciled, costing method applied (FIFO), shrinkage accrued',
+  'Accruals & JEs': 'Month-end accruals posted — payroll, depreciation, prepaid amortization, reclassifications',
+  'Financial statement package': 'P&L, balance sheet, and cash flow statement reviewed and signed off by controller',
+};
+
 interface StageCardProps {
   stage: CloseStage;
 }
@@ -47,11 +56,18 @@ export function StageCard({ stage }: StageCardProps) {
       }}
     >
       {/* Row 1: stage name + RAG badge */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <span style={{ fontSize: '0.9375rem', fontWeight: 600, color: 'var(--foreground)' }}>
-          {stage.name}
-        </span>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.375rem' }}>
+      <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '1rem' }}>
+        <div>
+          <span style={{ fontSize: '0.9375rem', fontWeight: 600, color: 'var(--foreground)' }}>
+            {stage.name}
+          </span>
+          {STAGE_DESCRIPTIONS[stage.name] && (
+            <p style={{ fontSize: '0.7rem', color: 'var(--muted-color)', margin: '0.15rem 0 0', lineHeight: 1.4 }}>
+              {STAGE_DESCRIPTIONS[stage.name]}
+            </p>
+          )}
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.375rem', flexShrink: 0 }}>
           <IconComponent color={config.color} variant="Bold" size={16} />
           <span style={{ fontSize: '0.8125rem', fontWeight: 600, color: config.color }}>
             {config.label}
@@ -65,19 +81,16 @@ export function StageCard({ stage }: StageCardProps) {
           height: '8px',
           borderRadius: '4px',
           background: 'rgba(1,30,65,0.08)',
-          position: 'relative',
           overflow: 'hidden',
         }}
       >
         <div
           style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            height: '100%',
+            height: '8px',
             width: `${stage.progress}%`,
             borderRadius: '4px',
             background: config.color,
+            display: 'block',
           }}
         />
       </div>
