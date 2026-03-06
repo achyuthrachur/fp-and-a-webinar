@@ -193,6 +193,21 @@ export default function KpiCard({
           vs prior month
         </span>
       </div>
+
+      {/* Explanation — always visible, small muted text below delta badge */}
+      {KPI_DESCRIPTIONS[label] && (
+        <p
+          style={{
+            fontSize: '0.7rem',
+            color: 'var(--muted-color)',
+            margin: 0,
+            lineHeight: 1.4,
+            opacity: 0.8,
+          }}
+        >
+          {KPI_DESCRIPTIONS[label]}
+        </p>
+      )}
     </div>
   );
 }
