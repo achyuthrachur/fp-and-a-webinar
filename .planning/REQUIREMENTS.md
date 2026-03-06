@@ -155,5 +155,35 @@
 - Unmapped: 0 ✓
 
 ---
+
+## v1.1 Requirements
+
+Requirements for Milestone v1.1 — Polish, Navigation, Storytelling, Reports.
+
+### Polish & Fixes
+
+- [ ] **PLSH-01**: Section title typography is clearly hierarchical — matching Crowe heading scale (size, weight, color) so titles read as prominent headings, not muted labels
+- [ ] **PLSH-02**: KPI card currency symbol ($) renders at the same visual size as the number, not subscript-small
+- [ ] **PLSH-03**: Explain mode panel enters and exits with an elegant spring animation — clean, smooth, no height flicker
+
+### Navigation
+
+- [ ] **NAV-01**: Dashboard layout uses 5-tab navigation (Overview, Close Tracker, Charts, AI Summary, Scenario) — no full-page scroll required to access any section
+- [ ] **NAV-02**: Active tab persists across page refresh via localStorage
+- [ ] **NAV-03**: Tab content panels animate on switch (fade or slide transition)
+
+### Scene Storytelling
+
+- [ ] **STORY-01**: Each tab displays a 2-3 sentence narrative header scoped to the scene — tells the data story for Summit Logistics Group in plain language a presenter can read aloud
+- [ ] **STORY-02**: Each tab surfaces 1-2 highlight callouts (watch items) — key numbers flagged as good or concerning with color, icon, and a one-line explanation
+
+### Reports
+
+- [ ] **RPT-01**: CFO Brief template — 1-page view: KPIs, AI narrative, close status summary
+- [ ] **RPT-02**: Board Deck Slide template — single slide layout: headline metrics and variance commentary
+- [ ] **RPT-03**: Ops Team Detail template — detailed view: close tracker stage-by-stage with chart data and notes
+- [ ] **RPT-04**: All report templates exportable as PDF from the browser
+
+---
 *Requirements defined: 2026-03-03*
-*Last updated: 2026-03-03 after roadmap creation — traceability updated to 9-phase fine-granularity structure*
+*Last updated: 2026-03-05 after Milestone v1.1 kickoff — v1.1 requirements added (PLSH, NAV, STORY, RPT)*

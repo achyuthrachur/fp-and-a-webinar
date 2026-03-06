@@ -190,6 +190,54 @@ Plans:
 - [ ] 10-05-PLAN.md — Wave 3: Explain mode — ExplainProvider in DashboardApp, Explain button in DashboardHeader, explanation panels in SectionHeader (all 6 texts)
 - [ ] 10-06-PLAN.md — Wave 4: production build + Vercel deploy + 19-point browser QA checkpoint (all 4 VISU requirements)
 
+### Phase 11: Polish and Tab Navigation
+**Goal**: Section titles read as clear Crowe-branded headings, the $ sign on KPI cards matches number size, the explain panel animation is elegant, and the dashboard is reorganized into 5 tabs replacing the scroll layout
+**Depends on**: Phase 10
+**Requirements**: PLSH-01, PLSH-02, PLSH-03, NAV-01, NAV-02, NAV-03
+**Success Criteria** (what must be TRUE):
+  1. Section titles (KPI Cards, Close Tracker, Charts, AI Summary, Scenario) read as prominent headings — same font weight and size hierarchy as Crowe display headings, not muted label text
+  2. The $ symbol on all 8 KPI cards is visually the same size as the number digits — no subscript or smaller-scale prefix
+  3. The explain mode panel slides open and closed with a smooth spring animation — no visible height flicker or abrupt jump
+  4. All dashboard content is accessible via 5 tabs (Overview, Close Tracker, Charts, AI Summary, Scenario) — no page-level scrolling required to reach any section
+  5. The active tab is preserved across page refresh via localStorage
+  6. Switching between tabs triggers a smooth content transition (fade or slide)
+**Plans**: 3 plans
+
+Plans:
+- [ ] 11-01-PLAN.md — Wave 1: SectionHeader title fix (PLSH-01) + KPI $ sizing fix (PLSH-02) + explain animation refinement (PLSH-03)
+- [ ] 11-02-PLAN.md — Wave 2: Tab navigation component + DashboardApp tab layout + localStorage persistence (NAV-01, NAV-02)
+- [ ] 11-03-PLAN.md — Wave 3: Tab content transitions + production build + browser QA checkpoint (NAV-03)
+
+### Phase 12: Scene Storytelling
+**Goal**: Each of the 5 tabs has a narrative header that tells the data story for Summit Logistics Group and 1-2 highlight callouts that surface the most important watch items for that scene
+**Depends on**: Phase 11
+**Requirements**: STORY-01, STORY-02
+**Success Criteria** (what must be TRUE):
+  1. Every tab displays a 2-3 sentence narrative header written in plain FP&A prose — a presenter can read it aloud to frame the data for the audience
+  2. Every tab surfaces at least 1 highlight callout — a flagged number with a color-coded indicator (good/watch/concern) and a one-line explanation of what it means
+  3. Callout indicators and narrative text update appropriately when the scenario preset changes
+**Plans**: 2 plans
+
+Plans:
+- [ ] 12-01-PLAN.md — Wave 1: SceneNarrative component + per-tab narrative text + callout data structure
+- [ ] 12-02-PLAN.md — Wave 2: SceneCallout component + wire callouts into all 5 tabs + browser QA checkpoint
+
+### Phase 13: Report Templates and PDF Export
+**Goal**: Three presentation-ready report templates (CFO Brief, Board Deck, Ops Detail) can be viewed and downloaded as PDF from the dashboard
+**Depends on**: Phase 12
+**Requirements**: RPT-01, RPT-02, RPT-03, RPT-04
+**Success Criteria** (what must be TRUE):
+  1. The CFO Brief template renders a clean 1-page summary: KPIs, AI narrative, and close status — suitable for a CFO to read in under 2 minutes
+  2. The Board Deck Slide template renders a single-slide layout with headline metrics and variance commentary — visually matches Crowe brand style
+  3. The Ops Team Detail template renders a detailed close tracker view: stage-by-stage progress, chart data, and contextual notes
+  4. All three templates can be downloaded as a PDF directly from the browser with a single button click — PDF is print-formatted (no cut-off content)
+**Plans**: 3 plans
+
+Plans:
+- [ ] 13-01-PLAN.md — Wave 1: ReportLayout shell + CFO Brief template (RPT-01) + Board Deck Slide template (RPT-02)
+- [ ] 13-02-PLAN.md — Wave 2: Ops Team Detail template (RPT-03) + Reports tab integration
+- [ ] 13-03-PLAN.md — Wave 3: PDF export (RPT-04) + print CSS + browser QA checkpoint (all 3 templates, PDF download)
+
 ## Progress
 
 **Execution Order:**
@@ -199,13 +247,16 @@ Note: Phase 5 (Close Tracker) depends only on Phase 2 and can begin after Phase 
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Project Scaffolding | 2/3 | In Progress|  |
-| 2. Data Layer | 3/4 | In Progress | - |
-| 3. KPI Cards and Variance Layer | 2/3 | In Progress|  |
-| 4. Scenario Control Panel | 2/3 | In Progress|  |
-| 5. Close Stage Tracker | 2/3 | In Progress|  |
-| 6. Static Charts | 3/3 | Complete   | 2026-03-05 |
-| 7. Reactive Margin Bridge | 4/4 | Complete   | 2026-03-05 |
-| 8. AI Executive Summary | 3/3 | Complete    | 2026-03-05 |
-| 9. Webinar Readiness and Polish | 3/3 | Complete    | 2026-03-05 |
-| 10. Visual Identity and Interactivity | 6/6 | Complete    | 2026-03-06 |
+| 1. Project Scaffolding | 3/3 | Complete | 2026-03-04 |
+| 2. Data Layer | 4/4 | Complete | 2026-03-04 |
+| 3. KPI Cards and Variance Layer | 3/3 | Complete | 2026-03-04 |
+| 4. Scenario Control Panel | 3/3 | Complete | 2026-03-04 |
+| 5. Close Stage Tracker | 3/3 | Complete | 2026-03-05 |
+| 6. Static Charts | 3/3 | Complete | 2026-03-05 |
+| 7. Reactive Margin Bridge | 4/4 | Complete | 2026-03-05 |
+| 8. AI Executive Summary | 3/3 | Complete | 2026-03-05 |
+| 9. Webinar Readiness and Polish | 3/3 | Complete | 2026-03-05 |
+| 10. Visual Identity and Interactivity | 6/6 | Complete | 2026-03-06 |
+| 11. Polish and Tab Navigation | 0/3 | Pending | — |
+| 12. Scene Storytelling | 0/2 | Pending | — |
+| 13. Report Templates and PDF Export | 0/3 | Pending | — |

@@ -8,6 +8,16 @@ A Next.js 15/16 (TypeScript, App Router) interactive financial close efficiency 
 
 FP&A teams can interactively model real financial close scenarios — adjusting revenue growth, margins, fuel index, collections, and close stage controls — and immediately see the impact on KPIs, charts, and an AI-generated executive narrative. The dashboard must be compelling and fully functional for a live webinar demonstration.
 
+## Current Milestone: v1.1 Polish, Navigation, Storytelling, and Reports
+
+**Goal:** Transform the working dashboard into a polished, tab-navigated, story-driven experience with professional report export capabilities.
+
+**Target features:**
+- Section title hierarchy and KPI card $ sizing fixes
+- 5-tab layout (Overview, Close Tracker, Charts, AI Summary, Scenario) with localStorage persistence
+- Scene narrative headers + highlight callouts per tab
+- Three report templates (CFO Brief, Board Deck Slide, Ops Team Detail) + PDF export
+
 ## Requirements
 
 ### Validated
@@ -90,4 +100,4 @@ FP&A teams can interactively model real financial close scenarios — adjusting 
 | Zod for data validation | Already used in `dataLoader.ts` — consistent with existing code | — Pending |
 
 ---
-*Last updated: 2026-03-03 after initialization*
+*Last updated: 2026-03-05 after Milestone v1.1 kickoff*
