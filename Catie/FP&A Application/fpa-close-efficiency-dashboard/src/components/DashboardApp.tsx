@@ -59,6 +59,9 @@ export default function DashboardApp({ seedData }: DashboardAppProps) {
       : false;
 
   const [activeTab, setActiveTab] = useState<TabId>('overview');
+  // initialized: becomes true after initializeFromSeedData dispatch fires.
+  // Guards MarginBridgeSection (and Scenario tab KPIs) from rendering with zero default store values.
+  const [storeInitialized, setStoreInitialized] = useState(false);
 
   useEffect(() => {
     try {
@@ -76,6 +79,8 @@ export default function DashboardApp({ seedData }: DashboardAppProps) {
 
   // Seed Redux store with real financial data from the server.
   // Finds the 'baseline' preset (or first preset) to initialize controls.
+  // Sets storeInitialized = true after dispatch so dependent components
+  // (MarginBridgeSection, Scenario tab KPIs) don't render with zero defaults.
   useEffect(() => {
     if (seedData && storeRef.current) {
       const defaultPreset =
@@ -86,6 +91,7 @@ export default function DashboardApp({ seedData }: DashboardAppProps) {
           defaultControls: defaultPreset.controls,
         })
       );
+      setStoreInitialized(true);
     }
   }, [seedData]);
 
@@ -174,9 +180,11 @@ export default function DashboardApp({ seedData }: DashboardAppProps) {
                 <SectionWrapper>
                   <CloseTracker seedData={seedData} />
                 </SectionWrapper>
-                <SectionWrapper>
-                  <MarginBridgeSection />
-                </SectionWrapper>
+                {storeInitialized && (
+                  <SectionWrapper>
+                    <MarginBridgeSection />
+                  </SectionWrapper>
+                )}
               </div>
             )}
 
@@ -191,9 +199,11 @@ export default function DashboardApp({ seedData }: DashboardAppProps) {
             {activeTab === 'charts' && seedData && (
               <div>
                 <ChartsSection seedData={seedData} />
-                <SectionWrapper>
-                  <MarginBridgeSection />
-                </SectionWrapper>
+                {storeInitialized && (
+                  <SectionWrapper>
+                    <MarginBridgeSection />
+                  </SectionWrapper>
+                )}
               </div>
             )}
 
@@ -204,10 +214,18 @@ export default function DashboardApp({ seedData }: DashboardAppProps) {
               </div>
             )}
 
-            {/* Scenario: full-width scenario panel (moved from sidebar) */}
+            {/* Scenario: two-column layout — controls left, live KPIs + margin bridge right */}
             {activeTab === 'scenario' && seedData && (
-              <div>
-                <ScenarioPanel presets={seedData.presets} />
+              <div style={{ display: 'flex', gap: '2rem', alignItems: 'flex-start' }}>
+                {/* LEFT: scenario controls — fixed width */}
+                <div style={{ width: '380px', flexShrink: 0 }}>
+                  <ScenarioPanel presets={seedData.presets} />
+                </div>
+                {/* RIGHT: live KPIs + Margin Bridge — flex-1 */}
+                <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+                  <KpiSection seedData={seedData} />
+                  {storeInitialized && <MarginBridgeSection />}
+                </div>
               </div>
             )}
           </motion.div>
