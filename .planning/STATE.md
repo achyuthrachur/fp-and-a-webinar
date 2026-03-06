@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: Defining requirements
-stopped_at: Completed 11-01-PLAN.md — PLSH-01, PLSH-02, PLSH-03 visual polish fixes applied
-last_updated: "2026-03-06T01:35:55.995Z"
+stopped_at: Completed 11-02-PLAN.md — NAV-01, NAV-02 tab layout implemented
+last_updated: "2026-03-06T01:39:00.845Z"
 last_activity: 2026-03-05 — Milestone v1.1 started — 3 phases, 8 plans, 12 requirements defined
 progress:
   total_phases: 13
   completed_phases: 10
   total_plans: 38
-  completed_plans: 36
+  completed_plans: 37
   percent: 0
 ---
 
@@ -85,6 +85,7 @@ Progress: [░░░░░░░░░░] 0%
 | Phase 10-visual-identity-and-interactivity P05 | 3 | 2 tasks | 9 files |
 | Phase 10-visual-identity-and-interactivity P06 | 30 | 2 tasks | 7 files |
 | Phase 11-polish-and-tab-navigation P01 | 2 | 2 tasks | 2 files |
+| Phase 11-polish-and-tab-navigation P02 | 2 | 1 tasks | 1 files |
 
 ## Accumulated Context
 
@@ -176,6 +177,9 @@ Recent decisions affecting current work:
 - [Phase 11-polish-and-tab-navigation]: Two-layer spring pattern: outer height spring (stiffness:300, damping:28) + inner opacity (delay:0.08) for explain panel — eliminates simultaneous opacity+height tween flash
 - [Phase 11-polish-and-tab-navigation]: SectionHeader amber border: wrapper div with borderLeft+paddingLeft around h2 at 1.5rem — subtitle p stays outside wrapper
 - [Phase 11-polish-and-tab-navigation]: KpiCard $ prefix: removed fontSize/fontWeight override entirely — CSS inheritance from parent 1.75rem/700 div handles it
+- [Phase 11-polish-and-tab-navigation]: Tab layout replaces sidebar: aside removed; ScenarioPanel rendered only in Scenario tab
+- [Phase 11-polish-and-tab-navigation]: AnimatePresence deferred to 11-03: tab content switches via conditional rendering only in 11-02
+- [Phase 11-polish-and-tab-navigation]: localStorage fallback: invalid stored tab values silently fall back to 'overview' via valid[] includes() guard
 
 ### Pending Todos
 
@@ -189,7 +193,7 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-06T01:35:55.988Z
-Stopped at: Completed 11-01-PLAN.md — PLSH-01, PLSH-02, PLSH-03 visual polish fixes applied
+Last session: 2026-03-06T01:39:00.839Z
+Stopped at: Completed 11-02-PLAN.md — NAV-01, NAV-02 tab layout implemented
 Resume file: None
 Resumed: N/A — project complete

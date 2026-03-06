@@ -168,8 +168,8 @@ Requirements for Milestone v1.1 — Polish, Navigation, Storytelling, Reports.
 
 ### Navigation
 
-- [ ] **NAV-01**: Dashboard layout uses 5-tab navigation (Overview, Close Tracker, Charts, AI Summary, Scenario) — no full-page scroll required to access any section
-- [ ] **NAV-02**: Active tab persists across page refresh via localStorage
+- [x] **NAV-01**: Dashboard layout uses 5-tab navigation (Overview, Close Tracker, Charts, AI Summary, Scenario) — no full-page scroll required to access any section
+- [x] **NAV-02**: Active tab persists across page refresh via localStorage
 - [ ] **NAV-03**: Tab content panels animate on switch (fade or slide transition)
 
 ### Scene Storytelling
