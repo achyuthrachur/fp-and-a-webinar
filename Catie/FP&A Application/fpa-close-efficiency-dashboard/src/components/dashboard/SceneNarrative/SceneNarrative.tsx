@@ -1,19 +1,24 @@
 // src/components/dashboard/SceneNarrative/SceneNarrative.tsx
 // No 'use client' — runs inside DashboardApp client boundary.
 // Banner card shown at the top of every tab: tab label + callout badges + italic narrative text.
+// Self-manages narrative state: fires /api/scene-narrative on named preset change, uses cache on repeat visits.
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import type { RootState } from '@/store/index';
 import {
   selectNetSales,
   selectEbitda,
   selectCash,
+  selectAr,
 } from '@/store/kpiSelectors';
 import { CALLOUT_RULES, BASELINE_NARRATIVES } from '@/lib/calloutRules';
 import type { CalloutRule } from '@/lib/calloutRules';
 import { CalloutBadge } from './CalloutBadge';
 import type { DashboardSeedData } from '@/lib/dataLoader';
+import { sceneNarrativeCache, getCacheKey } from '@/lib/scenarioNarrativeCache';
+import { formatCurrency } from '@/lib/formatters';
+import type { KpiPayload } from '@/features/model/aiPromptUtils';
 
 type TabId = 'overview' | 'close-tracker' | 'charts' | 'ai-summary' | 'scenario';
 
@@ -21,10 +26,6 @@ export interface SceneNarrativeProps {
   tabId: TabId;
   presetName: string;
   seedData: DashboardSeedData;
-  /** If provided, overrides the baseline narrative text (e.g. AI-generated text). */
-  narrativeText?: string;
-  /** If true, shows a pulsing loading placeholder instead of narrative text. */
-  isLoading?: boolean;
 }
 
 const TAB_LABELS: Record<TabId, string> = {
@@ -71,16 +72,72 @@ const METRIC_RESOLVERS: Record<string, MetricResolver> = {
   grossMargin: (_kpis, _seedData, controls) => controls.grossMarginPct,
 };
 
-export function SceneNarrative({
-  tabId,
-  seedData,
-  narrativeText,
-  isLoading,
-}: SceneNarrativeProps) {
+export function SceneNarrative({ tabId, presetName, seedData }: SceneNarrativeProps) {
   const netSales = useSelector(selectNetSales);
   const ebitda = useSelector(selectEbitda);
   const cash = useSelector(selectCash);
+  const ar = useSelector(selectAr);
   const controls = useSelector((state: RootState) => state.scenario.controls);
+
+  // Self-managed narrative state — DashboardApp does NOT hold text.
+  const [narrativeText, setNarrativeText] = useState<string>(BASELINE_NARRATIVES[tabId]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  // Build KpiPayload from current Redux state for the API call.
+  function buildKpiPayload(): KpiPayload {
+    const cogs = netSales - (ebitda + seedData.baseInputs.baseOpex);
+    const grossProfit = netSales - cogs;
+    return {
+      netSales: formatCurrency(netSales),
+      cogs: formatCurrency(cogs),
+      grossProfit: formatCurrency(grossProfit),
+      ebitda: formatCurrency(ebitda),
+      cash: formatCurrency(cash),
+      ar: formatCurrency(ar),
+      ap: formatCurrency(seedData.baseInputs.apTotal),
+      inventory: formatCurrency(seedData.baseInputs.inventoryTotal),
+    };
+  }
+
+  // Auto-regeneration: fires when presetName or tabId changes.
+  // Custom Scenario skips API (no meaningful preset context).
+  // Cache hit: use stored text immediately. Cache miss: fire API call.
+  // Stale-on-mount: since tabs conditionally render, SceneNarrative remounts on every
+  // tab switch — this useEffect fires on mount if preset changed while tab was unmounted.
+  useEffect(() => {
+    if (presetName === 'Custom Scenario') {
+      // Reset to baseline text for custom scenario
+      setNarrativeText(BASELINE_NARRATIVES[tabId]);
+      return;
+    }
+
+    const cacheKey = getCacheKey(presetName, tabId);
+    if (sceneNarrativeCache.has(cacheKey)) {
+      // Cache hit — use cached text immediately, no API call
+      setNarrativeText(sceneNarrativeCache.get(cacheKey)!);
+      return;
+    }
+
+    // Cache miss — fire API call
+    setIsLoading(true);
+    fetch('/api/scene-narrative', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ kpis: buildKpiPayload(), presetName, tabId }),
+    })
+      .then(r => r.json())
+      .then((data: { text?: string }) => {
+        if (data.text) {
+          setNarrativeText(data.text);
+          sceneNarrativeCache.set(cacheKey, data.text);
+        }
+      })
+      .catch(() => {
+        // Keep baseline text on error — silent degradation
+      })
+      .finally(() => setIsLoading(false));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [presetName, tabId]);
 
   const kpis: KpiBundle = { netSales, ebitda, cash };
   const controlsBundle: ControlsBundle = {
@@ -90,8 +147,6 @@ export function SceneNarrative({
 
   // Filter rules to this tab (max 2 badges)
   const tabRules: CalloutRule[] = CALLOUT_RULES.filter(r => r.tab === tabId).slice(0, 2);
-
-  const displayText = narrativeText ?? BASELINE_NARRATIVES[tabId];
 
   return (
     <div
@@ -158,7 +213,7 @@ export function SceneNarrative({
             lineHeight: 1.6,
           }}
         >
-          {displayText}
+          {narrativeText}
         </p>
       )}
 

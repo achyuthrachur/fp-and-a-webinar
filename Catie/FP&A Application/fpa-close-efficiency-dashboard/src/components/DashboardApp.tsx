@@ -6,9 +6,9 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Provider } from 'react-redux';
+import { Provider, useSelector } from 'react-redux';
 import { makeStore } from '@/store';
-import type { AppStore } from '@/store';
+import type { AppStore, RootState } from '@/store';
 import type { DashboardSeedData } from '@/lib/dataLoader';
 import { initializeFromSeedData } from '@/store/scenarioSlice';
 import KpiSection from '@/components/dashboard/KpiSection';
@@ -20,6 +20,8 @@ import AiSummarySection from '@/components/dashboard/AiSummarySection/AiSummaryS
 import DashboardHeader from '@/components/dashboard/DashboardHeader';
 import { TooltipProvider } from '@/components/ui/Tooltip';
 import { ExplainProvider } from '@/components/ExplainContext';
+import { SceneNarrative } from '@/components/dashboard/SceneNarrative/SceneNarrative';
+import { getActivePresetName } from '@/features/model/aiPromptUtils';
 
 interface DashboardAppProps {
   seedData?: DashboardSeedData;
@@ -44,6 +46,91 @@ const SECTION_ANIM = {
     transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] as const },
   },
 } as const;
+
+// ─── TabContent: inner component rendered inside Provider ─────────────────────
+// useSelector is only valid inside the Provider tree. DashboardApp IS the Provider,
+// so all useSelector calls must be in child components like this one.
+interface TabContentProps {
+  seedData: DashboardSeedData;
+  activeTab: TabId;
+  storeInitialized: boolean;
+  reducedMotion: boolean;
+}
+
+function TabContent({ seedData, activeTab, storeInitialized, reducedMotion }: TabContentProps) {
+  const controls = useSelector((state: RootState) => state.scenario.controls);
+  const activePresetName = getActivePresetName(controls, seedData.presets);
+
+  const SectionWrapper = ({ children }: { children: React.ReactNode }) => (
+    <motion.div
+      variants={SECTION_ANIM}
+      initial={reducedMotion ? false : 'hidden'}
+      whileInView={reducedMotion ? undefined : 'visible'}
+      viewport={{ once: true, margin: '-60px' }}
+    >
+      {children}
+    </motion.div>
+  );
+
+  return (
+    <>
+      {/* Overview: SceneNarrative + KPI cards + close tracker + margin bridge */}
+      {activeTab === 'overview' && (
+        <div>
+          <SceneNarrative tabId="overview" presetName={activePresetName} seedData={seedData} />
+          <KpiSection seedData={seedData} />
+          <SectionWrapper>
+            <CloseTracker seedData={seedData} />
+          </SectionWrapper>
+          {storeInitialized && <MarginBridgeSection />}
+        </div>
+      )}
+
+      {/* Close Tracker: SceneNarrative + full close tracker */}
+      {activeTab === 'close-tracker' && (
+        <div>
+          <SceneNarrative tabId="close-tracker" presetName={activePresetName} seedData={seedData} />
+          <CloseTracker seedData={seedData} />
+        </div>
+      )}
+
+      {/* Charts: SceneNarrative + static charts + margin bridge */}
+      {activeTab === 'charts' && (
+        <div>
+          <SceneNarrative tabId="charts" presetName={activePresetName} seedData={seedData} />
+          <ChartsSection seedData={seedData} />
+          {storeInitialized && <MarginBridgeSection />}
+        </div>
+      )}
+
+      {/* AI Summary: SceneNarrative + AI summary section */}
+      {activeTab === 'ai-summary' && (
+        <div>
+          <SceneNarrative tabId="ai-summary" presetName={activePresetName} seedData={seedData} />
+          <AiSummarySection seedData={seedData} />
+        </div>
+      )}
+
+      {/* Scenario: SceneNarrative full-width + two-column layout (controls left, live KPIs + margin bridge right) */}
+      {activeTab === 'scenario' && (
+        <div>
+          <SceneNarrative tabId="scenario" presetName={activePresetName} seedData={seedData} />
+          <div style={{ display: 'flex', gap: '2rem', alignItems: 'flex-start' }}>
+            {/* LEFT: scenario controls — fixed width */}
+            <div style={{ width: '380px', flexShrink: 0 }}>
+              <ScenarioPanel presets={seedData.presets} />
+            </div>
+            {/* RIGHT: live KPIs + Margin Bridge — flex-1 */}
+            <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+              <KpiSection seedData={seedData} />
+              {storeInitialized && <MarginBridgeSection />}
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
 
 export default function DashboardApp({ seedData }: DashboardAppProps) {
   const storeRef = useRef<AppStore | null>(null);
@@ -94,19 +181,6 @@ export default function DashboardApp({ seedData }: DashboardAppProps) {
       setStoreInitialized(true);
     }
   }, [seedData]);
-
-  // Helper: wrap a section in motion.div for scroll-triggered entrance.
-  // viewport margin -60px triggers animation slightly before section is fully visible.
-  const SectionWrapper = ({ children }: { children: React.ReactNode }) => (
-    <motion.div
-      variants={SECTION_ANIM}
-      initial={reducedMotion ? false : 'hidden'}
-      whileInView={reducedMotion ? undefined : 'visible'}
-      viewport={{ once: true, margin: '-60px' }}
-    >
-      {children}
-    </motion.div>
-  );
 
   return (
     <Provider store={storeRef.current}>
@@ -173,52 +247,13 @@ export default function DashboardApp({ seedData }: DashboardAppProps) {
             exit={reducedMotion ? undefined : { opacity: 0 }}
             transition={{ duration: 0.18, ease: 'easeOut' }}
           >
-            {/* Overview: KPI cards + close tracker + margin bridge */}
-            {activeTab === 'overview' && seedData && (
-              <div>
-                <KpiSection seedData={seedData} />
-                <SectionWrapper>
-                  <CloseTracker seedData={seedData} />
-                </SectionWrapper>
-                {storeInitialized && <MarginBridgeSection />}
-              </div>
-            )}
-
-            {/* Close Tracker: full close tracker */}
-            {activeTab === 'close-tracker' && seedData && (
-              <div>
-                <CloseTracker seedData={seedData} />
-              </div>
-            )}
-
-            {/* Charts: static charts + margin bridge */}
-            {activeTab === 'charts' && seedData && (
-              <div>
-                <ChartsSection seedData={seedData} />
-                {storeInitialized && <MarginBridgeSection />}
-              </div>
-            )}
-
-            {/* AI Summary */}
-            {activeTab === 'ai-summary' && seedData && (
-              <div>
-                <AiSummarySection seedData={seedData} />
-              </div>
-            )}
-
-            {/* Scenario: two-column layout — controls left, live KPIs + margin bridge right */}
-            {activeTab === 'scenario' && seedData && (
-              <div style={{ display: 'flex', gap: '2rem', alignItems: 'flex-start' }}>
-                {/* LEFT: scenario controls — fixed width */}
-                <div style={{ width: '380px', flexShrink: 0 }}>
-                  <ScenarioPanel presets={seedData.presets} />
-                </div>
-                {/* RIGHT: live KPIs + Margin Bridge — flex-1 */}
-                <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-                  <KpiSection seedData={seedData} />
-                  {storeInitialized && <MarginBridgeSection />}
-                </div>
-              </div>
+            {seedData && storeInitialized && (
+              <TabContent
+                seedData={seedData}
+                activeTab={activeTab}
+                storeInitialized={storeInitialized}
+                reducedMotion={reducedMotion}
+              />
             )}
           </motion.div>
         </AnimatePresence>
@@ -232,7 +267,7 @@ export default function DashboardApp({ seedData }: DashboardAppProps) {
             opacity: 0.4,
           }}
         >
-          FP&amp;A Close Efficiency Dashboard — Phase 11 Tab Navigation
+          FP&amp;A Close Efficiency Dashboard — Phase 12 Scene Storytelling
         </p>
       </main>
       </TooltipProvider>
