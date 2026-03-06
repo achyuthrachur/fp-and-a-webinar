@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: Defining requirements
-stopped_at: Completed 12-scene-storytelling-and-ai-formats/12-01-PLAN.md
-last_updated: "2026-03-06T15:38:49.689Z"
+stopped_at: Completed 12-scene-storytelling-and-ai-formats/12-02-PLAN.md
+last_updated: "2026-03-06T15:46:41.970Z"
 last_activity: 2026-03-05 — Milestone v1.1 started — 3 phases, 8 plans, 12 requirements defined
 progress:
   total_phases: 13
   completed_phases: 11
   total_plans: 41
-  completed_plans: 39
+  completed_plans: 40
   percent: 0
 ---
 
@@ -88,6 +88,7 @@ Progress: [░░░░░░░░░░] 0%
 | Phase 11-polish-and-tab-navigation P02 | 2 | 1 tasks | 1 files |
 | Phase 11-polish-and-tab-navigation P03 | 12 | 1 tasks | 1 files |
 | Phase 12-scene-storytelling-and-ai-formats P01 | 5 | 2 tasks | 5 files |
+| Phase 12-scene-storytelling-and-ai-formats P02 | 3 | 2 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -186,6 +187,9 @@ Recent decisions affecting current work:
 - [Phase 12-scene-storytelling-and-ai-formats]: BASELINE_NARRATIVES co-located in calloutRules.ts — both are pure config, single import for both concerns in SceneNarrative
 - [Phase 12-scene-storytelling-and-ai-formats]: ControlState field names: plan spec had revenueGrowth/grossMarginTarget but actual slice uses revenueGrowthPct/grossMarginPct — corrected in SceneNarrative METRIC_RESOLVERS
 - [Phase 12-scene-storytelling-and-ai-formats]: METRIC_RESOLVERS record pattern maps rule.metric string to resolver function — avoids switch/if chains in SceneNarrative component
+- [Phase 12-scene-storytelling-and-ai-formats]: TabContent inner component pattern for useSelector inside Provider tree — DashboardApp IS the Provider, child component needed
+- [Phase 12-scene-storytelling-and-ai-formats]: SceneNarrative self-manages narrative state — removes narrativeText/isLoading props, fires /api/scene-narrative on preset change, uses sceneNarrativeCache
+- [Phase 12-scene-storytelling-and-ai-formats]: Non-streaming /api/scene-narrative route: lazy getOpenAI() factory, tab-scoped system prompts, Response.json({ text }), max_tokens:80
 
 ### Pending Todos
 
@@ -199,7 +203,7 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-06T15:38:49.681Z
-Stopped at: Completed 12-scene-storytelling-and-ai-formats/12-01-PLAN.md
+Last session: 2026-03-06T15:46:41.959Z
+Stopped at: Completed 12-scene-storytelling-and-ai-formats/12-02-PLAN.md
 Resume file: None
 Resumed: N/A — project complete
