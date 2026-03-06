@@ -174,8 +174,8 @@ Requirements for Milestone v1.1 — Polish, Navigation, Storytelling, Reports.
 
 ### Scene Storytelling
 
-- [ ] **STORY-01**: Each tab displays a 2-3 sentence narrative header scoped to the scene — tells the data story for Summit Logistics Group in plain language a presenter can read aloud
-- [ ] **STORY-02**: Each tab surfaces 1-2 highlight callouts (watch items) — key numbers flagged as good or concerning with color, icon, and a one-line explanation
+- [x] **STORY-01**: Each tab displays a 2-3 sentence narrative header scoped to the scene — tells the data story for Summit Logistics Group in plain language a presenter can read aloud
+- [x] **STORY-02**: Each tab surfaces 1-2 highlight callouts (watch items) — key numbers flagged as good or concerning with color, icon, and a one-line explanation
 
 ### AI Summary Formats
 
