@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: Defining requirements
-stopped_at: Completed 12-scene-storytelling-and-ai-formats/12-02-PLAN.md
-last_updated: "2026-03-06T15:46:41.970Z"
+stopped_at: "Completed 12-scene-storytelling-and-ai-formats/12-03-PLAN.md (at checkpoint:human-verify)"
+last_updated: "2026-03-06T15:52:54.627Z"
 last_activity: 2026-03-05 — Milestone v1.1 started — 3 phases, 8 plans, 12 requirements defined
 progress:
   total_phases: 13
-  completed_phases: 11
+  completed_phases: 12
   total_plans: 41
-  completed_plans: 40
+  completed_plans: 41
   percent: 0
 ---
 
@@ -89,6 +89,7 @@ Progress: [░░░░░░░░░░] 0%
 | Phase 11-polish-and-tab-navigation P03 | 12 | 1 tasks | 1 files |
 | Phase 12-scene-storytelling-and-ai-formats P01 | 5 | 2 tasks | 5 files |
 | Phase 12-scene-storytelling-and-ai-formats P02 | 3 | 2 tasks | 5 files |
+| Phase 12-scene-storytelling-and-ai-formats P03 | 4 | 2 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -190,6 +191,8 @@ Recent decisions affecting current work:
 - [Phase 12-scene-storytelling-and-ai-formats]: TabContent inner component pattern for useSelector inside Provider tree — DashboardApp IS the Provider, child component needed
 - [Phase 12-scene-storytelling-and-ai-formats]: SceneNarrative self-manages narrative state — removes narrativeText/isLoading props, fires /api/scene-narrative on preset change, uses sceneNarrativeCache
 - [Phase 12-scene-storytelling-and-ai-formats]: Non-streaming /api/scene-narrative route: lazy getOpenAI() factory, tab-scoped system prompts, Response.json({ text }), max_tokens:80
+- [Phase 12-scene-storytelling-and-ai-formats]: Focus addition includes focus key name to satisfy AIFMT-02 toContain assertion
+- [Phase 12-scene-storytelling-and-ai-formats]: AUDIENCE_SYSTEM_MODIFIERS and FOCUS_USER_ADDITIONS exported from aiPromptUtils.ts for testability
 
 ### Pending Todos
 
@@ -203,7 +206,7 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-06T15:46:41.959Z
-Stopped at: Completed 12-scene-storytelling-and-ai-formats/12-02-PLAN.md
+Last session: 2026-03-06T15:52:54.618Z
+Stopped at: Completed 12-scene-storytelling-and-ai-formats/12-03-PLAN.md (at checkpoint:human-verify)
 Resume file: None
 Resumed: N/A — project complete

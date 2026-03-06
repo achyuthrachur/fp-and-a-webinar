@@ -179,8 +179,8 @@ Requirements for Milestone v1.1 — Polish, Navigation, Storytelling, Reports.
 
 ### AI Summary Formats
 
-- [ ] **AIFMT-01**: AI Summary tab has an Audience dropdown (CFO, Board of Directors, Operations Team, External Stakeholders, Internal FP&A) — selected audience changes the tone, depth, and framing of the generated narrative
-- [ ] **AIFMT-02**: AI Summary tab has a Focus dropdown (Full Dashboard Overview, Revenue & Profitability, Cash & Working Capital, Close Efficiency, Scenario Impact) — selected focus directs the AI to emphasize specific metrics and omit others
+- [x] **AIFMT-01**: AI Summary tab has an Audience dropdown (CFO, Board of Directors, Operations Team, External Stakeholders, Internal FP&A) — selected audience changes the tone, depth, and framing of the generated narrative
+- [x] **AIFMT-02**: AI Summary tab has a Focus dropdown (Full Dashboard Overview, Revenue & Profitability, Cash & Working Capital, Close Efficiency, Scenario Impact) — selected focus directs the AI to emphasize specific metrics and omit others
 
 ### Reports
 
