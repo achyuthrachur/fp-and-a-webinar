@@ -180,11 +180,7 @@ export default function DashboardApp({ seedData }: DashboardAppProps) {
                 <SectionWrapper>
                   <CloseTracker seedData={seedData} />
                 </SectionWrapper>
-                {storeInitialized && (
-                  <SectionWrapper>
-                    <MarginBridgeSection />
-                  </SectionWrapper>
-                )}
+                {storeInitialized && <MarginBridgeSection />}
               </div>
             )}
 
@@ -199,11 +195,7 @@ export default function DashboardApp({ seedData }: DashboardAppProps) {
             {activeTab === 'charts' && seedData && (
               <div>
                 <ChartsSection seedData={seedData} />
-                {storeInitialized && (
-                  <SectionWrapper>
-                    <MarginBridgeSection />
-                  </SectionWrapper>
-                )}
+                {storeInitialized && <MarginBridgeSection />}
               </div>
             )}
 
