@@ -138,7 +138,7 @@ export default function KpiCard({
       >
         {format === 'currency' && (
           <>
-            <span style={{ fontSize: '1.1rem', fontWeight: 500 }}>
+            <span>
               {value < 0 ? '-$' : '$'}
             </span>
             <CountUp
