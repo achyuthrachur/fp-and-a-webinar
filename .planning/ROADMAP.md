@@ -222,9 +222,9 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 12-01-PLAN.md — Wave 1: SceneNarrative component + per-tab narrative text + callout data structure (STORY-01)
-- [ ] 12-02-PLAN.md — Wave 2: SceneCallout component + wire callouts into all 5 tabs (STORY-02)
-- [ ] 12-03-PLAN.md — Wave 3: AI Summary Audience + Focus dropdowns + updated prompt logic + browser QA checkpoint (AIFMT-01, AIFMT-02)
+- [ ] 12-01-PLAN.md — Wave 1: Wave 0 TDD RED stubs + calloutRules.ts + SceneNarrative/CalloutBadge components (STORY-01, STORY-02)
+- [ ] 12-02-PLAN.md — Wave 2: scenarioNarrativeCache + /api/scene-narrative route + DashboardApp integration all 5 tabs (STORY-01, STORY-02)
+- [ ] 12-03-PLAN.md — Wave 3: Audience + Focus dropdowns in AiSummarySection + enhance-summary route extension + browser QA checkpoint (AIFMT-01, AIFMT-02)
 
 ### Phase 13: Report Templates and PDF Export
 **Goal**: Three presentation-ready report templates (CFO Brief, Board Deck, Ops Detail) can be viewed and downloaded as PDF from the dashboard
