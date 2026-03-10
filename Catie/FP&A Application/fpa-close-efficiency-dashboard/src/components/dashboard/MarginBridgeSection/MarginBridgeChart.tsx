@@ -9,6 +9,7 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
+  ReferenceLine,
   LabelList,
   ResponsiveContainer,
 } from 'recharts';
@@ -77,6 +78,7 @@ export default function MarginBridgeChart({ chartData, isDark }: MarginBridgeCha
           tickLine={false}
           width={64}
         />
+        <ReferenceLine y={0} stroke="var(--border)" strokeDasharray="4 2" />
         <Tooltip content={<MarginBridgeTooltip />} />
         <Bar
           dataKey="value"
