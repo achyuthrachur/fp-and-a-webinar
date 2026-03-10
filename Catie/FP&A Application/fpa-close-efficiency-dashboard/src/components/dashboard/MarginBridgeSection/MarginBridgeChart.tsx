@@ -9,7 +9,6 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  ReferenceLine,
   LabelList,
   ResponsiveContainer,
 } from 'recharts';
@@ -29,7 +28,7 @@ function getBarColor(entry: MarginBridgeBar, isDark: boolean): string {
   return entry.value >= 0 ? BAR_COLORS.positive : BAR_COLORS.negative;
 }
 
-function MarginBridgeTooltip({ active, payload }: TooltipProps<number, string>) {
+function MarginBridgeTooltip({ active, payload }: TooltipProps<number, string> & { payload?: { payload: MarginBridgeBar }[] }) {
   if (!active || !payload?.length) return null;
   const entry = payload[0].payload as MarginBridgeBar;
   return (
@@ -78,7 +77,6 @@ export default function MarginBridgeChart({ chartData, isDark }: MarginBridgeCha
           tickLine={false}
           width={64}
         />
-        <ReferenceLine y={0} stroke="var(--border)" strokeDasharray="4 2" />
         <Tooltip content={<MarginBridgeTooltip />} />
         <Bar
           dataKey="value"

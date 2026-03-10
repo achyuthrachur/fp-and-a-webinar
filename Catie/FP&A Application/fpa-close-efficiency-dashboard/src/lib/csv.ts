@@ -1,12 +1,13 @@
-// src/lib/csv.ts
-// Server-side only — imported by dataLoader.ts which runs in Node.js.
-// Returns Record<string, string>[] so Zod z.coerce.number() can convert CSV strings to numbers.
-import Papa from 'papaparse';
-
-export function parseCsv(raw: string): Record<string, string>[] {
-  const result = Papa.parse<Record<string, string>>(raw, {
-    header: true,
-    skipEmptyLines: true,
+﻿export function parseCsv(text: string): Record<string, string>[] {
+  const lines = text.trim().split(/\r?\n/);
+  if (lines.length < 2) return [];
+  const headers = lines[0].split(",").map((v) => v.trim());
+  return lines.slice(1).map((line) => {
+    const values = line.split(",").map((v) => v.trim());
+    const row: Record<string, string> = {};
+    headers.forEach((h, i) => {
+      row[h] = values[i] ?? "";
+    });
+    return row;
   });
-  return result.data;
 }

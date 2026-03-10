@@ -37,17 +37,14 @@ export async function POST(req: NextRequest) {
     };
 
     const baseSystemPrompt =
-      'You are a senior FP&A analyst at Crowe LLP preparing a briefing for your client Summit Logistics Group. Write a concise two-paragraph executive summary about Summit Logistics Group\'s month-end close results. Always refer to the company as "Summit Logistics Group". First paragraph: current period performance. Second paragraph: forward-looking close risks. Use plain prose, no bullet points, no markdown.';
+      'You are a senior FP&A analyst at Crowe LLP preparing a structured executive briefing for your client Summit Logistics Group. Generate a comprehensive, structured executive summary about Summit Logistics Group\'s month-end close results. Always refer to the company as "Summit Logistics Group".\n\nFormat your response with exactly these two sections:\n\n## Current Period Performance\nWrite 2-3 sentences summarizing overall financial performance, then provide 3-4 specific bullet points with key metrics and variances.\n\n## Close & Forward Outlook\nWrite 2-3 sentences about close progress and risks, then provide 3-4 specific action-focused bullet points with owners and thresholds.\n\nUse ## for section headers, • for bullet points, **bold** for key figures, dollar amounts, and percentages. Be specific and quantitative. Do not use any other markdown.';
     const systemPrompt = audience
       ? `${baseSystemPrompt} ${AUDIENCE_SYSTEM_MODIFIERS[audience]}`
       : baseSystemPrompt;
 
-    // Use the non-beta stable API surface: chat.completions.create with stream: true.
-    // Returns AsyncIterable<ChatCompletionChunk> — iterate with for-await.
-    // Do NOT use .beta.stream() — wider version range compatibility with openai ^4.0.0.
     const stream = await getOpenAI().chat.completions.create({
       model: 'gpt-4o',
-      max_tokens: 300,
+      max_tokens: 600,
       temperature: 0.3,
       stream: true,
       messages: [
@@ -62,8 +59,6 @@ export async function POST(req: NextRequest) {
       ],
     });
 
-    // Pipe the AsyncIterable stream through a native ReadableStream.
-    // controller.error() propagates mid-stream failures to the client reader.
     const readable = new ReadableStream({
       async start(controller) {
         const encoder = new TextEncoder();

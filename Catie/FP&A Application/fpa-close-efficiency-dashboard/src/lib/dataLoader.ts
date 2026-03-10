@@ -29,7 +29,7 @@ import {
 type Company = {
   name: string;
   closeTargetBusinessDays: number;
-  variancePct: number;
+  variancePct?: number;
   defaultAssumptions: Pick<ControlState, "revenueGrowthPct" | "grossMarginPct" | "fuelIndex" | "collectionsRatePct" | "returnsPct">;
 };
 
@@ -61,7 +61,7 @@ export async function loadDashboardSeedData(): Promise<DashboardSeedData> {
     .object({
       name: z.string(),
       closeTargetBusinessDays: z.number(),
-      variancePct: z.number(),
+      variancePct: z.number().optional(),
       defaultAssumptions: z.object({
         revenueGrowthPct: z.number(),
         grossMarginPct: z.number(),
@@ -111,8 +111,8 @@ export async function loadDashboardSeedData(): Promise<DashboardSeedData> {
     baseCash: latestGL.cash,
     baseCashInWeekly: latestGL.net_sales / 4,
     arTotal,
-    apTotal: latestGL.ap_total,
-    inventoryTotal: latestGL.inventory_total,
+    apTotal: latestGL.ap,
+    inventoryTotal: latestGL.inventory,
     manualJeCount: latestGL.manual_je_count,
     closeAdjustmentsCount: latestGL.close_adjustments_count,
     pipelineExecutionRatio,
@@ -123,7 +123,15 @@ export async function loadDashboardSeedData(): Promise<DashboardSeedData> {
     // fuelIndex=100 means no fuel delta (FUEL_COGS_SHARE * 0 = 0), so no fuel adjustment needed here.
   };
 
-  // Compute closeStages from journalEntries (replaces hardcoded values)
+  // Map entry_type values to close stage names
+  const ENTRY_TYPE_TO_STAGE: Record<string, string> = {
+    'Reclass': 'AP close',
+    'Accrual': 'Accruals & JEs',
+    'Expense Accrual': 'Accruals & JEs',
+    'Revenue Cutoff': 'Revenue recognition',
+    'Valuation': 'Inventory valuation',
+  };
+
   const STAGE_NAMES = [
     'AP close',
     'AR close',
@@ -133,11 +141,12 @@ export async function loadDashboardSeedData(): Promise<DashboardSeedData> {
     'Financial statement package',
   ] as const;
 
+  // Compute close stage progress from entry_type (requires_rework=0 → posted, 1 → pending)
   const closeStages: CloseStage[] = STAGE_NAMES.map(name => {
-    const rows = journalEntries.filter(je => je.stage === name);
+    const rows = journalEntries.filter(je => ENTRY_TYPE_TO_STAGE[je.entry_type] === name);
     const total = rows.length;
-    const posted = rows.filter(je => je.status === 'posted' || je.status === 'approved').length;
-    const pendingApproval = rows.filter(je => je.status === 'pending-approval').length;
+    const posted = rows.filter(je => je.requires_rework === 0).length;
+    const pendingApproval = rows.filter(je => je.requires_rework === 1).length;
     const progress = total > 0 ? Math.round((posted / total) * 100) : 0;
     return { name, progress, posted, pendingApproval, total };
   });

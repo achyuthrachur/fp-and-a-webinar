@@ -13,28 +13,41 @@ export const SelectGroup = SelectPrimitive.Group;
 export function SelectTrigger({
   className,
   children,
+  style,
   ...props
 }: SelectPrimitive.SelectTriggerProps) {
   return (
     <SelectPrimitive.Trigger
       className={cn(
-        'flex items-center justify-between w-full px-3 py-2 text-sm',
+        'w-full text-sm',
         'bg-[var(--card)] border border-[var(--border)] rounded-lg',
         'text-[var(--foreground)] cursor-pointer',
         'hover:bg-[var(--surface)] transition-colors duration-150',
         'focus:outline-none focus:ring-2 focus:ring-[var(--accent)] focus:ring-offset-1',
         'data-[placeholder]:text-[var(--muted-color)]',
-        '[&>svg]:ml-auto [&>svg]:opacity-60 [&>svg]:h-4 [&>svg]:w-4',
         className
       )}
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        padding: '0.5rem 0.75rem',
+        gap: '0.5rem',
+        background: 'var(--card)',
+        border: '1px solid var(--border)',
+        borderRadius: 8,
+        color: 'var(--foreground)',
+        cursor: 'pointer',
+        width: '100%',
+        fontSize: '0.875rem',
+        ...style,
+      }}
       {...props}
     >
       {children}
-      <SelectPrimitive.Icon asChild>
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-          <path d="M6 9l6 6 6-6" />
-        </svg>
-      </SelectPrimitive.Icon>
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true" style={{ flexShrink: 0, opacity: 0.6 }}>
+        <path d="M6 9l6 6 6-6" />
+      </svg>
     </SelectPrimitive.Trigger>
   );
 }
@@ -50,10 +63,9 @@ export function SelectContent({
       <SelectPrimitive.Content
         position="popper"
         sideOffset={4}
+        style={{ background: 'var(--card-solid, var(--card))', border: '1px solid var(--border)', borderRadius: 8, boxShadow: '0 4px 16px rgba(1,30,65,0.12)', zIndex: 50, overflow: 'hidden' }}
         className={cn(
-          'relative z-50 min-w-[var(--radix-select-trigger-width)] overflow-hidden rounded-lg',
-          'bg-[var(--card)] border border-[var(--border)]',
-          'shadow-[0_4px_16px_rgba(1,30,65,0.12)]',
+          'relative min-w-[var(--radix-select-trigger-width)]',
           'data-[state=open]:animate-in data-[state=closed]:animate-out',
           'data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
           'data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95',
@@ -61,7 +73,7 @@ export function SelectContent({
         )}
         {...props}
       >
-        <SelectPrimitive.Viewport className="p-1">
+        <SelectPrimitive.Viewport style={{ padding: 4 }}>
           {children}
         </SelectPrimitive.Viewport>
       </SelectPrimitive.Content>
@@ -78,12 +90,21 @@ export function SelectItem({
   return (
     <SelectPrimitive.Item
       className={cn(
-        'relative flex items-center px-3 py-2 text-sm rounded-md cursor-pointer select-none',
-        'text-[var(--foreground)] outline-none',
-        'data-[highlighted]:bg-[var(--accent-soft)] data-[highlighted]:text-[var(--foreground)]',
-        'data-[state=checked]:font-semibold',
+        'data-[highlighted]:bg-[var(--accent-soft)]',
         className
       )}
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        padding: '0.5rem 0.75rem',
+        fontSize: '0.875rem',
+        borderRadius: 6,
+        cursor: 'pointer',
+        userSelect: 'none',
+        color: 'var(--foreground)',
+        outline: 'none',
+        listStyle: 'none',
+      }}
       {...props}
     >
       <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>

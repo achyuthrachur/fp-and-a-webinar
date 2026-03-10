@@ -7,7 +7,6 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
-  ReferenceLine,
 } from 'recharts';
 import type { Cash13WeekRow } from '@/features/model/types';
 import { formatCurrency } from '@/lib/formatters';
@@ -133,7 +132,6 @@ export default function CashFlowChart({ data }: CashFlowChartProps) {
                 tickLine={false}
                 width={64}
               />
-              <ReferenceLine y={0} stroke="var(--border)" strokeWidth={1} />
               <Tooltip content={<CashFlowTooltip />} />
               <Area
                 dataKey="actualNetCash"

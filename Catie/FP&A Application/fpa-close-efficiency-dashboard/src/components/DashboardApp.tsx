@@ -238,7 +238,7 @@ export default function DashboardApp({ seedData }: DashboardAppProps) {
           ))}
         </nav>
 
-        {/* Tab content — AnimatePresence fade on tab switch (NAV-03) */}
+        {/* Tab content — AnimatePresence fade on tab switch */}
         <AnimatePresence mode="wait">
           <motion.div
             key={activeTab}

@@ -5,6 +5,7 @@ html[data-theme="light"] {
   --background: #f7f3ea;
   --foreground: #1c2d47;
   --card: #fffaf2cc;
+  --card-solid: #fffaf2;
   --surface: #fffdf8;
   --accent: #f5a800;
   --accent-soft: #ffd23126;
@@ -22,6 +23,7 @@ html[data-theme="dark"] {
   --background: #0f1b2f;
   --foreground: #e7eef8;
   --card: #17263be0;
+  --card-solid: #17263b;
   --surface: #1f324f;
   --accent: #ffd231;
   --accent-soft: #ffd2311c;
