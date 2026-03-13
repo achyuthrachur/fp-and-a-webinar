@@ -65,7 +65,6 @@ export default function KpiSection({ seedData }: KpiSectionProps) {
       ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
       : false;
 
-  // Base values for delta computation (default controls: 3% growth, 25% margin, fuel=118, etc.)
   const bi = seedData.baseInputs;
   const baseNetSales = bi.baseNetSales * 1.03;
   const baseCogs = baseNetSales * 0.75 * (1 + 0.18 * (118 / 100 - 1));

@@ -16,9 +16,9 @@ export default function SectionHeader({ title, subtitle, explanation }: SectionH
   const { explainMode } = useExplainMode();
 
   return (
-    <div style={{ marginBottom: '1rem' }}>
+    <div style={{ marginBottom: '1.25rem' }}>
       {/* PLSH-01: amber left border wrapper + 1.5rem title */}
-      <div style={{ paddingLeft: '0.75rem', borderLeft: '3px solid var(--accent)' }}>
+      <div style={{ paddingLeft: '0.875rem', borderLeft: '4px solid var(--crowe-amber-core)' }}>
         <h2
           style={{
             fontSize: '1.5rem',
@@ -26,6 +26,7 @@ export default function SectionHeader({ title, subtitle, explanation }: SectionH
             color: 'var(--foreground)',
             margin: 0,
             lineHeight: 1.3,
+            fontFamily: '"Helvetica Now Display", "Helvetica Neue", Arial, sans-serif',
           }}
         >
           {title}
@@ -35,8 +36,9 @@ export default function SectionHeader({ title, subtitle, explanation }: SectionH
         style={{
           fontSize: '0.875rem',
           color: 'var(--muted-color)',
-          margin: '0.375rem 0 0',
+          margin: '0.45rem 0 0',
           lineHeight: 1.5,
+          maxWidth: '60rem',
         }}
       >
         {subtitle}
@@ -63,12 +65,13 @@ export default function SectionHeader({ title, subtitle, explanation }: SectionH
                 style={{
                   marginTop: '0.75rem',
                   padding: '0.875rem 1rem',
-                  background: 'var(--surface)',
-                  borderLeft: '3px solid var(--accent)',
+                  background: 'var(--card-solid)',
+                  borderLeft: '3px solid var(--crowe-amber-core)',
                   borderRadius: '0 8px 8px 0',
                   fontSize: '0.875rem',
                   color: 'var(--muted-color)',
                   lineHeight: 1.65,
+                  boxShadow: '0 8px 18px rgba(1, 30, 65, 0.06)',
                 }}
               >
                 {explanation}

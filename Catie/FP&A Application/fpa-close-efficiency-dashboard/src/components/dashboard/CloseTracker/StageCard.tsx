@@ -45,11 +45,12 @@ export function StageCard({ stage }: StageCardProps) {
   return (
     <div
       style={{
-        background: 'var(--card)',
+        background: 'var(--card-solid)',
+        border: '1px solid var(--border)',
         borderRadius: '10px',
         padding: '0.875rem 1.25rem',
         boxShadow:
-          '0 1px 3px rgba(1,30,65,0.04), 0 6px 16px rgba(1,30,65,0.04), 0 12px 32px rgba(1,30,65,0.02)',
+          '0 10px 24px rgba(1,30,65,0.06), 0 2px 8px rgba(1,30,65,0.04)',
         display: 'flex',
         flexDirection: 'column',
         gap: '0.5rem',
@@ -80,7 +81,7 @@ export function StageCard({ stage }: StageCardProps) {
         style={{
           height: '8px',
           borderRadius: '4px',
-          background: 'rgba(1,30,65,0.08)',
+          background: 'rgba(1,30,65,0.1)',
           overflow: 'hidden',
         }}
       >

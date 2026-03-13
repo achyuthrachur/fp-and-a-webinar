@@ -2,8 +2,14 @@
 // Pure data transformation functions for static chart components.
 // No React imports — these are plain functions usable in Vitest (node env).
 
-import type { ARRow, PipelineRow, Cash13WeekRow } from '@/features/model/types';
+import type {
+  ARRow,
+  PipelineRow,
+  Cash13WeekRow,
+  ScenarioHorizon,
+} from '@/features/model/types';
 import { formatCurrency } from '@/lib/formatters';
+import { calculateMarginBridgeImpacts } from '@/store/scenarioMath';
 
 // ─── Pipeline to Invoiced (CHRT-02) ──────────────────────────────────────────
 
@@ -15,6 +21,14 @@ export const STAGE_ORDER = [
   'Invoiced',
 ] as const;
 
+const STAGE_ALIASES: Record<(typeof STAGE_ORDER)[number], string[]> = {
+  Qualified: ['Qualified', 'Pipeline'],
+  Proposal: ['Proposal', 'BestCase'],
+  Negotiation: ['Negotiation', 'Commit'],
+  'Closed Won': ['Closed Won'],
+  Invoiced: ['Invoiced'],
+};
+
 export interface PipelineChartPoint {
   stage: string;
   total: number;
@@ -23,7 +37,7 @@ export interface PipelineChartPoint {
 
 export function buildPipelineChartData(rows: PipelineRow[]): PipelineChartPoint[] {
   return STAGE_ORDER.map(stage => {
-    const stageRows = rows.filter(r => r.stage === stage);
+    const stageRows = rows.filter(r => STAGE_ALIASES[stage].includes(r.stage));
     const total = stageRows.reduce((s, r) => s + r.amount_usd, 0);
     const weighted = stageRows.reduce((s, r) => s + r.amount_usd * r.probability, 0);
     return { stage, total, weighted };
@@ -117,27 +131,53 @@ export function buildMarginBridgeData(
         baseNetSales: number;
         baseGrossMarginPct: number;
         baseOpex: number;
+        baseCash: number;
+        baseCashInWeekly: number;
+        arTotal: number;
+        apTotal: number;
+        inventoryTotal: number;
+        manualJeCount: number;
+        closeAdjustmentsCount: number;
+        pipelineExecutionRatio: number;
+        variancePct: number;
+        baseEbitda: number;
+      };
+      baselineControls: {
+        revenueGrowthPct: number;
+        grossMarginPct: number;
+        fuelIndex: number;
+        collectionsRatePct: number;
+        returnsPct: number;
+        lateInvoiceHours: number;
+        journalLoadMultiplier: number;
+        prioritizeCashMode: boolean;
+        conservativeForecastBias: boolean;
+        tightenCreditHolds: boolean;
+        inventoryComplexity: boolean;
       };
       controls: {
         revenueGrowthPct: number;
         grossMarginPct: number;
         fuelIndex: number;
+        collectionsRatePct: number;
+        returnsPct: number;
+        lateInvoiceHours: number;
+        journalLoadMultiplier: number;
+        prioritizeCashMode: boolean;
+        conservativeForecastBias: boolean;
+        tightenCreditHolds: boolean;
+        inventoryComplexity: boolean;
       };
+      scenarioHorizon: ScenarioHorizon;
     };
   };
 
-  const FUEL_COGS_SHARE = 0.18;
-  const base = s.scenario.baseInputs;
-  const controls = s.scenario.controls;
-
-  const netSales = base.baseNetSales * (1 + controls.revenueGrowthPct);
-  const revenueGrowthImpact = base.baseNetSales * controls.revenueGrowthPct * controls.grossMarginPct;
-  const grossMarginImpact = netSales * (controls.grossMarginPct - base.baseGrossMarginPct);
-  const cogsAtMargin = netSales * (1 - controls.grossMarginPct);
-  const fuelDelta = cogsAtMargin * FUEL_COGS_SHARE * (controls.fuelIndex / 100 - 1);
-  const fuelIndexImpact = -fuelDelta || 0;
-  const otherLeversImpact =
-    adjustedEbitda - baselineEbitda - revenueGrowthImpact - grossMarginImpact - fuelIndexImpact;
+  const impacts = calculateMarginBridgeImpacts(
+    s.scenario.baseInputs,
+    s.scenario.controls,
+    s.scenario.baselineControls,
+    s.scenario.scenarioHorizon
+  );
 
   return [
     {
@@ -148,26 +188,26 @@ export function buildMarginBridgeData(
     },
     {
       name: 'Revenue Growth',
-      value: revenueGrowthImpact,
-      label: formatBridgeLabel(revenueGrowthImpact),
+      value: impacts.revenueGrowthImpact,
+      label: formatBridgeLabel(impacts.revenueGrowthImpact),
       isTotal: false,
     },
     {
       name: 'Gross Margin',
-      value: grossMarginImpact,
-      label: formatBridgeLabel(grossMarginImpact),
+      value: impacts.grossMarginImpact,
+      label: formatBridgeLabel(impacts.grossMarginImpact),
       isTotal: false,
     },
     {
       name: 'Fuel Index',
-      value: fuelIndexImpact,
-      label: formatBridgeLabel(fuelIndexImpact),
+      value: impacts.fuelIndexImpact,
+      label: formatBridgeLabel(impacts.fuelIndexImpact),
       isTotal: false,
     },
     {
       name: 'All Other Levers',
-      value: otherLeversImpact,
-      label: formatBridgeLabel(otherLeversImpact),
+      value: impacts.otherLeversImpact,
+      label: formatBridgeLabel(impacts.otherLeversImpact),
       isTotal: false,
     },
     {

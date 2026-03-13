@@ -80,27 +80,29 @@ export default function KpiCard({
     <div
       ref={cardRef}
       style={{
-        background: 'var(--card)',
-        border: 'none',
+        background: 'var(--card-solid)',
+        border: '1px solid var(--border)',
         borderRadius: '12px',
         padding: '1.25rem 1.5rem',
         display: 'flex',
         flexDirection: 'column',
         gap: '0.5rem',
         boxShadow:
-          '0 1px 3px rgba(1,30,65,0.04), 0 6px 16px rgba(1,30,65,0.04), 0 12px 32px rgba(1,30,65,0.02)',
-        transition: 'box-shadow 250ms ease-out, transform 250ms ease-out',
+          '0 10px 24px rgba(1,30,65,0.06), 0 2px 8px rgba(1,30,65,0.04)',
+        transition: 'box-shadow 250ms ease-out, transform 250ms ease-out, border-color 250ms ease-out',
         cursor: 'default',
       }}
       onMouseEnter={e => {
         (e.currentTarget as HTMLDivElement).style.transform = 'translateY(-2px)';
+        (e.currentTarget as HTMLDivElement).style.borderColor = 'rgba(245, 168, 0, 0.55)';
         (e.currentTarget as HTMLDivElement).style.boxShadow =
-          '0 2px 4px rgba(1,30,65,0.06), 0 8px 24px rgba(1,30,65,0.06), 0 16px 48px rgba(1,30,65,0.04)';
+          '0 14px 30px rgba(1,30,65,0.1), 0 4px 12px rgba(1,30,65,0.05)';
       }}
       onMouseLeave={e => {
         (e.currentTarget as HTMLDivElement).style.transform = 'translateY(0)';
+        (e.currentTarget as HTMLDivElement).style.borderColor = 'var(--border)';
         (e.currentTarget as HTMLDivElement).style.boxShadow =
-          '0 1px 3px rgba(1,30,65,0.04), 0 6px 16px rgba(1,30,65,0.04), 0 12px 32px rgba(1,30,65,0.02)';
+          '0 10px 24px rgba(1,30,65,0.06), 0 2px 8px rgba(1,30,65,0.04)';
       }}
     >
       {/* Header: icon + label */}
@@ -111,10 +113,10 @@ export default function KpiCard({
             <span
               style={{
                 fontSize: '0.75rem',
-                fontWeight: 600,
+                fontWeight: 700,
                 color: 'var(--muted)',
                 textTransform: 'uppercase',
-                letterSpacing: '0.05em',
+                letterSpacing: '0.08em',
                 cursor: 'help',
               }}
             >

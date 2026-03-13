@@ -38,6 +38,7 @@ export type DashboardSeedData = {
   presets: ScenarioPreset[];
   baseInputs: BaseInputs;
   ar90Ratio: number;
+  currentClosePeriod: string;
   arAging: ARRow[];
   crmPipeline: PipelineRow[];
   closeStages: CloseStage[];
@@ -99,6 +100,8 @@ export async function loadDashboardSeedData(): Promise<DashboardSeedData> {
     .parse(parseCsv(await readDataFile("external_vendor_price_index.csv"))) as ExternalVendorPriceIndexRow[];
 
   const latestGL = glRows[glRows.length - 1];
+  const currentClosePeriod =
+    Array.from(new Set(journalEntries.map((je) => je.period))).sort().at(-1) ?? latestGL.period;
   const arTotal = arRows.reduce((sum, row) => sum + row.ar_total, 0);
   const ar90 = arRows.reduce((sum, row) => sum + row.ar_90_plus, 0);
   const weightedPipeline = pipelineRows.reduce((sum, row) => sum + row.amount_usd * row.probability, 0);
@@ -126,10 +129,12 @@ export async function loadDashboardSeedData(): Promise<DashboardSeedData> {
   // Map entry_type values to close stage names
   const ENTRY_TYPE_TO_STAGE: Record<string, string> = {
     'Reclass': 'AP close',
+    'AR Reconciliation': 'AR close',
     'Accrual': 'Accruals & JEs',
     'Expense Accrual': 'Accruals & JEs',
     'Revenue Cutoff': 'Revenue recognition',
     'Valuation': 'Inventory valuation',
+    'FS Package Review': 'Financial statement package',
   };
 
   const STAGE_NAMES = [
@@ -143,7 +148,9 @@ export async function loadDashboardSeedData(): Promise<DashboardSeedData> {
 
   // Compute close stage progress from entry_type (requires_rework=0 → posted, 1 → pending)
   const closeStages: CloseStage[] = STAGE_NAMES.map(name => {
-    const rows = journalEntries.filter(je => ENTRY_TYPE_TO_STAGE[je.entry_type] === name);
+    const rows = journalEntries.filter(
+      je => je.period === currentClosePeriod && ENTRY_TYPE_TO_STAGE[je.entry_type] === name
+    );
     const total = rows.length;
     const posted = rows.filter(je => je.requires_rework === 0).length;
     const pendingApproval = rows.filter(je => je.requires_rework === 1).length;
@@ -156,6 +163,7 @@ export async function loadDashboardSeedData(): Promise<DashboardSeedData> {
     presets,
     baseInputs,
     ar90Ratio: arTotal > 0 ? ar90 / arTotal : 0,
+    currentClosePeriod,
     arAging: arRows,
     crmPipeline: pipelineRows,
     closeStages,

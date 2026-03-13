@@ -6,6 +6,7 @@ import scenarioSlice, {
   setControl,
   loadPreset,
   resetToDefaults,
+  setScenarioHorizon,
 } from '@/store/scenarioSlice';
 import type { ControlState } from '@/features/model/types';
 
@@ -67,17 +68,26 @@ describe('scenarioSlice reducer', () => {
       inventoryComplexity: false,
     };
 
-    // Modify state first to verify that resetToDefaults actually changes something
+    const stateWithBaseline = {
+      ...initialState,
+      baselineControls,
+      scenarioHorizon: 'long_term' as const,
+    };
     const modifiedState = reducer(
-      initialState,
-      setControl({ field: 'fuelIndex', value: 200 })
+      reducer(stateWithBaseline, setControl({ field: 'fuelIndex', value: 200 })),
+      setScenarioHorizon('long_term')
     );
     expect(modifiedState.controls.fuelIndex).toBe(200);
 
-    // Now reset
-    const resetAction = resetToDefaults(baselineControls);
+    const resetAction = resetToDefaults();
     const nextState = reducer(modifiedState, resetAction);
 
     expect(nextState.controls).toEqual(baselineControls);
+    expect(nextState.scenarioHorizon).toBe('short_term');
+  });
+
+  it('SCEN-05: setScenarioHorizon updates the outcome horizon', () => {
+    const nextState = reducer(initialState, setScenarioHorizon('long_term'));
+    expect(nextState.scenarioHorizon).toBe('long_term');
   });
 });

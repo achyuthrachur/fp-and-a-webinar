@@ -151,11 +151,13 @@ export function SceneNarrative({ tabId, presetName, seedData }: SceneNarrativePr
   return (
     <div
       style={{
-        background: '#f0f2f8',
-        borderLeft: '3px solid var(--accent)',
+        background: 'var(--card-solid)',
+        border: '1px solid var(--border)',
+        borderLeft: '4px solid var(--crowe-amber-core)',
         borderRadius: 12,
         padding: '1rem 1.25rem',
         marginBottom: '1.5rem',
+        boxShadow: '0 10px 24px rgba(1, 30, 65, 0.06)',
       }}
     >
       {/* Top row: tab label left, badges right */}
@@ -171,9 +173,11 @@ export function SceneNarrative({ tabId, presetName, seedData }: SceneNarrativePr
       >
         <span
           style={{
-            fontWeight: 600,
-            fontSize: '0.9375rem',
+            fontWeight: 700,
+            fontSize: '0.75rem',
             color: 'var(--foreground)',
+            textTransform: 'uppercase',
+            letterSpacing: '0.08em',
           }}
         >
           {TAB_LABELS[tabId]}
@@ -208,7 +212,6 @@ export function SceneNarrative({ tabId, presetName, seedData }: SceneNarrativePr
           style={{
             margin: 0,
             fontSize: '0.875rem',
-            fontStyle: 'italic',
             color: 'var(--muted-foreground, var(--muted-color))',
             lineHeight: 1.6,
           }}

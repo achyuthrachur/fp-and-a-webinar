@@ -138,6 +138,22 @@ export default function DashboardApp({ seedData }: DashboardAppProps) {
     storeRef.current = makeStore();
   }
 
+  const [isDark, setIsDark] = useState(
+    typeof document !== 'undefined' &&
+      document.documentElement.getAttribute('data-theme') === 'dark'
+  );
+
+  useEffect(() => {
+    const observer = new MutationObserver(() => {
+      setIsDark(document.documentElement.getAttribute('data-theme') === 'dark');
+    });
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme'],
+    });
+    return () => observer.disconnect();
+  }, []);
+
   // prefers-reduced-motion check — JS-level (CSS media query doesn't disable Framer Motion)
   // Evaluated inside component body (not module scope) to avoid SSR window access
   const reducedMotion =
@@ -196,18 +212,20 @@ export default function DashboardApp({ seedData }: DashboardAppProps) {
         <nav
           style={{
             position: 'sticky',
-            top: 56,
+            top: 64,
             zIndex: 40,
-            height: 48,
+            height: 54,
             display: 'flex',
-            alignItems: 'flex-end',
-            background: 'var(--card)',
+            alignItems: 'center',
+            background: isDark ? 'rgba(255, 255, 255, 0.96)' : 'rgba(255, 255, 255, 0.96)',
             borderBottom: '1px solid var(--border)',
+            boxShadow: '0 8px 20px rgba(1, 30, 65, 0.06)',
             marginLeft: '-1.5rem',
             marginRight: '-1.5rem',
             width: 'calc(100% + 3rem)',
             padding: '0 1.5rem',
             marginBottom: '1.5rem',
+            gap: '0.35rem',
           }}
           aria-label="Dashboard navigation"
         >
@@ -217,20 +235,26 @@ export default function DashboardApp({ seedData }: DashboardAppProps) {
               onClick={() => handleTabChange(tab.id)}
               aria-selected={activeTab === tab.id}
               style={{
-                height: '100%',
-                padding: '0 1rem',
-                background: 'none',
-                border: 'none',
-                borderBottom: activeTab === tab.id
-                  ? '2px solid var(--accent)'
-                  : '2px solid transparent',
-                color: activeTab === tab.id ? 'var(--foreground)' : 'var(--muted-color)',
-                fontWeight: activeTab === tab.id ? 600 : 400,
+                height: '2.3rem',
+                padding: '0 0.95rem',
+                background: activeTab === tab.id ? 'var(--crowe-indigo-dark)' : 'transparent',
+                border: activeTab === tab.id
+                  ? '1px solid var(--crowe-indigo-dark)'
+                  : '1px solid transparent',
+                borderRadius: 999,
+                color: activeTab === tab.id
+                  ? 'var(--crowe-white)'
+                  : isDark
+                    ? 'var(--crowe-indigo-dark)'
+                    : 'var(--foreground)',
+                fontWeight: activeTab === tab.id ? 700 : 600,
                 fontSize: '0.875rem',
                 cursor: 'pointer',
-                transition: 'color 150ms ease, border-color 150ms ease',
+                transition: 'all 150ms ease',
                 fontFamily: 'inherit',
                 whiteSpace: 'nowrap',
+                textTransform: 'uppercase',
+                letterSpacing: '0.03em',
               }}
             >
               {tab.label}
@@ -260,14 +284,15 @@ export default function DashboardApp({ seedData }: DashboardAppProps) {
 
         <p
           style={{
-            color: 'var(--foreground)',
-            fontFamily: 'var(--font-sans)',
+            color: 'var(--muted-color)',
             margin: '2rem 0 0',
             fontSize: '0.75rem',
-            opacity: 0.4,
+            opacity: 0.9,
+            textTransform: 'uppercase',
+            letterSpacing: '0.05em',
           }}
         >
-          FP&amp;A Close Efficiency Dashboard — Phase 12 Scene Storytelling
+          FP and A Close Efficiency Dashboard - Phase 12 scene storytelling
         </p>
       </main>
       </TooltipProvider>

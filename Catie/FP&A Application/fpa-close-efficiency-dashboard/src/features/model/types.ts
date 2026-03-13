@@ -103,6 +103,9 @@ export const controlStateSchema = z.object({
 });
 export type ControlState = z.infer<typeof controlStateSchema>;
 
+export const scenarioHorizonSchema = z.enum(['short_term', 'long_term']);
+export type ScenarioHorizon = z.infer<typeof scenarioHorizonSchema>;
+
 // ─── Derived Metrics (computed by kpiSelectors from controls + baseInputs) ───
 
 export interface DerivedMetrics {

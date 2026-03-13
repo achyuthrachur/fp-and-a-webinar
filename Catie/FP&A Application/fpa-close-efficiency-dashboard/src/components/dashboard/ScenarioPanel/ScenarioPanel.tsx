@@ -5,13 +5,23 @@
 
 import { useSelector, useDispatch } from 'react-redux';
 import type { RootState } from '@/store';
-import type { ControlState, ScenarioPreset } from '@/features/model/types';
-import { setControl, loadPreset, resetToDefaults } from '@/store/scenarioSlice';
+import type {
+  ControlState,
+  ScenarioHorizon,
+  ScenarioPreset,
+} from '@/features/model/types';
+import {
+  setControl,
+  loadPreset,
+  resetToDefaults,
+  setScenarioHorizon,
+} from '@/store/scenarioSlice';
 import * as SliderPrimitive from '@radix-ui/react-slider';
 import * as SwitchPrimitive from '@radix-ui/react-switch';
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from '@/components/ui/Select';
 import { Button } from '@/components/ui/Button';
 import SectionHeader from '@/components/dashboard/SectionHeader';
+import { getScenarioHorizonLabel } from '@/store/scenarioMath';
 
 // ─── Prop Types ───────────────────────────────────────────────────────────────
 
@@ -290,8 +300,111 @@ function PresetRow({ presets, controls, onSelect, onReset }: PresetRowProps) {
 
       {/* Reset button */}
       <Button onClick={onReset} variant="outline" size="sm" style={{ flexShrink: 0 }}>
-        Reset
+        Baseline
       </Button>
+    </div>
+  );
+}
+
+const HORIZON_OPTIONS: {
+  value: ScenarioHorizon;
+  label: string;
+  buttonLabel: string;
+}[] = [
+  { value: 'short_term', label: 'Short Term (13 weeks)', buttonLabel: 'Short Term' },
+  { value: 'long_term', label: 'Long Term (1 year)', buttonLabel: 'Long Term' },
+];
+
+interface HorizonRowProps {
+  scenarioHorizon: ScenarioHorizon;
+  onChange: (value: ScenarioHorizon) => void;
+}
+
+function HorizonRow({ scenarioHorizon, onChange }: HorizonRowProps) {
+  return (
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '0.75rem',
+        padding: '0.875rem 1rem',
+        borderRadius: 12,
+        background: 'var(--crowe-indigo-dark)',
+        border: '1px solid color-mix(in srgb, var(--crowe-white) 14%, transparent)',
+        boxShadow: '0 10px 24px rgba(1, 30, 65, 0.12)',
+      }}
+    >
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          gap: '0.75rem',
+        }}
+      >
+        <span
+          style={{
+            fontSize: '0.75rem',
+            fontWeight: 700,
+            letterSpacing: '0.08em',
+            textTransform: 'uppercase',
+            color: 'var(--crowe-white)',
+          }}
+        >
+          Outcome Horizon
+        </span>
+        <span
+          style={{
+            fontSize: '0.8125rem',
+            color: 'rgba(255, 255, 255, 0.78)',
+            fontWeight: 600,
+          }}
+        >
+          {getScenarioHorizonLabel(scenarioHorizon)}
+        </span>
+      </div>
+      <p
+        style={{
+          margin: 0,
+          fontSize: '0.8125rem',
+          lineHeight: 1.55,
+          color: 'rgba(255, 255, 255, 0.82)',
+        }}
+      >
+        Choose whether the active situation should show a 13-week outcome or a
+        full-year outcome. KPI cards and the margin bridge update using the same
+        horizon.
+      </p>
+      <div style={{ display: 'flex', gap: '0.5rem' }}>
+        {HORIZON_OPTIONS.map((option) => {
+          const active = scenarioHorizon === option.value;
+          return (
+            <Button
+              key={option.value}
+              type="button"
+              variant={active ? 'default' : 'outline'}
+              size="sm"
+              onClick={() => onChange(option.value)}
+              style={{
+                flex: 1,
+                minHeight: '2.75rem',
+                paddingInline: '0.9rem',
+                borderRadius: 12,
+                fontSize: '0.7rem',
+                lineHeight: 1.15,
+                textTransform: 'uppercase',
+                letterSpacing: '0.03em',
+                whiteSpace: 'normal',
+                background: active ? 'var(--crowe-amber-core)' : 'transparent',
+                borderColor: active ? 'var(--crowe-amber-core)' : 'rgba(255, 255, 255, 0.26)',
+                color: active ? 'var(--crowe-indigo-dark)' : 'var(--crowe-white)',
+              }}
+            >
+              {option.buttonLabel}
+            </Button>
+          );
+        })}
+      </div>
     </div>
   );
 }
@@ -300,9 +413,8 @@ function PresetRow({ presets, controls, onSelect, onReset }: PresetRowProps) {
 
 export default function ScenarioPanel({ presets }: ScenarioPanelProps) {
   const controls = useSelector((s: RootState) => s.scenario.controls);
+  const scenarioHorizon = useSelector((s: RootState) => s.scenario.scenarioHorizon);
   const dispatch = useDispatch();
-
-  const baseline = presets.find((p) => p.id === 'baseline') ?? presets[0];
 
   const handleSliderChange = (field: keyof ControlState) => (value: number) => {
     dispatch(setControl({ field, value }));
@@ -327,8 +439,8 @@ export default function ScenarioPanel({ presets }: ScenarioPanelProps) {
     >
       <SectionHeader
         title="Scenario Controls"
-        subtitle="Adjust revenue, cost, and operations levers to model close outcomes in real time"
-        explanation="Use these levers to model different close scenarios. Sliders adjust financial rates and operational factors; toggles activate business mode assumptions. Select a named preset from the dropdown to jump to a pre-configured scenario in one click."
+        subtitle="Adjust revenue, cost, operations, and timing assumptions to model close outcomes in real time"
+        explanation="Use these levers to model different close scenarios. Select a named preset from the situation dropdown, choose whether to view 13-week or 1-year outcomes, then adjust the levers below. The KPI cards and margin bridge recalculate against the active horizon immediately."
       />
       {/* Switch thumb CSS — uses data-state selectors for smooth animation without re-render jank */}
       <style>{`
@@ -341,7 +453,12 @@ export default function ScenarioPanel({ presets }: ScenarioPanelProps) {
         presets={presets}
         controls={controls}
         onSelect={(preset) => dispatch(loadPreset(preset.controls))}
-        onReset={() => dispatch(resetToDefaults(baseline.controls))}
+        onReset={() => dispatch(resetToDefaults())}
+      />
+
+      <HorizonRow
+        scenarioHorizon={scenarioHorizon}
+        onChange={(value) => dispatch(setScenarioHorizon(value))}
       />
 
       {/* Revenue Levers */}

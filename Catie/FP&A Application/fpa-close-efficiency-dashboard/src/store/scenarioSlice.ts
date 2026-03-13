@@ -3,11 +3,17 @@
 // Phase 4 dispatches setControl/loadPreset/resetToDefaults.
 // Phase 3 dispatches initializeFromSeedData from DashboardApp.
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import type { BaseInputs, ControlState } from '@/features/model/types';
+import type {
+  BaseInputs,
+  ControlState,
+  ScenarioHorizon,
+} from '@/features/model/types';
 
 interface ScenarioState {
   baseInputs: BaseInputs;
+  baselineControls: ControlState;
   controls: ControlState;
+  scenarioHorizon: ScenarioHorizon;
 }
 
 const DEFAULT_BASE_INPUTS: BaseInputs = {
@@ -44,7 +50,9 @@ const scenarioSlice = createSlice({
   name: 'scenario',
   initialState: {
     baseInputs: DEFAULT_BASE_INPUTS,
+    baselineControls: DEFAULT_CONTROLS,
     controls: DEFAULT_CONTROLS,
+    scenarioHorizon: 'short_term',
   } as ScenarioState,
   reducers: {
     initializeFromSeedData(
@@ -52,7 +60,9 @@ const scenarioSlice = createSlice({
       action: PayloadAction<{ baseInputs: BaseInputs; defaultControls: ControlState }>
     ) {
       state.baseInputs = action.payload.baseInputs;
+      state.baselineControls = action.payload.defaultControls;
       state.controls = action.payload.defaultControls;
+      state.scenarioHorizon = 'short_term';
     },
     setControl(
       state,
@@ -64,12 +74,21 @@ const scenarioSlice = createSlice({
     loadPreset(state, action: PayloadAction<ControlState>) {
       state.controls = action.payload;
     },
-    resetToDefaults(state, action: PayloadAction<ControlState>) {
-      state.controls = action.payload;
+    resetToDefaults(state) {
+      state.controls = state.baselineControls;
+      state.scenarioHorizon = 'short_term';
+    },
+    setScenarioHorizon(state, action: PayloadAction<ScenarioHorizon>) {
+      state.scenarioHorizon = action.payload;
     },
   },
 });
 
-export const { initializeFromSeedData, setControl, loadPreset, resetToDefaults } =
-  scenarioSlice.actions;
+export const {
+  initializeFromSeedData,
+  setControl,
+  loadPreset,
+  resetToDefaults,
+  setScenarioHorizon,
+} = scenarioSlice.actions;
 export default scenarioSlice;

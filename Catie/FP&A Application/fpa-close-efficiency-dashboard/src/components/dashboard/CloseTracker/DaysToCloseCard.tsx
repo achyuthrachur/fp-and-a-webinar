@@ -11,11 +11,12 @@ export function DaysToCloseCard({ days }: DaysToCloseCardProps) {
   return (
     <div
       style={{
-        background: 'var(--card)',
+        background: 'var(--card-solid)',
+        border: '1px solid var(--border)',
         borderRadius: '12px',
         padding: '1.25rem 1.5rem',
         boxShadow:
-          '0 1px 3px rgba(1,30,65,0.04), 0 6px 16px rgba(1,30,65,0.04), 0 12px 32px rgba(1,30,65,0.02)',
+          '0 10px 24px rgba(1,30,65,0.06), 0 2px 8px rgba(1,30,65,0.04)',
         display: 'flex',
         alignItems: 'center',
         gap: '1rem',
@@ -36,10 +37,10 @@ export function DaysToCloseCard({ days }: DaysToCloseCardProps) {
         <div
           style={{
             fontSize: '0.75rem',
-            fontWeight: 600,
+            fontWeight: 700,
             color: 'var(--muted-foreground)',
             textTransform: 'uppercase',
-            letterSpacing: '0.05em',
+            letterSpacing: '0.08em',
             marginTop: '0.125rem',
           }}
         >
